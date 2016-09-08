@@ -1,0 +1,54 @@
+.onShow {
+    background: url(/ssml/js/Validator/images/onShow.gif) no-repeat;
+    padding-left: 25px;
+    padding-right: 10px;
+    font-size: 12px;
+    line-height: 25px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 10px;
+}
+
+.onFocus {
+    background: #E9F0FF url(/ssml/js/Validator/images/onFocus.gif) no-repeat;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 25px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 10px;
+    padding-right: 10px;
+}
+
+.onError {
+    background: #FFF2E9 url(/ssml/js/Validator/images/onError.gif) no-repeat;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 25px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 10px;
+    padding-right: 10px;
+}
+
+.onCorrect {
+    background: #E9FFEB url(/ssml/js/Validator/images/onCorrect.gif) no-repeat;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 25px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 14px;
+    padding-right: 10px;
+}
+
+.onLoad {
+    background: #E9FFEB url(/ssml/js/Validator/images/onLoad.gif) no-repeat 3px 3px;
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 25px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 10px;
+    padding-right: 10px;
+}
