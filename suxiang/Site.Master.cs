@@ -9,7 +9,7 @@ namespace suxiang
         {
             if (Session["user"] == null)
             {
-                Response.Write("<script>window.open('Login.aspx','_parent')</script>");
+                Response.Write("<script>window.open('../Login.aspx','_parent')</script>");
             }
         }
     }

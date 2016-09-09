@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>信息管理系统</title>
+    <title>登录--南京苏翔劳务有限公司</title>
     <link href="Content/css/style.css" rel="stylesheet" type="text/css" />
     <script src="Content/js/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="Content/js/cloud.js" type="text/javascript"></script>

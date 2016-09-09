@@ -165,12 +165,26 @@
       <DependentUpon>PersonalCenter.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Report\CostReport.aspx.cs">
-      <DependentUpon>CostReport.aspx</DependentUpon>
+    <Compile Include="Report\LaborCostReport.aspx.cs">
+      <DependentUpon>LaborCostReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Report\CostReport.aspx.designer.cs">
-      <DependentUpon>CostReport.aspx</DependentUpon>
+    <Compile Include="Report\LaborCostReport.aspx.designer.cs">
+      <DependentUpon>LaborCostReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ManageCostReport.aspx.cs">
+      <DependentUpon>ManageCostReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ManageCostReport.aspx.designer.cs">
+      <DependentUpon>ManageCostReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\MaterialCostReport.aspx.cs">
+      <DependentUpon>MaterialCostReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\MaterialCostReport.aspx.designer.cs">
+      <DependentUpon>MaterialCostReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\QualityReport.aspx.cs">
       <DependentUpon>QualityReport.aspx</DependentUpon>
@@ -647,7 +661,9 @@
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
     <Content Include="Personal\PersonalCenter.aspx" />
-    <Content Include="Report\CostReport.aspx" />
+    <Content Include="Report\LaborCostReport.aspx" />
+    <Content Include="Report\ManageCostReport.aspx" />
+    <Content Include="Report\MaterialCostReport.aspx" />
     <Content Include="Report\QualityReport.aspx" />
     <Content Include="Report\SecurityReport.aspx" />
     <Content Include="Top.aspx" />

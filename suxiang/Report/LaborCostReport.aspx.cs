@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace suxiang.Report
 {
-    public partial class CostReport : System.Web.UI.Page
+    public partial class LaborCostReport : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
