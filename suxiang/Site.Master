@@ -24,7 +24,6 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
     <div>
         <div class="place" style="position: fixed; width: 100%; top: 0; z-index: 9999">
             <span>位置：</span>
@@ -37,6 +36,5 @@
             </asp:ContentPlaceHolder>
         </div>
     </div>
-    </form>
 </body>
 </html>

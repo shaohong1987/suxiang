@@ -611,6 +611,7 @@
     <Content Include="Content\js\jquery.md5.js" />
     <Content Include="Content\js\jquery.multiselect.min.js" />
     <Content Include="Content\js\jquery.multiselect.zh-cn.js" />
+    <Content Include="Content\js\jquery.validate.min.js" />
     <Content Include="Content\js\jquery.ztree.core-3.5.js" />
     <Content Include="Content\js\jquery.ztree.core-3.5.min.js" />
     <Content Include="Content\js\jquery.ztree.excheck-3.5.min.js" />
