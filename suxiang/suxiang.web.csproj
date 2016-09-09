@@ -609,8 +609,10 @@
     <Content Include="Content\js\jquery.jqGrid.min.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\jquery.md5.js" />
+    <Content Include="Content\js\jquery.mobile.datepicker.js" />
     <Content Include="Content\js\jquery.multiselect.min.js" />
     <Content Include="Content\js\jquery.multiselect.zh-cn.js" />
+    <Content Include="Content\js\jquery.ui.datepicker.js" />
     <Content Include="Content\js\jquery.ztree.core-3.5.js" />
     <Content Include="Content\js\jquery.ztree.core-3.5.min.js" />
     <Content Include="Content\js\jquery.ztree.excheck-3.5.min.js" />
