@@ -21,7 +21,7 @@ namespace suxiang.Handler
                     var usercode = WebHelper.GetActionStr(context, "usercode");
                     var userpass = WebHelper.GetActionStr(context, "userpass");
                     var user = new UsersModel {EmployeeNo = usercode, Password = userpass};
-                    var msg = SxDal.Login(user);
+                    var msg = new SxDal().Login(user);
                     json = WebHelper.GetObjJson(msg);
                     if (msg.Data != null)
                         context.Session["user"] = msg.Data;
