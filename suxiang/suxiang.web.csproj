@@ -154,8 +154,14 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\LaborCostModel.cs" />
     <Compile Include="Model\LogModel.cs" />
+    <Compile Include="Model\ManageCostModel.cs" />
+    <Compile Include="Model\MaterialCostModel.cs" />
     <Compile Include="Model\MsgModel.cs" />
+    <Compile Include="Model\ProjectInfoModel.cs" />
+    <Compile Include="Model\ProjectModel.cs" />
+    <Compile Include="Model\QuestionModel.cs" />
     <Compile Include="Model\UsersModel.cs" />
     <Compile Include="Personal\PersonalCenter.aspx.cs">
       <DependentUpon>PersonalCenter.aspx</DependentUpon>

@@ -1,28 +1,50 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 
 namespace suxiang.Handler
 {
     /// <summary>
-    /// Process 的摘要说明
+    ///     Process 的摘要说明
     /// </summary>
     public class Process : IHttpHandler
     {
-
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            var json = "";
+            var action = WebHelper.GetActionStr(context, "action");
+            switch (action)
+            {
+                case "SecurityQuestionForm":
+                {
+
+                    break;
+                }
+                case "QualityQuestionForm":
+                {
+
+                    break;
+                }
+                case "LaborCostForm":
+                {
+
+                    break;
+                }
+                case "ManageCostForm":
+                {
+
+                    break;
+                }
+                case "MaterialCostForm":
+                {
+
+                    break;
+                }
+            }
+            context.Response.Write(json);
         }
 
         public bool IsReusable
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

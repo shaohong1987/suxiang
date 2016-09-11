@@ -37,9 +37,16 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
                     .validate({
                         focusInvalid: false,
                         onkeyup: false,
-                        submitHandler: function (form) {
-                            alert("提交表单");
-                           // form.submit();   //提交表单   
+                        submitHandler: function () {
+                            var formData = $("#sqform").serialize();
+                            $.ajax({
+                                type: "POST",
+                                url: "../Handler/Process.ashx",
+                                cache: false,
+                                data: formData,
+                                success: onSuccess,
+                                error: onError
+                            });
                         },
                         rules: {
                             levelno: "required",
@@ -81,10 +88,19 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
                         }
                     });
             });
+
+        function onSuccess(data, status) {
+           
+        }
+
+        function onError(data, status) {
+          
+        }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
         <form class="formbody" id="sqform">
+            <input type="hidden" value="SecurityQuestionForm" name="action"/>
             <div id="usual1" class="usual">
                 <ul class="forminfo">
                     <li>
