@@ -28,7 +28,7 @@ namespace suxiang.Handler
                     json = WebHelper.GetObjJson(msg);
                     break;
                 }
-                case "GetBuildingsByProjectId":
+                case "GetBuildings":
                 {
                     var msg = new SxDal().GetBuildings();
                     json = WebHelper.GetObjJson(msg);

@@ -9,47 +9,34 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
     <script src="../Content/js/My97/WdatePicker.js" type="text/javascript"></script>
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        var arr = new Array();
-        $(document)
-            .ready(function() {
-                $(".select1")
-                    .uedSelect({
+        var arr=new Array();
+        $(document).ready(function() {
+                $(".select1").uedSelect({
                         width: 345
                     });
-                $(".select2")
-                    .uedSelect({
+                $(".select2").uedSelect({
                         width: 167
                     });
-                $(".select3")
-                    .uedSelect({
+                $(".select3").uedSelect({
                         width: 80
                     });
-                $.post("../Handler/Process.ashx",
-                    {
-                        action: "GetBuildings"
-                    },
-                    function(data) {
+                $.post("../Handler/Process.ashx",{action: "GetBuildings"},function(data) {
                         var json = eval(data);
                         if (json.State === true) {
-                            $.each(json.Data,
-                                function(i, item) {
-                                    arr[i] = new Array(item['projectid'], item['Buildingid']);
-                                });
+                            $.each(json.Data, function (i, item) {
+                                arr[i] = new Array();
+                                arr[i][0] = item['Projectid'];
+                                arr[i][1] = item['Buildingid'];
+                            });
+
+                         
                         }
                     },
                     "json");
-                $.post("../Handler/Process.ashx",
-                    {
-                        action: "GetProjects"
-                    },
-                    function(data) {
+                $.post("../Handler/Process.ashx",{action: "GetProjects"},function(data) {
                         var json = eval(data);
                         if (json.State === true) {
-                            $.each(json.Data,
-                                function (i, item) {
-                                    //if(i === 0)
-                                    //    $("#projectid").append("<option value='" + item['Id'] + "' selected>" + item['Projectname'] + "</option>");
-                                    //else
+                            $.each(json.Data,function (i, item) {
                                         $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
                                 });
                         }
@@ -57,8 +44,7 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
                     "json");
 
 
-                $("#sqform")
-                    .validate({
+                $("#sqform").validate({
                         focusInvalid: false,
                         onkeyup: false,
                         submitHandler: function() {
@@ -120,11 +106,10 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
         }
 
         function changepro(proid) {
-            
             $("#projectname").val($('#projectid').find("option:selected").text());
             $("#buildingno").empty();
             for (var i = 0; i < arr.length; i++) {
-                if (arr[i][0] === proid) {
+                if (arr[i][0] == proid) {
                     $("#buildingno").append($("<option>").val(arr[i][1]).text(arr[i][1]));
                 }
             }
