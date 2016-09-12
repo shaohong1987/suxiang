@@ -62,8 +62,43 @@ namespace suxiang.Dal
             };
             try
             {
-                var sql =
-                    "SELECT b.* FROM `projects` a LEFT JOIN `projectinfo` b ON a.id=b.projectid WHERE a.state=1 AND b.state=1;";
+                const string sql = "SELECT id,projectname FROM `projects` a WHERE a.state=1;";
+                var result = DbHelper.ExecuteDataTable(CommandType.Text, sql);
+                if ((result != null) && (result.Rows.Count > 0))
+                {
+                    var projects = new List<ProjectModel>();
+                    foreach (DataRow row in result.Rows)
+                    {
+                        var project = new ProjectModel();
+                        if (DBNull.Value != row["Id"])
+                            project.Id = Convert.ToInt32(row["Id"]);
+                        if (DBNull.Value != row["projectname"])
+                            project.Projectname = Convert.ToString(row["projectname"]);
+                        projects.Add(project);
+                    }
+                    msg.State = true;
+                    msg.Msg = "成功获取项目信息";
+                    msg.Data = projects;
+                }
+            }
+            catch (Exception)
+            {
+                //ignore
+            }
+            return msg;
+        }
+
+        public MsgModel GetBuildings()
+        {
+            var msg = new MsgModel
+            {
+                State = false,
+                Msg = "无法获取到栋号信息!",
+                Data = null
+            };
+            try
+            {
+                const string sql = "SELECT projectid,buildingid FROM `projectinfo` a WHERE a.state=1;";
                 var result = DbHelper.ExecuteDataTable(CommandType.Text, sql);
                 if ((result != null) && (result.Rows.Count > 0))
                 {
@@ -71,19 +106,14 @@ namespace suxiang.Dal
                     foreach (DataRow row in result.Rows)
                     {
                         var project = new ProjectInfoModel();
-                        if (DBNull.Value != row["Id"])
-                            project.Id = Convert.ToInt32(row["Id"]);
                         if (DBNull.Value != row["projectid"])
                             project.Projectid = Convert.ToInt32(row["projectid"]);
-                        if (DBNull.Value != row["projectname"])
-                            project.Projectname = Convert.ToString(row["projectname"]);
                         if (DBNull.Value != row["buildingid"])
                             project.Buildingid = Convert.ToInt32(row["buildingid"]);
-                        if (DBNull.Value != row["state"])
-                            project.Buildingid = Convert.ToInt32(row["state"]);
+                        projects.Add(project);
                     }
                     msg.State = true;
-                    msg.Msg = "成功获取项目信息";
+                    msg.Msg = "成功获取栋号信息";
                     msg.Data = projects;
                 }
             }
@@ -121,5 +151,6 @@ namespace suxiang.Dal
         }
 
         #endregion
+
     }
 }
