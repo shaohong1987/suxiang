@@ -42,12 +42,12 @@ namespace suxiang.Handler
                     var levelno = WebHelper.GetActionStr(context, "levelno");
                     var location = WebHelper.GetActionStr(context, "location");
                     var details = WebHelper.GetActionStr(context, "details");
-                    var checktime = WebHelper.GetActionDt(context, "checktime");
+                    var checktime = WebHelper.GetActionStr(context, "checktime");
                     var workers = WebHelper.GetActionStr(context, "workers");
                     var managers = WebHelper.GetActionStr(context, "managers");
                     var results = WebHelper.GetActionStr(context, "results");
                     var reworkers = WebHelper.GetActionStr(context, "reworkers");
-                    var finishtime = WebHelper.GetActionDt(context, "finishtime");
+                    var finishtime = WebHelper.GetActionStr(context, "finishtime");
                     var costofworktime = WebHelper.GetActionStr(context, "costofworktime");
                     var costofmaterial = WebHelper.GetActionStr(context, "costofmaterial");
                     var rechecker = WebHelper.GetActionStr(context, "rechecker");
@@ -58,7 +58,7 @@ namespace suxiang.Handler
                             projectid + ",'" + projectname + "','" + buildingno + "','" + levelno + "','" + location +
                             "','" + details + "','" + managers + "','" + checktime + "','" + workers + "','" + reworkers +
                             "','" + finishtime + "','" + rechecker + "','" + results + "','" + costofworktime + "','" +
-                            costofmaterial + "','Security','"+um.RealName+",'"+DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+"')";
+                            costofmaterial + "','Security','"+um.RealName+"','"+DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+"')";
                         var msg = new SxDal().AddData(sql);
                         json = WebHelper.GetObjJson(msg);
                     }
@@ -72,12 +72,12 @@ namespace suxiang.Handler
                         var levelno = WebHelper.GetActionStr(context, "levelno");
                         var location = WebHelper.GetActionStr(context, "location");
                         var details = WebHelper.GetActionStr(context, "details");
-                        var checktime = WebHelper.GetActionDt(context, "checktime");
+                        var checktime = WebHelper.GetActionStr(context, "checktime");
                         var workers = WebHelper.GetActionStr(context, "workers");
                         var managers = WebHelper.GetActionStr(context, "managers");
                         var results = WebHelper.GetActionStr(context, "results");
                         var reworkers = WebHelper.GetActionStr(context, "reworkers");
-                        var finishtime = WebHelper.GetActionDt(context, "finishtime");
+                        var finishtime = WebHelper.GetActionStr(context, "finishtime");
                         var costofworktime = WebHelper.GetActionStr(context, "costofworktime");
                         var costofmaterial = WebHelper.GetActionStr(context, "costofmaterial");
                         var rechecker = WebHelper.GetActionStr(context, "rechecker");
