@@ -156,7 +156,7 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
                     <textarea class="textinput2" name="details" placeholder="问题说明"></textarea>
                 </li>
                 <li>
-                    <label for="checktime">
+                    <label>
                         检查日期<b>*</b>
                     </label>
                     <input type="text" name="checktime" id="checktime" placeholder="检查日期" class="dfinput" onclick="WdatePicker()"/>
