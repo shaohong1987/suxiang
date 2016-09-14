@@ -17,36 +17,38 @@ namespace suxiang.Handler
             switch (action)
             {
                 case "Login":
-                {
-                    var usercode = WebHelper.GetActionStr(context, "usercode");
-                    var userpass = WebHelper.GetActionStr(context, "userpass");
-                    var user = new UsersModel {EmployeeNo = usercode, Password = userpass};
-                    var msg = new SxDal().Login(user);
-                    json = WebHelper.GetObjJson(msg);
-                    if (msg.Data != null)
-                        context.Session["user"] = msg.Data;
-                    break;
-                }
+                    {
+                        var usercode = WebHelper.GetActionStr(context, "usercode");
+                        var userpass = WebHelper.GetActionStr(context, "userpass");
+                        var user = new UsersModel { EmployeeNo = usercode, Password = userpass };
+                        var msg = new SxDal().Login(user);
+                        json = WebHelper.GetObjJson(msg);
+                        if (msg.Data != null)
+                            context.Session["user"] = msg.Data;
+                        break;
+                    }
                 case "UpdatePwd":
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
                 case "AddNewUser":
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
                 case "DelUser":
-                {
-                    break;
-                }
-                case "GetUsers":
-                {
-                    break;
-                }
-                case "GetUserByCondition":
-                {
-                    break;
-                }
+                    {
+                        break;
+                    }
+                case "GetUserByUserName":
+                    {
+                        var userName = WebHelper.GetActionStr(context, "UserName");
+                        var sql = string.IsNullOrEmpty(userName)
+                                 ? "SELECT * FROM Users"
+                                 : "SELECT * FROM Users A WHERE A.RealName LIKE '%" + userName + "%'";
+	                    var result = new SxDal().GetData(sql);
+	                    json = WebHelper.GetObjJson(result);
+                        break;
+                    }
             }
             context.Response.Write(json);
         }

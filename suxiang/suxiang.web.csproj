@@ -45,7 +45,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=6.8.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="Newtonsoft.Json.Net20">
       <HintPath>..\lib\Newtonsoft.Json.Net20.dll</HintPath>
     </Reference>
@@ -154,6 +154,7 @@
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Model\JqGridModel.cs" />
     <Compile Include="Model\LaborCostModel.cs" />
     <Compile Include="Model\LogModel.cs" />
     <Compile Include="Model\ManageCostModel.cs" />
