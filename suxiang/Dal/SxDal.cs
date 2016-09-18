@@ -366,6 +366,10 @@ namespace suxiang.Dal
             return msg;
         }
 
+	    public DataTable GetData(string sql)
+	    {
+		    return DbHelper.ExecuteDataTable(CommandType.Text, sql);
+	    }
         #endregion
 
         public DataTable GetProblems(string sql)
