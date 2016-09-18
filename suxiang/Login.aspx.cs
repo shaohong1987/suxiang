@@ -9,7 +9,7 @@ namespace suxiang
         {
             if (!IsPostBack)
             {
-                lblauth.Text = "版权所有 南京苏翔劳务有限公司 " + DateTime.Now.Year + " ICP备189239-2";
+                lblauth.Text = "版权所有 南京苏翔劳务有限公司 " + DateTime.Now.Year + " 苏ICP备16042802号-1";
             }
         }
     }

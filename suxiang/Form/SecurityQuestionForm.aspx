@@ -10,7 +10,8 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         var arr=new Array();
-        $(document).ready(function() {
+        $(document).ready(function () {
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>安全问题表</a></li>");
                 $(".select1").uedSelect({
                         width: 345
                     });

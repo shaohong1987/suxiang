@@ -14,6 +14,7 @@ namespace suxiang.Model
 
         public string Email { get; set; }
 
+        public bool State { get; set; }
         public int Group { get; set; }
     }
 }

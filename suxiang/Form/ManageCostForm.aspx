@@ -8,6 +8,7 @@
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>管理成本表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });

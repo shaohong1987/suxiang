@@ -3,6 +3,6 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h1>
-        Welcome !
+        欢迎使用苏翔劳务有限公司——后台管理系统！
     </h1>
 </asp:Content>

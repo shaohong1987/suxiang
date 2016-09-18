@@ -9,8 +9,10 @@
     <script src="../Content/js/My97/WdatePicker.js" type="text/javascript"></script>
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+        
         var arr = new Array();
         $(document).ready(function () {
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>材料成本表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });
@@ -21,25 +23,25 @@
                 width: 80
             });
             $.post("../Handler/Process.ashx", { action: "GetBuildings" }, function (data) {
-                var json = eval(data);
-                if (json.State === true) {
-                    $.each(json.Data, function (i, item) {
-                        arr[i] = new Array();
-                        arr[i][0] = item['Projectid'];
-                        arr[i][1] = item['Buildingid'];
-                    });
-                }
-            },
-                    "json");
+                    var json = eval(data);
+                    if (json.State === true) {
+                        $.each(json.Data, function (i, item) {
+                            arr[i] = new Array();
+                            arr[i][0] = item['Projectid'];
+                            arr[i][1] = item['Buildingid'];
+                        });
+                    }
+                },
+                "json");
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
-                var json = eval(data);
-                if (json.State === true) {
-                    $.each(json.Data, function (i, item) {
-                        $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
-                    });
-                }
-            },
-                    "json");
+                    var json = eval(data);
+                    if (json.State === true) {
+                        $.each(json.Data, function (i, item) {
+                            $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
+                        });
+                    }
+                },
+                "json");
 
             $("#mcform").validate({
                 focusInvalid: false,
@@ -106,7 +108,7 @@
         }
 
         function check(e) {
-	        var re = /^\d+(?=\.{0,1}\d+$|$)/;
+            var re = /^\d+(?=\.{0,1}\d+$|$)/;
             if (e.value != "") {
                 if (!re.test(e.value)) {
                     alert("请输入正确的数字");

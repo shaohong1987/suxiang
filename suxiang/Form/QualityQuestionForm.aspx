@@ -9,6 +9,7 @@
     <script type="text/javascript">
         var arr = new Array();
         $(document).ready(function () {
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>质量问题表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });
