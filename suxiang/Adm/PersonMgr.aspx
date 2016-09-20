@@ -245,7 +245,7 @@
                         <label>
                             确认密码<b>*</b>
                         </label>
-                        <input type="text" class="dfinput" name="repassword" id="price" placeholder="请再次输入密码"/>
+                        <input type="password" class="dfinput" name="repassword" id="price" placeholder="请再次输入密码"/>
                     </li>
                     <li>
                         <label>

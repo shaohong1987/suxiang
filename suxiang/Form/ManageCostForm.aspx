@@ -42,6 +42,7 @@
                             data: formData,
                             success: function (data) {
                                 var json = JSON.parse(data);
+	                            alert(json.Msg);
                                 if (json.State === true) {
                                     window.open("ManageCostForm.aspx", "_self");
                                 }
@@ -82,7 +83,9 @@
                 }
             });
         });
-
+        function changepro(proid) {
+            $("#projectname").val($('#projectid').find("option:selected").text());
+        }
         function check(e) {
             var re = /^\d+(?=\.{0,1}\d+$|$)/;
             if (e.value != "") {
@@ -108,7 +111,7 @@
                     地点
                 </label>
                 <div class="vocation">
-                    <select name="projectid" id="projectid" class="select2">
+                    <select name="projectid" id="projectid" class="select2" onchange="changepro(this.value)" >
                         <option value="-1">请选择项目</option>
                     </select>
                     <input type="hidden" id="projectname" name="projectname" />
@@ -124,7 +127,7 @@
                 <label>
                     类别<b>*</b>
                 </label>
-                <input type="text" name="type" placeholder="类别" class="dfinput" />
+                <input type="text" name="type" placeholder="类别（如，福利、劳保、招待等）" class="dfinput" />
             </li>
             <li>
                 <label>

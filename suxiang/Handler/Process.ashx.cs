@@ -212,7 +212,7 @@ namespace suxiang.Handler
                             var sql =
                                 "INSERT INTO cost_labor(projectid,projectname,buildingno,startdate,endate,content,workcontent,unit,price,worktime,totalprice,remark,poster,posttime,state) VALUES(" +
                                 projectid + ",'" + projectname + "','" + buildingno + "','" + startdate + "','" + enddate + "','" + content + "','" + workcontent + "','" + unit + "'," + price + "," + number +
-                                "," + totalprice + ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',1)";
+                                "," + totalprice + ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',1);";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
@@ -235,7 +235,7 @@ namespace suxiang.Handler
                             var sql =
                                  "INSERT INTO cost_management(projectid,projectname,curdate,type,content,unit,price,number,totalprice,remark,poster,posttime) VALUES(" +
                                  projectid + ",'" + projectname + "','" + curdate + "','" + type + "','" + content + "','" + unit + "'," + price + "," + number +
-                                 "," + totalprice + ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',1)";
+                                 "," + totalprice + ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "');";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
