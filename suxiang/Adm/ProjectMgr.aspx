@@ -45,15 +45,11 @@
         });
 
         function onSuccess(data, status) {
-            data = $.trim(data);
-            alert(data);
             window.open("ProjectMgr.aspx", "_self");
         }
 
         function onError(data, status) {
-            data = $.trim(data);
-            alert(data);
-            window.open("ProjectMgr.aspx", "_self");
+	        window.open("ProjectMgr.aspx", "_self");
         }
 
         function changeState(uid, s) {

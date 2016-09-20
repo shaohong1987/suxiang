@@ -277,7 +277,9 @@
     <Content Include="Content\js\jquery.ui.datepicker.js" />
     <Content Include="Content\js\npm.js" />
     <Content Include="login.htm" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -286,6 +288,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dal\DbHelper.cs" />
     <Compile Include="Handler\process.ashx.cs">
       <DependentUpon>process.ashx</DependentUpon>
     </Compile>
@@ -301,9 +304,7 @@
     <None Include="Content\img\Thumbs.db" />
     <Content Include="Handler\process.ashx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dal\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>

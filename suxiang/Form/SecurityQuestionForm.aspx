@@ -58,6 +58,7 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
                                     data: formData,
                                     success: function(data) {
                                         var json = JSON.parse(data);
+                                        alert(json.Msg);
                                         if (json.State === true) {
                                             window.open("SecurityQuestionForm.aspx", "_self");
                                         }
@@ -196,13 +197,13 @@ CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestio
                     <label>
                         整改花费工时<b>*</b>
                     </label>
-                    <input type="text" name="costofworktime" placeholder="整改花费工时" class="dfinput"/>
+                    <input type="text" name="costofworktime" placeholder="整改花费工时（数字）" class="dfinput" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" />
                 </li>
                 <li>
                     <label>
                         整改消耗材料<b>*</b>
                     </label>
-                    <input type="text" name="costofmaterial" placeholder="整改消耗材料" class="dfinput"/>
+                    <input type="text" name="costofmaterial" placeholder="整改消耗材料(数字)" class="dfinput" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" />
                 </li>
                 <li>
                     <label>

@@ -56,8 +56,9 @@
                             data: formData,
                             success: function (data) {
                                 var json = JSON.parse(data);
+	                            alert(json.Msg);
                                 if (json.State === true) {
-                                    window.open("MaterialCostForm.aspx", "_self");
+                                    window.open("LaborCostForm.aspx", "_self");
                                 }
                             },
                             error: function (data) {
