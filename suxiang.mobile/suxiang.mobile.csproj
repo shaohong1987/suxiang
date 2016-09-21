@@ -35,6 +35,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json.Net20">
+      <HintPath>..\lib\Newtonsoft.Json.Net20.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -271,12 +274,27 @@
     <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\jquery.md5.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mobile-1.4.5.min.js" />
     <Content Include="Content\js\jquery.mobile.datepicker.js" />
     <Content Include="Content\js\jquery.ui.datepicker.js" />
     <Content Include="Content\js\npm.js" />
+    <Content Include="FormList.aspx" />
+    <Content Include="Form\LaborCostForm.aspx" />
+    <Content Include="Form\ManageCostForm.aspx" />
+    <Content Include="Form\MaterialCostForm.aspx" />
+    <Content Include="Form\QualityQuestionForm.aspx" />
+    <Content Include="Form\SecurityQuestionForm.aspx" />
+    <Content Include="index.aspx" />
     <Content Include="login.htm" />
+    <Content Include="PersonalCenter.aspx" />
+    <Content Include="Report\LaborCostReport.aspx" />
+    <Content Include="Report\ManageCostReport.aspx" />
+    <Content Include="Report\MaterialCostReport.aspx" />
+    <Content Include="Report\QualityReport.aspx" />
+    <Content Include="Report\ReportList.aspx" />
+    <Content Include="Report\SecurityReport.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -288,13 +306,127 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dal\DalHelper.cs" />
+    <Compile Include="Dal\MySql.cs" />
+    <Compile Include="Dal\SxDal.cs" />
+    <Compile Include="FormList.aspx.cs">
+      <DependentUpon>FormList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormList.aspx.designer.cs">
+      <DependentUpon>FormList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\LaborCostForm.aspx.cs">
+      <DependentUpon>LaborCostForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\LaborCostForm.aspx.designer.cs">
+      <DependentUpon>LaborCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ManageCostForm.aspx.cs">
+      <DependentUpon>ManageCostForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ManageCostForm.aspx.designer.cs">
+      <DependentUpon>ManageCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm.aspx.cs">
+      <DependentUpon>MaterialCostForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm.aspx.designer.cs">
+      <DependentUpon>MaterialCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\QualityQuestionForm.aspx.cs">
+      <DependentUpon>QualityQuestionForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\QualityQuestionForm.aspx.designer.cs">
+      <DependentUpon>QualityQuestionForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm.aspx.cs">
+      <DependentUpon>SecurityQuestionForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm.aspx.designer.cs">
+      <DependentUpon>SecurityQuestionForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Handler\auth.ashx.cs">
+      <DependentUpon>auth.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Dal\DbHelper.cs" />
     <Compile Include="Handler\process.ashx.cs">
       <DependentUpon>process.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Helper\WebHelper.cs" />
+    <Compile Include="index.aspx.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="index.aspx.designer.cs">
+      <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LaborCostModel.cs" />
+    <Compile Include="Model\ManageCostModel.cs" />
+    <Compile Include="Model\MaterialCostModel.cs" />
+    <Compile Include="Model\MsgModel.cs" />
+    <Compile Include="Model\ProjectInfoModel.cs" />
+    <Compile Include="Model\ProjectModel.cs" />
+    <Compile Include="Model\QuestionModel.cs" />
+    <Compile Include="Model\UsersModel.cs" />
+    <Compile Include="PersonalCenter.aspx.cs">
+      <DependentUpon>PersonalCenter.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonalCenter.aspx.designer.cs">
+      <DependentUpon>PersonalCenter.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\LaborCostReport.aspx.cs">
+      <DependentUpon>LaborCostReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\LaborCostReport.aspx.designer.cs">
+      <DependentUpon>LaborCostReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ManageCostReport.aspx.cs">
+      <DependentUpon>ManageCostReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ManageCostReport.aspx.designer.cs">
+      <DependentUpon>ManageCostReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\MaterialCostReport.aspx.cs">
+      <DependentUpon>MaterialCostReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\MaterialCostReport.aspx.designer.cs">
+      <DependentUpon>MaterialCostReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\QualityReport.aspx.cs">
+      <DependentUpon>QualityReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\QualityReport.aspx.designer.cs">
+      <DependentUpon>QualityReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\ReportList.aspx.cs">
+      <DependentUpon>ReportList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\ReportList.aspx.designer.cs">
+      <DependentUpon>ReportList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Report\SecurityReport.aspx.cs">
+      <DependentUpon>SecurityReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Report\SecurityReport.aspx.designer.cs">
+      <DependentUpon>SecurityReport.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Handler\auth.ashx" />
     <None Include="Content\css\bootstrap-theme.css.map" />
     <None Include="Content\css\bootstrap.css.map" />
     <None Include="Content\fonts\glyphicons-halflings-regular.eot" />

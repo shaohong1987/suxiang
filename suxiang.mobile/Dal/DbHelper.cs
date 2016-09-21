@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
-using System.Web;
 
 namespace suxiang.mobile.Dal
 {
@@ -72,9 +69,9 @@ namespace suxiang.mobile.Dal
         /// </param>
         public static DbHelper Create()
         {
-            var type = Type.GetType("suxiang.Dal.MySql", true, true);
-            var ci = type.GetConstructor(new Type[] { });
-            return (DbHelper)ci.Invoke(null);
+            var type = Type.GetType("suxiang.mobile.Dal.MySql", true, true);
+            var ci = type.GetConstructor(new Type[] {});
+            return (DbHelper) ci.Invoke(null);
         }
 
         /// <summary>
@@ -1503,7 +1500,7 @@ namespace suxiang.mobile.Dal
 
             for (int i = 0, j = originalParameters.Length; i < j; i++)
             {
-                clonedParameters[i] = (IDbDataParameter)((ICloneable)originalParameters[i]).Clone();
+                clonedParameters[i] = (IDbDataParameter) ((ICloneable) originalParameters[i]).Clone();
             }
 
             return clonedParameters;
@@ -1785,7 +1782,7 @@ namespace suxiang.mobile.Dal
         {
             if (obj != null && obj != DBNull.Value)
             {
-                return (byte[])obj;
+                return (byte[]) obj;
             }
             return null;
         }
