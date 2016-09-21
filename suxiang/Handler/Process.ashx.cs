@@ -272,9 +272,9 @@ namespace suxiang.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT * FROM Problems a where a.problemType='Security' and a.projectid=" + projectid
-                                : "SELECT * FROM Problems A WHERE  a.problemType='Security'  and A.projectid=" + projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            var result = new SxDal().GetProblems(sql);
+                                ? "SELECT id,projectid,projectname,buildingno,levelno,location,problemdescription,responsibleperson,DATE_FORMAT(`checkdate`,'%Y-%m-%d') as checkdate,worker,rebuilder,DATE_FORMAT(`finishdate`,'%Y-%m-%d') as finishdate,rechecker,treatmentmeasures,worktimecost,materialcost,problemType,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d') as posttime FROM Problems a where a.problemType='Security' and a.projectid=" + projectid
+                                : "SELECT id,projectid,projectname,buildingno,levelno,location,problemdescription,responsibleperson,DATE_FORMAT(`checkdate`,'%Y-%m-%d') as checkdate,worker,rebuilder,DATE_FORMAT(`finishdate`,'%Y-%m-%d') as finishdate,rechecker,treatmentmeasures,worktimecost,materialcost,problemType,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d') as posttime FROM Problems A WHERE  a.problemType='Security'  and A.projectid=" + projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                            var result = new SxDal().GetData(sql);
                             json = WebHelper.GetObjJson(result);
                         }
                         break;
@@ -286,9 +286,9 @@ namespace suxiang.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT * FROM Problems a where a.problemType='Quality' and a.projectid=" + projectid
-                                : "SELECT * FROM Problems A WHERE  a.problemType='Quality'  and A.projectid=" + projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            var result = new SxDal().GetProblems(sql);
+                                ? "SELECT id,projectid,projectname,buildingno,levelno,location,problemdescription,responsibleperson,DATE_FORMAT(`checkdate`,'%Y-%m-%d') as checkdate,worker,rebuilder,DATE_FORMAT(`finishdate`,'%Y-%m-%d') as finishdate,rechecker,treatmentmeasures,worktimecost,materialcost,problemType,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d') as posttime FROM Problems a where a.problemType='Quality' and a.projectid=" + projectid
+                                : "SELECT id,projectid,projectname,buildingno,levelno,location,problemdescription,responsibleperson,DATE_FORMAT(`checkdate`,'%Y-%m-%d') as checkdate,worker,rebuilder,DATE_FORMAT(`finishdate`,'%Y-%m-%d') as finishdate,rechecker,treatmentmeasures,worktimecost,materialcost,problemType,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d') as posttime FROM Problems A WHERE  a.problemType='Quality'  and A.projectid=" + projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                            var result = new SxDal().GetData(sql);
                             json = WebHelper.GetObjJson(result);
                         }
                         break;
@@ -300,11 +300,15 @@ namespace suxiang.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT * FROM cost_labor a where  a.projectid=" + projectid
-                                : "SELECT * FROM cost_labor A WHERE A.projectid=" + projectid + " and a.startdate>='" + month + "-01" + "'  and a.startdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            var result = new SxDal().GetProblems(sql);
+                               ? "SELECT id,projectid,projectname,buildingno,DATE_FORMAT(`startdate`,'%Y-%m-%d') as startdate,DATE_FORMAT(`endate`,'%Y-%m-%d') as endate,content,workcontent,unit,price,worktime,totalprice,poster,posttime,state,remark FROM cost_labor a where  a.projectid=" +
+                                 projectid
+                               : "SELECT id,projectid,projectname,buildingno,DATE_FORMAT(`startdate`,'%Y-%m-%d') as startdate,DATE_FORMAT(`endate`,'%Y-%m-%d') as endate,content,workcontent,unit,price,worktime,totalprice,poster,posttime,state,remark FROM cost_labor A WHERE A.projectid=" +
+                                 projectid + " and a.startdate>='" + month + "-01" + "'  and a.startdate<'" +
+                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                            var result = new SxDal().GetData(sql);
                             json = WebHelper.GetObjJson(result);
                         }
+
                         break;
                     }
                 case "GetMaterialCosts":
@@ -314,9 +318,9 @@ namespace suxiang.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT * FROM cost_material a where a.projectid=" + projectid
-                                : "SELECT * FROM cost_material A WHERE A.projectid=" + projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            var result = new SxDal().GetProblems(sql);
+                               ? "SELECT id,projectid,projectname,buildingno,DATE_FORMAT(`curdate`,'%Y-%m-%d') as curdate,workteam,materialname,unit,number,price,totalprice,remark,poster,posttime FROM cost_material a where a.projectid=" + projectid
+                               : "SELECT id,projectid,projectname,buildingno,DATE_FORMAT(`curdate`,'%Y-%m-%d') as curdate,workteam,materialname,unit,number,price,totalprice,remark,poster,posttime FROM cost_material A WHERE A.projectid=" + projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                            var result = new SxDal().GetData(sql);
                             json = WebHelper.GetObjJson(result);
                         }
                         break;
@@ -328,9 +332,9 @@ namespace suxiang.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT * FROM cost_management a where a.projectid=" + projectid
-                                : "SELECT * FROM cost_management A WHERE  A.projectid=" + projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            var result = new SxDal().GetProblems(sql);
+                                ? "SELECT id,projectid,projectname,DATE_FORMAT(`curdate`,'%Y-%m-%d') as curdate,type,content,unit,number,price,totalprice,remark,poster,posttime FROM cost_management a where a.projectid=" + projectid
+                                : "SELECT id,projectid,projectname,DATE_FORMAT(`curdate`,'%Y-%m-%d') as curdate,type,content,unit,number,price,totalprice,remark,poster,posttime FROM cost_management A WHERE  A.projectid=" + projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" + (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                            var result = new SxDal().GetData(sql);
                             json = WebHelper.GetObjJson(result);
                         }
                         break;

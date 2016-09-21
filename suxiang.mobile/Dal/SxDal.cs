@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using suxiang.Model;
 
-namespace suxiang.Dal
+namespace suxiang.mobile.Dal
 {
     public class SxDal
     {
