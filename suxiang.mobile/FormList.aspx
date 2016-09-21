@@ -1,6 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="FormList.aspx.cs" Inherits="suxiang.mobile.Form.FormList" %>
 
-<
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,21 +14,23 @@
     <div data-role="page">
         <div data-role="header">
             <h1>
-                报表中心</h1>
+                各类表单</h1>
         </div>
         <div data-role="content">
             <ul data-role="listview" data-inset="true" data-divider-theme="a">
-                <li data-role="list-divider">项目列表</li>
-                <li><a href='Report/ReportList.aspx' target='_self'>金陵城</a></li>
-                <li><a href='Report/ReportList.aspx' target='_self'>扬州城</a></li>
-                <li><a href='Report/ReportList.aspx' target='_self'>常州城</a></li>
+                <li data-role="list-divider">表单列表</li>
+                <li><a href='Form/SecurityQuestionForm.aspx' target='_self'>安全问题表</a></li>
+                <li><a href='Form/QualityQuestionForm.aspx' target='_self'>质量问题表</a></li>
+                <li><a href='Form/LaborCostForm.aspx' target='_self'>用工成本表</a></li>
+                <li><a href='Form/MaterialCostForm.aspx' target='_self'>材料成本表</a></li>
+                <li><a href='Form/ManageCostForm.aspx' target='_self'>管理成本表</a></li>
             </ul>
         </div>
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href='FormList.aspx' data-icon='star' target='_self'>各类表单</a></li>
-                    <li><a href="#" data-icon="grid" class="ui-btn-active">报表中心</a></li>
+                    <li><a href='#' data-icon='star' class="ui-btn-active">各类表单</a></li>
+                    <li><a href="index.aspx" data-icon="grid" target='_self'>报表中心</a></li>
                     <li><a href="PersonalCenter.aspx" data-icon="gear" target='_self'>个人设置</a></li>
                 </ul>
             </div>

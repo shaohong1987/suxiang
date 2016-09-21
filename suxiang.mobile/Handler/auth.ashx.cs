@@ -21,14 +21,16 @@ namespace suxiang.mobile.Handler
             switch (action)
             {
                 case "loginaction":
+                {
                     var usercode = WebHelper.GetActionStr(context, "usercode");
                     var userpass = WebHelper.GetActionStr(context, "userpass");
-                    var user = new UsersModel { EmployeeNo = usercode, Password = userpass };
+                    var user = new UsersModel {EmployeeNo = usercode, Password = userpass};
                     var msg = new SxDal().Login(user);
                     json = WebHelper.GetObjJson(msg);
                     if (msg.Data != null)
                         context.Session["user"] = msg.Data;
                     break;
+                }
             }
             context.Response.Write(json);
         }
@@ -38,12 +40,5 @@ namespace suxiang.mobile.Handler
             get { return false; }
         }
 
-        private static string Md5(string str)
-        {
-            var result = Encoding.Default.GetBytes(str);
-            MD5 md5 = new MD5CryptoServiceProvider();
-            var output = md5.ComputeHash(result);
-            return BitConverter.ToString(output).Replace("-", "");
-        }
     }
 }

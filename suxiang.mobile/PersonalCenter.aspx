@@ -8,8 +8,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="Content/css/jquery.mobile-1.4.5.min.css" />
-    <script src="Content/js/jquery.min.js" type="text/javascript"></script>
+    <script src="Content/js/jquery.min.js" type="text/javascript"></script> 
     <script src="Content/js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+    <script src="Content/js/jquery.md5.js" type="text/javascript"></script>
     <script type="text/javascript">
         function doPost() {
             var oldpass = $("#oldpass").val();
@@ -19,32 +20,19 @@
                 $("#notification").text("请填写完整数据,并保两次输入的新密码一致.");
                 return false;
             }
-            var formData = $("#updatepwdForm").serialize();
-            $.ajax({
-                type: "POST",
-                url: "Handler/Process.ashx",
-                cache: false,
-                data: formData,
-                success: onSuccess,
-                error: onError
-            });
-            return false;
-        }
-
-        function onSuccess(data, status) {
-            if (data.indexOf(".php") > 0) {
-                window.location.href = 'login.php';
-            }
-            else {
-                data = $.trim(data);
-                $("#notification").text(data);
-            }
-        }
-
-        function onError(data, status) {
-            data = $.trim(data);
-            $("#notification").text(data);
-            window.location.href = 'self.php';
+            $.post("Handler/process.ashx?action=updatepwdaction",
+			    {
+			        oldpass: $.md5($("#oldpass").val()),
+			        newpass: $.md5($("#pass").val())
+			    },
+			    function (data) {
+			        var json = eval(data);
+			        if (json.State === true) {
+			            window.location.href = "login.htm";
+			        } else {
+			            $("#notification").html(json.Msg);
+			        }
+			    }, "json");
         }
     </script>
 </head>
@@ -67,7 +55,7 @@
                     新密码</label>
                 <input type="password" name='pass' placeholder="新密码" id="pass" />
                 <label for="pass2">
-                    再次输入新密码</label>
+                    确认密码</label>
                 <input type="password" name='pass2' placeholder="再次输入新密码" id="pass2" />
                 <h3 id="notification">
                 </h3>
