@@ -299,7 +299,6 @@
     <Content Include="Report\ManageCostReport.aspx" />
     <Content Include="Report\MaterialCostReport.aspx" />
     <Content Include="Report\QualityReport.aspx" />
-    <Content Include="Report\ReportList.aspx" />
     <Content Include="Report\SecurityReport.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -415,13 +414,6 @@
     </Compile>
     <Compile Include="Report\QualityReport.aspx.designer.cs">
       <DependentUpon>QualityReport.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Report\ReportList.aspx.cs">
-      <DependentUpon>ReportList.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Report\ReportList.aspx.designer.cs">
-      <DependentUpon>ReportList.aspx</DependentUpon>
     </Compile>
     <Compile Include="Report\SecurityReport.aspx.cs">
       <DependentUpon>SecurityReport.aspx</DependentUpon>

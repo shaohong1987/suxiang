@@ -9,28 +9,21 @@
     <link rel="stylesheet" href="Content/css/jquery.mobile-1.4.5.min.css" />
     <script src="Content/js/jquery.min.js" type="text/javascript"></script>
     <script src="Content/js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $.post("../Handler/process.ashx", { action: "GetProjects" }, function (data) {
-                var json = eval(data);
-                if (json.State === true) {
-                    $.each(json.Data, function (i, item) {
-                        $("#uid").append("<li class='ui-last-child'><a href='Report/ReportList.aspx?projectid=" + item['Id'] + "' target='_self' class='ui-btn ui-btn-icon-right ui-icon-carat-r'>" + item['Projectname'] + "</a></li>");
-                    });
-                }
-            },
-                "json");
-        });
-    </script>
 </head>
 <body>
     <div data-role="page">
         <div data-role="header">
-            <h1>报表中心</h1>
+            <h1>
+                报表中心</h1>
         </div>
         <div data-role="content">
             <ul data-role="listview" data-inset="true" data-divider-theme="a" id="uid">
-                <li data-role="list-divider">项目列表</li>
+                <li data-role="list-divider">报表列表</li>
+                <li><a href='Report/SecurityReport.aspx' target='_self'>安全问题表</a></li>
+                <li><a href='Report/QualityReport.aspx' target='_self'>质量问题表</a></li>
+                <li><a href='Report/LaborCostReport.aspx' target='_self'>用工成本表</a></li>
+                <li><a href='Report/MaterialCostReport.aspx' target='_self'>材料成本表</a></li>
+                <li><a href='Report/ManageCostReport.aspx' target='_self'>管理成本表</a></li>
             </ul>
         </div>
         <div data-role="footer" data-position="fixed">
