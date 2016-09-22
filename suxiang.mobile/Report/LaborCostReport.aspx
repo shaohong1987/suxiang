@@ -15,6 +15,21 @@
     <script src="../Content/js/jquery.mobile.datepicker.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            var nowdays = new Date();
+            var year = nowdays.getFullYear();
+            var month = nowdays.getMonth();
+            if (month == 0) {
+                month = 12;
+                year = year - 1;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            $("#fmonths").val(year + "-" + month + "-" + "01");
+            var myDate = new Date(year, month, 0);
+            $("#fmonthe").val(year + "-" + month + "-" + myDate.getDate());
+
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
                 var json = eval(data);
                 if (json.State === true) {
@@ -27,6 +42,9 @@
         });
 
         function doPost() {
+            var projectid = $("#projectid").val();
+            var startdate = $("#fmonths").val();
+            var enddate = $("#fmonthe").val();
             return false;
         }
     </script>
@@ -38,8 +56,8 @@
                 Back</a>
             <h1>
                 用工成本表</h1>
-            <a href="#searchpanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all  ui-btn-icon-right ui-icon-search" style="padding-top: 0.3em;">
-                查询</a>
+            <a href="#searchpanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all  ui-btn-icon-right ui-icon-search"
+                style="padding-top: 0.4em;">查询 </a>
         </div>
         <div style="margin-top: 5px;">
             <table class="table table-bordered">
@@ -75,6 +93,11 @@
                         小计
                     </th>
                 </tr>
+                <tr>
+                    <td colspan="10">
+                        请点击右上角的查询，选择项目和时间段查询
+                    </td>
+                </tr>
             </table>
         </div>
         <div data-role="panel" id="searchpanel" data-position="right" data-display="push"
@@ -87,7 +110,8 @@
                     <select name="projectid" id="projectid" onchange="changepro(this.value)">
                         <option value='-1'>请选择项目</option>
                     </select>
-                    <input type="text" name='fmonth' id="fmonth" data-role="date" />
+                    <input type="text" name='fmonths' id="fmonths" data-role="date" placeholder="开始日期" />
+                    <input type="text" name='fmonthe' id="fmonthe" data-role="date" placeholder="截止日期" />
                     <button data-theme="b" data-rel="close" type="button" onclick='doPost()'>
                         确认</button>
                 </div>
