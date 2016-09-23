@@ -15,7 +15,6 @@
     <script src="../Content/js/jquery.mobile.datepicker.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-
             var nowdays = new Date();
             var year = nowdays.getFullYear();
             var month = nowdays.getMonth();
@@ -45,6 +44,31 @@
             var projectid = $("#projectid").val();
             var startdate = $("#fmonths").val();
             var enddate = $("#fmonthe").val();
+            if (projectid == '-1' || startdate.length == 0 || enddate.length == 0) {
+                alert('请补全搜索条件.');
+                return false;
+            }
+            $.post("../Handler/Process.ashx", { action: "GetLaborCosts", pid: projectid, sdate: startdate, edate: enddate }, function (data) {
+                var json = eval(data);
+                $("table tbody").html('');
+                if (json.length == 0) {
+                    $("table tbody").html("<tr><td colspan='10'>暂无数据</td></tr>");
+                } else {
+                    var sum = 0;
+                    var newRow;
+                    $.each(json, function (i, item) {
+                        if (i == 0) {
+                            $("#lid").html(item["projectname"]);
+                        }
+                        sum += parseFloat(item["totalprice"]);
+                        newRow += "<tr><td>" + (i + 1) + "</td><td>" + item["startdate"] + "</td><td>" + item["endate"] + "</td><td>" + item["buildingno"] + "</td><td>" + item["content"] + "</td><td>" + item["workcontent"] + "</td><td>" + item["unit"] + "</td><td>" + item["worktime"] + "</td><td>" + item["price"] + "</td><td>" + item["totalprice"] + "</td></tr>";
+                        $("table tbody tr:last").after(newRow);
+                    });
+                    newRow += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>合计：</td><td>" + sum + "</td></tr>";
+                    $("table tbody").html(newRow);
+                }
+            },
+                "json");
             return false;
         }
     </script>
@@ -52,59 +76,64 @@
 <body>
     <div data-role="page">
         <div data-role="header" data-position="fixed">
-            <a href="../FormList.aspx" target="_self" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">
+            <a href="../index.aspx" target="_self" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">
                 Back</a>
             <h1>
-                用工成本表</h1>
+                <label id="lid">
+                    用工成本表</label></h1>
             <a href="#searchpanel" class="ui-btn-right ui-btn ui-btn-inline ui-mini ui-corner-all  ui-btn-icon-right ui-icon-search"
                 style="padding-top: 0.4em;">查询 </a>
         </div>
         <div style="margin-top: 5px;">
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        序号
-                    </th>
-                    <th>
-                        开始日期
-                    </th>
-                    <th>
-                        结束日期
-                    </th>
-                    <th>
-                        栋号
-                    </th>
-                    <th>
-                        工种
-                    </th>
-                    <th>
-                        工作内容
-                    </th>
-                    <th>
-                        单位
-                    </th>
-                    <th>
-                        工作量
-                    </th>
-                    <th>
-                        单价
-                    </th>
-                    <th>
-                        小计
-                    </th>
-                </tr>
-                <tr>
-                    <td colspan="10">
-                        请点击右上角的查询，选择项目和时间段查询
-                    </td>
-                </tr>
+            <table class="table table-bordered scrolltable">
+                <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>
+                        <th>
+                            开始日期
+                        </th>
+                        <th>
+                            结束日期
+                        </th>
+                        <th>
+                            栋号
+                        </th>
+                        <th>
+                            工种
+                        </th>
+                        <th>
+                            工作内容
+                        </th>
+                        <th>
+                            单位
+                        </th>
+                        <th>
+                            工作量
+                        </th>
+                        <th>
+                            单价
+                        </th>
+                        <th>
+                            小计
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="10">
+                            请点击右上角查询按钮进行数据检索。
+                        </td>
+                    </tr>
+                </tbody>
             </table>
         </div>
         <div data-role="panel" id="searchpanel" data-position="right" data-display="push"
             data-theme="a">
             <div data-role="content">
                 <h3>
-                    查询</h3>
+                    用工成本查询</h3>
                 <form id="laborcostForm">
                 <div data-role="fieldcontain">
                     <select name="projectid" id="projectid" onchange="changepro(this.value)">

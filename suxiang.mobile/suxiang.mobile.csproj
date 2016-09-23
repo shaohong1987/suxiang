@@ -280,6 +280,7 @@
     <Content Include="Content\img\glyphicons-halflings.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
+    <Content Include="Content\js\iscroll.js" />
     <Content Include="Content\js\jquery.md5.js" />
     <Content Include="Content\js\jquery.min.js" />
     <Content Include="Content\js\jquery.mobile-1.4.5.min.js" />
