@@ -64,7 +64,7 @@ namespace suxiang.Dal
                 Data = null
             };
             var sql = "select count(1)  from users where username='" + username + "'";
-            var obj=DbHelper.ExecuteScalar(CommandType.Text, sql);
+            var obj = DbHelper.ExecuteScalar(CommandType.Text, sql);
             if (obj != null)
             {
                 var i = Convert.ToInt32(obj);
@@ -92,7 +92,7 @@ namespace suxiang.Dal
             try
             {
                 var sql = "INSERT INTO USERS(username,password,realname,email,state,`group`) VALUES('" + model.EmployeeNo +
-                          "','" + model.Password + "','" + model.RealName + "','" + model.Email + "'," + (model.State?1:0) +
+                          "','" + model.Password + "','" + model.RealName + "','" + model.Email + "'," + (model.State ? 1 : 0) +
                           "," + model.Group + ");";
                 if (DbHelper.ExecuteNonQuery(CommandType.Text, sql) > 0)
                 {
@@ -122,7 +122,7 @@ namespace suxiang.Dal
                           model.EmployeeNo + "';";
                 if (string.IsNullOrEmpty(model.Password))
                 {
-                    sql = "update USERS set realname='"+model.RealName+"',email='"+model.Email+"',state="+ (model.State ? 1 : 0) + ",`group`=" +model.Group+" where username='" + model.EmployeeNo + "';";
+                    sql = "update USERS set realname='" + model.RealName + "',email='" + model.Email + "',state=" + (model.State ? 1 : 0) + ",`group`=" + model.Group + " where username='" + model.EmployeeNo + "';";
                 }
                 if (DbHelper.ExecuteNonQuery(CommandType.Text, sql) > 0)
                 {
@@ -173,8 +173,8 @@ namespace suxiang.Dal
             return msg;
         }
 
-	    public MsgModel GetAllProjects()
-	    {
+        public MsgModel GetAllProjects()
+        {
             var msg = new MsgModel
             {
                 State = false,
@@ -199,11 +199,35 @@ namespace suxiang.Dal
                             project.Projectleaderid = Convert.ToInt32(row["projectleaderid"]);
                         if (DBNull.Value != row["projectleader"])
                             project.Projectleader = Convert.ToString(row["projectleader"]);
+                        if (DBNull.Value != row["Constructionleaderid"])
+                            project.Constructionleaderid = Convert.ToInt32(row["Constructionleaderid"]);
+                        if (DBNull.Value != row["Constructionleader"])
+                            project.Constructionleader = Convert.ToString(row["Constructionleader"]);
+                        if (DBNull.Value != row["Accountantid"])
+                            project.Accountantid = Convert.ToInt32(row["Accountantid"]);
+                        if (DBNull.Value != row["Accountant"])
+                            project.Accountant = Convert.ToString(row["Accountant"]);
+                        if (DBNull.Value != row["Productleaderid"])
+                            project.Productleaderid = Convert.ToInt32(row["Productleaderid"]);
+                        if (DBNull.Value != row["Productleader"])
+                            project.Productleader = Convert.ToString(row["Productleader"]);
+                        if (DBNull.Value != row["Qualityleaderid"])
+                            project.Qualityleaderid = Convert.ToInt32(row["Qualityleaderid"]);
+                        if (DBNull.Value != row["Qualityleader"])
+                            project.Qualityleader = Convert.ToString(row["Qualityleader"]);
+                        if (DBNull.Value != row["Safetyleaderid"])
+                            project.Safetyleaderid = Convert.ToInt32(row["Safetyleaderid"]);
+                        if (DBNull.Value != row["Safetyleader"])
+                            project.Safetyleader = Convert.ToString(row["Safetyleader"]);
+                        if (DBNull.Value != row["Storekeeperid"])
+                            project.Storekeeperid = Convert.ToInt32(row["Storekeeperid"]);
+                        if (DBNull.Value != row["Storekeeper"])
+                            project.Storekeeper = Convert.ToString(row["Storekeeper"]);
                         if (DBNull.Value != row["buildingTotal"])
                             project.BuildingTotal = Convert.ToInt32(row["buildingTotal"]);
                         if (DBNull.Value != row["state"])
                             project.State = Convert.ToBoolean(row["state"]);
-	                    projects.Add(project);
+                        projects.Add(project);
                     }
                     msg.State = true;
                     msg.Msg = "成功获取项目信息";
@@ -215,10 +239,10 @@ namespace suxiang.Dal
                 //ignore
             }
             return msg;
-	    }
+        }
 
-	    public MsgModel GetProjectinfo(string projectid)
-	    {
+        public MsgModel GetProjectinfo(string projectid)
+        {
             var msg = new MsgModel
             {
                 State = false,
@@ -227,7 +251,7 @@ namespace suxiang.Dal
             };
             try
             {
-                 string sql = "SELECT * FROM `projectinfo` where projectid="+projectid+";";
+                string sql = "SELECT * FROM `projectinfo` where projectid=" + projectid + ";";
                 var result = DbHelper.ExecuteDataTable(CommandType.Text, sql);
                 if ((result != null) && (result.Rows.Count > 0))
                 {
@@ -259,7 +283,7 @@ namespace suxiang.Dal
                 //ignore
             }
             return msg;
-	    }
+        }
 
 
         public MsgModel GetProject(string projectid)
@@ -341,7 +365,7 @@ namespace suxiang.Dal
         }
 
         public MsgModel AddData(string sql)
-        { 
+        {
             var msg = new MsgModel
             {
                 State = false,
@@ -366,10 +390,10 @@ namespace suxiang.Dal
             return msg;
         }
 
-	    public DataTable GetData(string sql)
-	    {
-		    return DbHelper.ExecuteDataTable(CommandType.Text, sql);
-	    }
+        public DataTable GetData(string sql)
+        {
+            return DbHelper.ExecuteDataTable(CommandType.Text, sql);
+        }
         #endregion
 
         public DataTable GetProblems(string sql)
@@ -423,15 +447,15 @@ namespace suxiang.Dal
             return msg;
         }
 
-	    public int GetId(string sql)
-	    {
-		    var obj = DbHelper.ExecuteScalar(CommandType.Text, sql);
-		    if (obj != null)
-		    {
-			    var id = Convert.ToInt32(obj);
-			    return id;
-		    }
-		    return -1;
-	    }
+        public int GetId(string sql)
+        {
+            var obj = DbHelper.ExecuteScalar(CommandType.Text, sql);
+            if (obj != null)
+            {
+                var id = Convert.ToInt32(obj);
+                return id;
+            }
+            return -1;
+        }
     }
 }

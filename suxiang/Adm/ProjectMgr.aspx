@@ -19,6 +19,12 @@
                                 var newRow = "<tr>";
                                 newRow += "<td>" + item.Projectname + "</td>";
                                 newRow += "<td>" + item.Projectleader + "</td>";
+                                newRow += "<td>" + item.Productleader + "</td>";
+                                newRow += "<td>" + item.Accountant + "</td>";
+                                newRow += "<td>" + item.Constructionleader + "</td>";
+                                newRow += "<td>" + item.Safetyleader + "</td>";
+                                newRow += "<td>" + item.Qualityleader + "</td>";
+                                newRow += "<td>" + item.Storekeeper + "</td>";
                                 newRow += "<td>" + item.BuildingTotal + "</td>";
                                 newRow += "<td>" + (item.State ? "进行中" : "已结束") + "</td>";
                                 newRow += "<td>" + (item.State ? "<a onclick='changeState(" + item.Id + ",0);' style='cursor:pointer;'>结束项目</a>" : "<a onclick='changeState(" + item.Id + ",1);' style='cursor:pointer;'>启用项目</a>") + "</td>";
@@ -49,7 +55,7 @@
         }
 
         function onError(data, status) {
-	        window.open("ProjectMgr.aspx", "_self");
+            window.open("ProjectMgr.aspx", "_self");
         }
 
         function changeState(uid, s) {
@@ -89,7 +95,25 @@
                             项目名称
                         </th>
                         <th data-priority="1">
-                            项目经理
+                            项目负责人
+                        </th>
+                        <th data-priority="1">
+                            生产经理
+                        </th>
+                        <th data-priority="1">
+                            会计
+                        </th>
+                        <th data-priority="1">
+                            施工员
+                        </th>
+                        <th data-priority="1">
+                            质量员
+                        </th>
+                        <th data-priority="1">
+                            安全员
+                        </th>
+                        <th data-priority="1">
+                            保管员
                         </th>
                         <th data-priority="1">
                             总栋数

@@ -7,6 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "suxiang.mobile", "suxiang.m
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{196E9520-EB4F-4D1D-9329-B88EA8818A01}"
 	ProjectSection(SolutionItems) = preProject
+		C:\Users\Eric\Desktop\suxiang.sql = C:\Users\Eric\Desktop\suxiang.sql
 		修改记录.txt = 修改记录.txt
 		修改进度.txt = 修改进度.txt
 	EndProjectSection

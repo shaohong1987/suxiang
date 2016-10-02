@@ -2,7 +2,7 @@
     CodeBehind="ProjectInfo.aspx.cs" Inherits="suxiang.Adm.ProjectInfo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-	<meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <link rel="stylesheet" href="../Content/css/jquery.mobile-1.4.5.min.css">
     <script src="../Content/js/jquery.min.js" type="text/javascript"></script>
     <script src="../Content/js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
@@ -29,6 +29,36 @@
                                             $("#manage").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#manage").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        }
+                                         if (json.Data[0].Productleaderid + "-" + json.Data[0].Productleader == item['Id'] + "-" + item["realname"]) {
+                                            $("#productleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        } else {
+                                            $("#productleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        }
+                                         if (json.Data[0].Accountantid + "-" + json.Data[0].Accountant == item['Id'] + "-" + item["realname"]) {
+                                            $("#accountant").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        } else {
+                                            $("#accountant").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        }
+                                         if (json.Data[0].Constructionleaderid + "-" + json.Data[0].Constructionleader == item['Id'] + "-" + item["realname"]) {
+                                            $("#constructionleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        } else {
+                                            $("#constructionleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        }
+                                         if (json.Data[0].Qualityleaderid + "-" + json.Data[0].Qualityleader == item['Id'] + "-" + item["realname"]) {
+                                            $("#qualityleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        } else {
+                                            $("#qualityleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        }
+                                         if (json.Data[0].Safetyleaderid + "-" + json.Data[0].Safetyleader == item['Id'] + "-" + item["realname"]) {
+                                            $("#safetyleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        } else {
+                                            $("#safetyleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        }
+                                         if (json.Data[0].Storekeeperid + "-" + json.Data[0].Storekeeper == item['Id'] + "-" + item["realname"]) {
+                                            $("#storekeeper").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                        } else {
+                                            $("#storekeeper").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         }
                                         $("#buildingleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                     });
@@ -96,7 +126,15 @@
                     buildingArr[j - 1][3] = $("#table-column-toggle tr:eq(" + j + ") td:eq(3)").text().replace('添加栋号信息', '');
                 }
             }
-            if ($("#projectname").val() == '' ||$("#manage").val() == '-1' ||buildingArr.length < 1) {
+            if ($("#projectname").val() == '' ||
+                $("#manage").val() == '-1' ||
+                $("#productleader").val() == '-1' ||
+                $("#accountant").val() == '-1' ||
+                $("#constructionleader").val() == '-1' ||
+                $("#qualityleader").val() == '-1' ||
+                $("#safetyleader").val() == '-1' ||
+                $("#storekeeper").val() == '-1' ||
+                buildingArr.length < 1) {
                 alert('请将数据填写完整后提交，谢谢！');
                 return false;
             }
@@ -110,6 +148,12 @@
                         projectid: <%=ProjectId%>,
                         projectname: $("#projectname").val(),
                         manage: $("#manage").val(),
+                        productleader: $("#productleader").val(),
+                        accountant: $("#accountant").val(),
+                        constructionleader: $("#constructionleader").val(),
+                        qualityleader: $("#qualityleader").val(),
+                        safetyleader: $("#safetyleader").val(),
+                        storekeeper: $("#storekeeper").val(),
                         bArr: buildingArr
                     },
                     success: function (data) {
@@ -170,6 +214,24 @@
                     <input type="text" name='projectname' id='projectname' placeholder="项目名称" value="" />
                     <select name="manage" id="manage">
                         <option value='-1'>请选择项目经理</option>
+                    </select>
+                    <select name="productleader" id="Select1">
+                        <option value="-1">请选择生产经理</option>
+                    </select>
+                    <select name="accountant" id="Select2">
+                        <option value="-1">请选择会计</option>
+                    </select>
+                    <select name="constructionleader" id="Select3">
+                        <option value="-1">请选择施工员</option>
+                    </select>
+                    <select name="qualityleader" id="Select4">
+                        <option value="-1">请选择质量员</option>
+                    </select>
+                    <select name="safetyleader" id="Select5">
+                        <option value="-1">请选择安全员</option>
+                    </select>
+                    <select name="storekeeper" id="Select6">
+                        <option value="-1">请选择保管员</option>
                     </select>
                     <table data-role="table" id="table-column-toggle" class="ui-responsive table-stroke"
                         style='float: right;'>

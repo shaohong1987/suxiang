@@ -12,22 +12,14 @@
     <script src="../content/js/jquery.jqGrid.js" type="text/javascript"></script>
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(document)
-            .ready(function() {
-                $("#BtnSearch")
-                    .on("click",
-                        function() {
-                            jQuery("#grid")
-                                .jqGrid('setGridParam',
-                                {
+        $(document).ready(function() {
+                $("#BtnSearch").on("click",function() {jQuery("#grid").jqGrid('setGridParam',{
                                     url: "../Handler/Auth.ashx?action=GetUserByUserName",
                                     postData: { UserName: $("#txtuserName").val() }
-                                })
-                                .trigger("reloadGrid");
+                                }).trigger("reloadGrid");
                         });
              
-                $('#grid')
-                    .jqGrid({
+                $('#grid').jqGrid({
                         height: "auto",
                         autowidth: true,
                         multiboxonly: true,
@@ -52,7 +44,7 @@
                                     if (cellValue == 0) {
                                         return "总经理";
                                     } else if (cellValue == 1) {
-                                        return "管理员";
+                                        return "财务";
                                     } else {
                                         return "普通员工";
                                     }
@@ -259,7 +251,7 @@
                         </label><cite>
                             <input type="radio" name="group" value="100" id="r普通员工"/>普通员工&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" name="group" value="0" id="r总经理"/>总经理&nbsp;&nbsp;&nbsp;&nbsp;
-                            <input type="radio" name="group" value="1" id="r管理员"/>管理员
+                            <input type="radio" name="group" value="1" id="r财务"/>财务
                         </cite>
                     </li>
                     <li>

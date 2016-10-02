@@ -47,9 +47,38 @@ namespace suxiang.Handler
                             var projectid = WebHelper.GetActionInt(context, "projectid");
                             var projectname = WebHelper.GetActionStr(context, "projectname");
                             var manage = WebHelper.GetActionStr(context, "manage");//bArr
+                            var productleader = WebHelper.GetActionStr(context, "productleader");
+                            var accountant = WebHelper.GetActionStr(context, "accountant");
+                            var constructionleader = WebHelper.GetActionStr(context, "constructionleader");
+                            var qualityleader = WebHelper.GetActionStr(context, "qualityleader");
+                            var safetyleader = WebHelper.GetActionStr(context, "safetyleader");
+                            var storekeeper = WebHelper.GetActionStr(context, "storekeeper");
+
                             var marr = manage.Split('-');
+                            var parr = productleader.Split('-');
+                            var aarr = accountant.Split('-');
+                            var carr = constructionleader.Split('-');
+                            var qarr = qualityleader.Split('-');
+                            var saarr = safetyleader.Split('-');
+                            var starr = storekeeper.Split('-');
+
                             var list = (from string item in context.Request.Params where item.StartsWith("bArr") select context.Request.Params[item] into v select v.Split(',')).ToList();
-                            var sql = "update projects set projectname='" + projectname + "',projectleaderid=" + marr[0] + ",projectleader='" + marr[1] + "',buildingTotal=" + list.Count + " where id=" + projectid + ";";
+                            var sql = "update projects set projectname='" + projectname
+                                + "',projectleaderid=" + marr[0]
+                                + ",projectleader='" + marr[1]
+                                + "',productleaderid=" + parr[0]
+                                + ",productleader='" + parr[1]
+                                + "',accountantid=" + aarr[0]
+                                + ",accountant='" + aarr[1]
+                                + "',constructionleaderid=" + carr[0]
+                                + ",constructionleader='" + carr[1]
+                                + "',qualityleaderid=" + qarr[0]
+                                + ",qualityleader='" + qarr[1]
+                                + "',safetyleaderid=" + saarr[0]
+                                + ",safetyleader='" + saarr[1]
+                                + "',storekeeperid=" + starr[0]
+                                + ",storekeeper='" + starr[1]
+                                + "',buildingTotal=" + list.Count + " where id=" + projectid + ";";
                             sql += "delete from projectinfo where projectid=" + projectid + ";";
                             sql += list.Aggregate("", (current, item) => current + ("insert into projectinfo (projectid,projectname,buildingid,buildingleaderid,buildingleader,state)values(" + projectid + ",'" + projectname + "'," + item[0] + "," + item[1] + ",'" + item[2] + "',1);"));
                             msg = new SxDal().AddData(sql);
@@ -73,9 +102,23 @@ namespace suxiang.Handler
                         {
                             var projectname = WebHelper.GetActionStr(context, "projectname");
                             var manage = WebHelper.GetActionStr(context, "manage");//bArr
+                            var productleader = WebHelper.GetActionStr(context, "productleader");
+                            var accountant = WebHelper.GetActionStr(context, "accountant");
+                            var constructionleader = WebHelper.GetActionStr(context, "constructionleader");
+                            var qualityleader = WebHelper.GetActionStr(context, "qualityleader");
+                            var safetyleader = WebHelper.GetActionStr(context, "safetyleader");
+                            var storekeeper = WebHelper.GetActionStr(context, "storekeeper");
+
                             var marr = manage.Split('-');
+                            var parr = productleader.Split('-');
+                            var aarr = accountant.Split('-');
+                            var carr = constructionleader.Split('-');
+                            var qarr = qualityleader.Split('-');
+                            var saarr = safetyleader.Split('-');
+                            var starr = storekeeper.Split('-');
+
                             var list = (from string item in context.Request.Params where item.StartsWith("bArr") select context.Request.Params[item] into v select v.Split(',')).ToList();
-                            var sql = "insert into projects(projectname,projectleaderid,projectleader,buildingTotal,state)values('" + projectname + "'," + marr[0] + ",'" + marr[1] + "'," + list.Count + ",1);select @@identity;";
+                            var sql = "insert into projects(projectname,projectleaderid,projectleader,productleaderid,productleader,accountantid,accountant,constructionleaderid,constructionleader,safetyleaderid,safetyleader,qualityleaderid,qualityleader,storekeeperid,storekeeper,buildingTotal,state)values('" + projectname + "'," + marr[0] + ",'" + marr[1] + "'," + parr[0] + ",'" + parr[1] + "'," + aarr[0] + ",'" + aarr[1] + "'," + carr[0] + ",'" + carr[1] + "'," + saarr[0] + ",'" + saarr[1] + "'," + qarr[0] + ",'" + qarr[1] + "'," + starr[0] + ",'" + starr[1] + "'," + list.Count + ",1);select @@identity;";
                             var id = new SxDal().GetId(sql);
                             if (id > 0)
                             {

@@ -16,6 +16,12 @@
                     var d = JSON.parse(data);
                     $.each(d, function (i, item) {
                         $("#manage").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                        $("#productleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                        $("#accountant").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                        $("#constructionleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                        $("#qualityleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                        $("#safetyleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                        $("#storekeeper").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                         $("#buildingleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                     });
                 },
@@ -41,7 +47,12 @@
             }
             if ($("#projectname").val() == '' ||
 					$("#manage").val() == '-1' ||
-					$("#accountname").val() == '-1' ||
+					$("#productleader").val() == '-1' ||
+                    $("#accountant").val() == '-1' ||
+                    $("#constructionleader").val() == '-1' ||
+                    $("#qualityleader").val() == '-1' ||
+                    $("#safetyleader").val() == '-1' ||
+                    $("#storekeeper").val() == '-1' ||
 					buildingArr.length < 1
 			) {
                 alert('请将数据填写完整后提交，谢谢！');
@@ -55,6 +66,12 @@
                         action: "addprojectform",
                         projectname: $("#projectname").val(),
                         manage: $("#manage").val(),
+                        productleader: $("#productleader").val(),
+                        accountant: $("#accountant").val(),
+                        constructionleader: $("#constructionleader").val(),
+                        qualityleader: $("#qualityleader").val(),
+                        safetyleader: $("#safetyleader").val(),
+                        storekeeper: $("#storekeeper").val(),
                         bArr: buildingArr
                     },
                     success: function (data) {
@@ -111,7 +128,25 @@
                 <div data-role="fieldcontain">
                     <input type="text" name="projectname" id="projectname" placeholder="项目名称" />
                     <select name="manage" id="manage">
-                        <option value="-1">请选择项目经理</option>
+                        <option value="-1">请选择项目负责人</option>
+                    </select>
+                    <select name="productleader" id="Select1">
+                        <option value="-1">请选择生产经理</option>
+                    </select>
+                    <select name="accountant" id="Select2">
+                        <option value="-1">请选择会计</option>
+                    </select>
+                    <select name="constructionleader" id="Select3">
+                        <option value="-1">请选择施工员</option>
+                    </select>
+                    <select name="qualityleader" id="Select4">
+                        <option value="-1">请选择质量员</option>
+                    </select>
+                    <select name="safetyleader" id="Select5">
+                        <option value="-1">请选择安全员</option>
+                    </select>
+                    <select name="storekeeper" id="Select6">
+                        <option value="-1">请选择保管员</option>
                     </select>
                     <table data-role="table" id="table-column-toggle" class="ui-responsive table-stroke"
                         style="float: right;">
