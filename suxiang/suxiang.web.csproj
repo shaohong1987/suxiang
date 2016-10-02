@@ -705,6 +705,7 @@
     <Content Include="Report\MaterialCostReport.aspx" />
     <Content Include="Report\QualityReport.aspx" />
     <Content Include="Report\SecurityReport.aspx" />
+    <Content Include="suxiang.sql" />
     <Content Include="Top.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
