@@ -62,6 +62,7 @@
                 <span>
                     <img src="Content/images/leftico03.png" alt="个人中心" /></span>个人中心</div>
             <ul class="menuson">
+                <li><cite></cite><a href="Personal/MyWorks.aspx" target="rightFrame">我的工作</a><i></i></li>
                 <li><cite></cite><a href="Personal/PersonalCenter.aspx" target="rightFrame">个人资料设置</a><i></i></li>
             </ul>
         </dd>

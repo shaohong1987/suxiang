@@ -699,6 +699,7 @@
     <Content Include="Left.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
+    <Content Include="Personal\MyWorks.aspx" />
     <Content Include="Personal\PersonalCenter.aspx" />
     <Content Include="Report\LaborCostReport.aspx" />
     <Content Include="Report\ManageCostReport.aspx" />

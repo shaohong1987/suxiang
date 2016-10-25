@@ -1,0 +1,1352 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta id="wiz-template-info" data-templatename="sudoku" data-templateversion="0.0.1">
+    <title>模板</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            min-height: 100%;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .date {
+            float: left;
+            position: relative;
+        }
+
+            .date div {
+                float: left;
+                line-height: 1;
+            }
+
+                .date div:first-child {
+                    font-size: 45px;
+                    margin-right: 4px;
+                }
+
+                .date div:last-child p {
+                    font-size: 15px;
+                    padding-top: 1px;
+                }
+
+                    .date div:last-child p:first-child {
+                        padding-top: 6px;
+                    }
+
+        .tools {
+            float: right;
+        }
+
+        .content {
+            clear: both;
+            margin-top: 1rem;
+        }
+
+        .wiz-template-select-btn {
+            cursor: pointer;
+        }
+
+        .wiz-template-option {
+            cursor: pointer;
+        }
+
+        .wiz-template-floatLayer, .layer-mask {
+            display: none;
+        }
+
+            .layer-mask.active {
+                width: 90%;
+                height: 50%;
+                display: block;
+                position: absolute;
+                top: 89px;
+                box-sizing: border-box;
+                z-index: 100;
+                background-color: transparent !important;
+            }
+
+            .wiz-template-floatLayer.active {
+                width: 240px;
+                display: block;
+                position: absolute;
+                top: 50px;
+                left: 50%;
+                margin-left: -120px;
+                padding-top: 15px;
+                box-shadow: 0 4px 3px #bbb;
+                background-color: #ffffff;
+                z-index: 10000;
+                border: 1px solid #fff;
+            }
+
+        @media (max-width: 768px) {
+            .wiz-template-floatLayer.active {
+                top: 90px;
+            }
+        }
+
+        .wiz-template-select {
+            list-style: none;
+            overflow: hidden;
+            margin-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 0;
+        }
+
+        .wiz-template-option {
+            float: left;
+        }
+
+        .wiz-template-select li {
+            width: 50px;
+            text-align: center;
+        }
+
+        .mood-blue .date {
+            color: #77b7df;
+        }
+
+        .mood-purple .date {
+            color: #b790d9;
+        }
+
+        .mood-green .date {
+            color: #87ca87;
+        }
+
+        .mood-red .date {
+            color: #ed9191;
+        }
+
+        #wiz-template-weather-layer .wiz-template-select i, .tools i {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-image: url("index_files/wizIcon_icons_l.png") !important;
+            background-repeat: no-repeat;
+            background-size: 270px 315px;
+        }
+
+        i, .wiz-template-select-btn, .wiz-template-option, .wiz-template-sudoku-btn {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+
+        body.mood-blue i.weather-sun {
+            background-position: 0 -135px;
+        }
+
+        body.mood-purple i.weather-sun {
+            background-position: 0 -180px;
+        }
+
+        body.mood-green i.weather-sun {
+            background-position: 0 -225px;
+        }
+
+        body.mood-red i.weather-sun {
+            background-position: 0 -270px;
+        }
+
+        body.mood-blue i.weather-wind {
+            background-position: -45px -135px;
+        }
+
+        body.mood-purple i.weather-wind {
+            background-position: -45px -180px;
+        }
+
+        body.mood-green i.weather-wind {
+            background-position: -45px -225px;
+        }
+
+        body.mood-red i.weather-wind {
+            background-position: -45px -270px;
+        }
+
+        body.mood-blue i.weather-rain {
+            background-position: -90px -135px;
+        }
+
+        body.mood-purple i.weather-rain {
+            background-position: -90px -180px;
+        }
+
+        body.mood-green i.weather-rain {
+            background-position: -90px -225px;
+        }
+
+        body.mood-red i.weather-rain {
+            background-position: -90px -270px;
+        }
+
+        body.mood-blue i.weather-snow {
+            background-position: -135px -135px;
+        }
+
+        body.mood-purple i.weather-snow {
+            background-position: -135px -180px;
+        }
+
+        body.mood-green i.weather-snow {
+            background-position: -135px -225px;
+        }
+
+        body.mood-red i.weather-snow {
+            background-position: -135px -270px;
+        }
+
+        body.mood-blue i.weather-cloudy {
+            background-position: -180px -135px;
+        }
+
+        body.mood-purple i.weather-cloudy {
+            background-position: -180px -180px;
+        }
+
+        body.mood-green i.weather-cloudy {
+            background-position: -180px -225px;
+        }
+
+        body.mood-red i.weather-cloudy {
+            background-position: -180px -270px;
+        }
+
+        body.mood-blue i.weather-fog {
+            background-position: -225px -135px;
+        }
+
+        body.mood-purple i.weather-fog {
+            background-position: -225px -180px;
+        }
+
+        body.mood-green i.weather-fog {
+            background-position: -225px -225px;
+        }
+
+        body.mood-red i.weather-fog {
+            background-position: -225px -270px;
+        }
+
+        i.mood-blue, body.mood-blue i.mood {
+            background-position: 0 0;
+        }
+
+        i.mood-purple, body.mood-purple i.mood {
+            background-position: -45px 0;
+        }
+
+        i.mood-green, body.mood-green i.mood {
+            background-position: -90px 0;
+        }
+
+        i.mood-red, body.mood-red i.mood {
+            background-position: -135px 0;
+        }
+
+        .wiz-template-select .wiz-template-option i.weather-sun {
+            background-position: 0 -45px;
+        }
+
+        .wiz-template-select .wiz-template-option i.weather-wind {
+            background-position: -45px -45px;
+        }
+
+        .wiz-template-select .wiz-template-option i.weather-rain {
+            background-position: -90px -45px;
+        }
+
+        .wiz-template-select .wiz-template-option i.weather-snow {
+            background-position: -135px -45px;
+        }
+
+        .wiz-template-select .wiz-template-option i.weather-cloudy {
+            background-position: -180px -45px;
+        }
+
+        .wiz-template-select .wiz-template-option i.weather-fog {
+            background-position: -225px -45px;
+        }
+
+        .wiz-template-option i.weather-sun:hover, .wiz-template-option i.weather-sun:active {
+            background-position: 0 -90px;
+        }
+
+        .wiz-template-option i.weather-wind:hover, .wiz-template-option i.weather-wind:active {
+            background-position: -45px -90px;
+        }
+
+        .wiz-template-option i.weather-rain:hover, .wiz-template-option i.weather-rain:active {
+            background-position: -90px -90px;
+        }
+
+        .wiz-template-option i.weather-snow:hover, .wiz-template-option i.weather-snow:active {
+            background-position: -135px -90px;
+        }
+
+        .wiz-template-option i.weather-cloudy:hover, .wiz-template-option i.weather-cloudy:active {
+            background-position: -180px -90px;
+        }
+
+        .wiz-template-option i.weather-fog:hover, .wiz-template-option i.weather-fog:active {
+            background-position: -225px -90px;
+        }
+
+        .wiz-template-sudoku-content {
+            position: relative;
+            width: 100%;
+            min-height: 600px;
+            overflow-x: hidden;
+        }
+
+        .wiz-template-sudoku-index, .wiz-template-sudoku-btn {
+            position: absolute;
+        }
+
+        .sudoku-grid {
+            position: absolute;
+            background-color: #f4f7fa;
+            border: 1px solid #f4f7fa;
+            border-radius: 5px;
+            color: #353c47;
+            overflow: hidden;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+        }
+
+            .sudoku-grid:hover {
+                overflow-y: auto;
+                overflow-x: hidden;
+            }
+
+            .sudoku-grid::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+                background-color: rgba(179, 194, 221, 0.1);
+                border: none;
+                cursor: default;
+            }
+
+            .sudoku-grid::-webkit-scrollbar-thumb {
+                background-color: rgba(143, 150, 163, 0.1);
+            }
+
+                .sudoku-grid::-webkit-scrollbar-thumb:hover {
+                    background-color: rgba(143, 150, 163, 0.2);
+                }
+
+                .sudoku-grid::-webkit-scrollbar-thumb:active {
+                    background-color: rgba(143, 150, 163, 0.3);
+                }
+
+            .sudoku-grid.active {
+                cursor: inherit;
+            }
+
+            .sudoku-grid.editing {
+                cursor: inherit;
+            }
+
+        .sudoku-index-hide .sudoku-grid {
+            color: #666;
+            padding-top: 45px;
+        }
+
+        .wiz-template-sudoku-content h2 {
+            font-size: 1.2rem;
+            font-weight: normal;
+            text-align: center;
+            margin-top: 70px;
+        }
+
+        .sudoku-index-hide .wiz-template-sudoku-content h2 {
+            margin-top: 0;
+            text-align: left;
+        }
+
+        .quadrant-content-edit {
+            padding: 10px;
+        }
+
+            .quadrant-content-edit h2 {
+                margin-top: 0;
+                text-align: left;
+            }
+
+            .quadrant-content-edit .quadrant-content {
+                overflow: hidden;
+            }
+
+        .wiz-template-sudoku-btn {
+            opacity: 0;
+            width: 100%;
+            text-align: right;
+            position: absolute;
+            z-index: 200;
+            transition: opacity 0.3s;
+            cursor: pointer;
+            padding-top: 6px;
+            padding-right: 1px;
+            display: none;
+        }
+
+        .sudoku-index-hide .wiz-template-sudoku-btn {
+            background-color: transparent !important;
+        }
+
+        .wiz-template-sudoku-btn a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background-size: 25px 25px;
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+
+        .wiz-template-sudoku-content .sudoku-btn-index {
+            background-image: url("index_files/wizIcon_index.png") !important;
+            margin-right: 15px;
+        }
+
+        .wiz-template-sudoku-content .sudoku-btn-next {
+            background-image: url("index_files/wizIcon_next.png") !important;
+        }
+
+            .wiz-template-sudoku-content .sudoku-btn-next.unenable {
+                background-image: url("index_files/wizIcon_next_unenable.png") !important;
+            }
+
+        .wiz-template-sudoku-content .sudoku-btn-previous {
+            background-image: url("index_files/wizIcon_previous.png") !important;
+            margin-right: 10px;
+        }
+
+            .wiz-template-sudoku-content .sudoku-btn-previous.unenable {
+                background-image: url("index_files/wizIcon_previous_unenable.png") !important;
+            }
+
+        .sudoku-index-hide .wiz-template-sudoku-btn {
+            opacity: 1;
+        }
+
+        .sudoku-index-hide .wiz-template-sudoku-index {
+            display: none;
+        }
+
+        .sudoku-grid {
+            width: 33%;
+            height: 170px;
+        }
+
+        .wiz-template-sudoku-index {
+            width: 240px;
+            left: 50%;
+            margin-left: -120px;
+            top: 240px;
+        }
+
+        .grid1, .grid2, .grid3 {
+            top: 0;
+        }
+
+        .grid4, .grid5 {
+            top: 180px;
+        }
+
+        .grid6, .grid7, .grid8 {
+            top: 360px;
+        }
+
+        .grid1, .grid4, .grid6 {
+            left: 0;
+        }
+
+        .grid2, .grid7 {
+            left: 33.5%;
+        }
+
+        .grid3, .grid5, .grid8 {
+            left: 67%;
+        }
+
+        .sudoku-index-hide .grid1, .sudoku-index-hide .grid2, .sudoku-index-hide .grid3, .sudoku-index-hide .grid4, .sudoku-index-hide .grid5, .sudoku-index-hide .grid6, .sudoku-index-hide .grid7, .sudoku-index-hide .grid8 {
+            width: 100%;
+            height: 510px;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+
+        .quadrant-content ol, .quadrant-content ul {
+            padding-left: 1.6rem;
+        }
+
+        .sudoku-index-hide .quadrant-content ol, .sudoku-index-hide .quadrant-content ul {
+            padding-left: 2.13rem;
+        }
+
+        .sudoku-index-hide .quadrant-content {
+            min-height: 100%;
+        }
+
+        .grid1.active, .grid2.active, .grid3.active, .grid4.active, .grid5.active, .grid6.active, .grid7.active, .grid8.active {
+            left: 0;
+            z-index: 100;
+            display: block;
+            background-color: #fff;
+            border-color: transparent !important;
+            transition: top 0.3s, left 0.3s, width 0.3s, height 0.3s, z-index 0.3s, background-color 0.5s, border-color 0.5s;
+        }
+
+        .grid1.next, .grid2.next, .grid3.next, .grid4.next, .grid5.next, .grid6.next, .grid7.next, .grid8.next {
+            left: 100%;
+            z-index: 50;
+            display: block;
+            transition: none;
+        }
+
+        .grid1.previous, .grid2.previous, .grid3.previous, .grid4.previous, .grid5.previous, .grid6.previous, .grid7.previous, .grid8.previous {
+            left: -100%;
+            z-index: 50;
+            display: block;
+            transition: none;
+        }
+
+        .sudoku-placeholder {
+            display: none;
+        }
+
+        .sudoku-index-hide .sudoku-placeholder {
+            display: none;
+        }
+
+        .quadrant-content-edit .sudoku-placeholder {
+            display: none;
+        }
+
+        .wiz-todo, .wiz-todo-img {
+            box-sizing: content-box;
+        }
+
+        .quadrant-content .wiz-todo-label {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sudoku-index-hide .quadrant-content .wiz-todo-label {
+            padding-top: 7px;
+            padding-bottom: 6px;
+        }
+
+        @media (max-width: 768px) {
+            .wiz-template-sudoku-content {
+                min-height: 600px;
+                height: auto;
+            }
+
+                .wiz-template-sudoku-content h2 {
+                    margin-top: 55px;
+                    font-size: 1rem;
+                }
+
+            .sudoku-index-hide .wiz-template-sudoku-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .quadrant-content-edit {
+                padding: 5px;
+            }
+
+                .quadrant-content-edit h2 {
+                    margin-top: 0;
+                    margin-bottom: 5px;
+                }
+
+            .wiz-template-sudoku-index {
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 300;
+                margin-left: 0;
+                padding-left: 5px;
+            }
+
+            .wiz-template-sudoku-btn {
+                display: block;
+            }
+
+            .sudoku-grid {
+                width: 49.3%;
+                height: 125px;
+                color: #b3c2dd;
+                overflow: hidden;
+            }
+
+                .sudoku-grid.quadrant-content-edit {
+                    color: #8f96a3;
+                }
+
+            .grid1, .grid3, .grid5, .grid7 {
+                left: 0;
+            }
+
+            .grid2, .grid4, .grid6, .grid8 {
+                left: 50.7%;
+            }
+
+            .grid1, .grid2 {
+                top: 50px;
+            }
+
+            .grid3, .grid4 {
+                top: 180px;
+            }
+
+            .grid5, .grid6 {
+                top: 310px;
+            }
+
+            .grid7, .grid8 {
+                top: 440px;
+            }
+
+            .sudoku-index-hide .grid1, .sudoku-index-hide .grid2, .sudoku-index-hide .grid3, .sudoku-index-hide .grid4, .sudoku-index-hide .grid5, .sudoku-index-hide .grid6, .sudoku-index-hide .grid7, .sudoku-index-hide .grid8 {
+                min-height: 520px;
+                height: auto;
+            }
+
+            .sudoku-index-hide .sudoku-grid-head {
+                position: absolute;
+                top: 0;
+            }
+
+            .quadrant-content ol, .quadrant-content ul {
+                padding-left: 1.7rem;
+            }
+
+            .sudoku-index-hide .quadrant-content ol, .sudoku-index-hide .quadrant-content ul {
+                padding-left: 2.5rem;
+            }
+        }
+    </style>
+    <style>
+        .wiz-template-editable {
+            outline: none;
+        }
+
+        span.h5 {
+            color: #b3c2dd;
+            padding-left: 4px;
+        }
+
+        .h5.title {
+            background-color: #a1c4ff;
+            color: #fff;
+            border-radius: 5px;
+            padding: 1px 4px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="file:///C:\Program Files (x86)\WizNote\WizTools\htmleditor\editor.css" wiz_style="unsave" charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="file:///C:\Program Files (x86)\WizNote\WizTools\htmleditor\scrollbar.css" wiz_style="unsave" charset="utf-8">
+    <script type="text/javascript" src="file:///C:\Program Files (x86)\WizNote\WizTools\htmleditor\utils.js" wiz_style="unsave" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///C:\Program Files (x86)\WizNote\WizTools\htmleditor\localize.js" wiz_style="unsave" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///C:\Program Files (x86)\WizNote\WizTools\htmleditor\core\wizEditorForPc.js" wiz_style="unsave" charset="utf-8"></script>
+    <script type="text/javascript" src="file:///C:\Program Files (x86)\WizNote\WizTools\htmleditor\editorHelper.js" wiz_style="unsave" charset="utf-8"></script>
+    <link rel="stylesheet" charset="utf-8" name="wiz_tmp_editor_style" href="C:/Program Files (x86)/WizNote/WizTools/htmleditor/dependency/fonts.css">
+    <style id="wiz_custom_css">
+        html, body {
+            font-size: 15px;
+        }
+
+        body {
+            font-family: Helvetica, 'Hiragino Sans GB', '微软雅黑', 'Microsoft YaHei UI', SimSun, SimHei, arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px 15px;
+            padding: 1.33rem 1rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            margin: 20px 0 10px;
+            margin: 1.33rem 0 0.667rem;
+            padding: 0;
+            font-weight: bold;
+        }
+
+        h1 {
+            font-size: 21px;
+            font-size: 1.4rem;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-size: 1.33rem;
+        }
+
+        h3 {
+            font-size: 18px;
+            font-size: 1.2rem;
+        }
+
+        h4 {
+            font-size: 17px;
+            font-size: 1.13rem;
+        }
+
+        h5 {
+            font-size: 15px;
+            font-size: 1rem;
+        }
+
+        h6 {
+            font-size: 15px;
+            font-size: 1rem;
+            color: #777777;
+            margin: 1rem 0;
+        }
+
+        div, p, ul, ol, dl, li {
+            margin: 0;
+        }
+
+        blockquote, table, pre, code {
+            margin: 8px 0;
+        }
+
+        ul, ol {
+            padding-left: 32px;
+            padding-left: 2.13rem;
+        }
+
+        blockquote {
+            padding: 0 12px;
+            padding: 0 0.8rem;
+        }
+
+            blockquote > :first-child {
+                margin-top: 0;
+            }
+
+            blockquote > :last-child {
+                margin-bottom: 0;
+            }
+
+        img {
+            border: 0;
+            max-width: 100%;
+            height: auto !important;
+            margin: 2px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border: 1px solid #bbbbbb;
+        }
+
+        td, th {
+            padding: 4px 8px;
+            border-collapse: collapse;
+            border: 1px solid #bbbbbb;
+        }
+
+        @media only screen and (-webkit-max-device-width: 1024px), only screen and (-o-max-device-width: 1024px), only screen and (max-device-width: 1024px), only screen and (-webkit-min-device-pixel-ratio: 3), only screen and (-o-min-device-pixel-ratio: 3), only screen and (min-device-pixel-ratio: 3) {
+            html, body {
+                font-size: 17px;
+            }
+
+            body {
+                line-height: 1.7;
+                padding: 0.75rem 0.9375rem;
+                color: #353c47;
+            }
+
+            h1 {
+                font-size: 2.125rem;
+            }
+
+            h2 {
+                font-size: 1.875rem;
+            }
+
+            h3 {
+                font-size: 1.625rem;
+            }
+
+            h4 {
+                font-size: 1.375rem;
+            }
+
+            h5 {
+                font-size: 1.125rem;
+            }
+
+            h6 {
+                color: inherit;
+            }
+
+            ul, ol {
+                padding-left: 2.5rem;
+            }
+
+            blockquote {
+                padding: 0 0.9375rem;
+            }
+        }
+    </style>
+    <style id="wiz_tmp_editor_style" wiz_style="unsave">
+        html, body {
+            font-size: 15px;
+        }
+
+        body {
+            font-family: Helvetica, 'Hiragino Sans GB', 微软雅黑, 'Microsoft YaHei UI', SimSun, SimHei, arial, sans-serif;
+            line-height: 1.6;
+            color:;
+            background-color:;
+            margin: 0;
+            padding: 20px 15px;
+            padding: 1.33rem 1rem;
+        }
+
+        img {
+            max-width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" charset="utf-8" name="wiz_tmp_editor_style" href="C:/Program Files (x86)/WizNote/WizTools/htmleditor/dependency/fonts.css">
+    <style name="wiz_tmp_editor_style">
+        .wiz-img-resize-handle {
+            position: absolute;
+            z-index: 1000;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        .wiz-img-resize-handle {
+            width: 5px;
+            height: 5px;
+        }
+
+            .wiz-img-resize-handle.lt {
+                cursor: nw-resize;
+            }
+
+            .wiz-img-resize-handle.tm {
+                cursor: n-resize;
+            }
+
+            .wiz-img-resize-handle.rt {
+                cursor: ne-resize;
+            }
+
+            .wiz-img-resize-handle.lm {
+                cursor: w-resize;
+            }
+
+            .wiz-img-resize-handle.rm {
+                cursor: e-resize;
+            }
+
+            .wiz-img-resize-handle.lb {
+                cursor: sw-resize;
+            }
+
+            .wiz-img-resize-handle.bm {
+                cursor: s-resize;
+            }
+
+            .wiz-img-resize-handle.rb {
+                cursor: se-resize;
+            }
+
+        .wiz-table-body.wiz-table-moving *, .wiz-table-body.wiz-table-moving *:before, .wiz-table-body.wiz-table-moving *:after {
+            cursor: default !important;
+        }
+
+        td, th {
+            position: relative;
+        }
+
+        #wiz-table-range-border {
+            display: none;
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 105;
+        }
+
+        #wiz-table-col-line, #wiz-table-row-line {
+            display: none;
+            background-color: #448aff;
+            position: absolute;
+            z-index: 120;
+        }
+
+        #wiz-table-col-line {
+            width: 1px;
+            cursor: col-resize;
+        }
+
+        #wiz-table-row-line {
+            height: 1px;
+            cursor: row-resize;
+        }
+
+        #wiz-table-range-border_start, #wiz-table-range-border_range {
+            display: none;
+            width: 0;
+            height: 0;
+            position: absolute;
+        }
+
+        #wiz-table-range-border_start_top, #wiz-table-range-border_range_top {
+            height: 2px;
+            background-color: #448aff;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #wiz-table-range-border_range_top {
+            height: 1px;
+        }
+
+        #wiz-table-range-border_start_right, #wiz-table-range-border_range_right {
+            width: 2px;
+            background-color: #448aff;
+            position: absolute;
+            top: 0;
+        }
+
+        #wiz-table-range-border_range_right {
+            width: 1px;
+        }
+
+        #wiz-table-range-border_start_bottom, #wiz-table-range-border_range_bottom {
+            height: 2px;
+            background-color: #448aff;
+            position: absolute;
+            top: 0;
+        }
+
+        #wiz-table-range-border_range_bottom {
+            height: 1px;
+        }
+
+        #wiz-table-range-border_start_left, #wiz-table-range-border_range_left {
+            width: 2px;
+            background-color: #448aff;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #wiz-table-range-border_range_left {
+            width: 1px;
+        }
+
+        #wiz-table-range-border_start_dot, #wiz-table-range-border_range_dot {
+            width: 5px;
+            height: 5px;
+            border: 2px solid rgb(255, 255, 255);
+            background-color: #448aff;
+            cursor: crosshair;
+            position: absolute;
+            z-index: 110;
+        }
+
+        .wiz-table-tools {
+            display: block;
+            background-color: #fff;
+            position: absolute;
+            left: 0px;
+            border: 1px solid #ddd;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            z-index: 130;
+        }
+
+            .wiz-table-tools ul {
+                list-style: none;
+                padding: 0;
+            }
+
+            .wiz-table-tools .wiz-table-menu-item {
+                position: relative;
+                float: left;
+                margin: 5px 2px 5px 8px;
+            }
+
+                .wiz-table-tools .wiz-table-menu-item .wiz-table-menu-button {
+                    font-size: 15px;
+                    width: 20px;
+                    height: 20px;
+                    line-height: 20px;
+                    cursor: pointer;
+                    position: relative;
+                }
+
+            .wiz-table-tools i.editor-icon {
+                font-size: 15px;
+                color: #455a64;
+            }
+
+            .wiz-table-tools .wiz-table-menu-item .wiz-table-menu-button i#wiz-menu-bg-demo {
+                position: absolute;
+                top: 1px;
+                left: 0;
+            }
+
+            .wiz-table-tools .wiz-table-menu-sub {
+                position: absolute;
+                display: none;
+                width: 125px;
+                padding: 5px 0;
+                background: #fff;
+                border-radius: 3px;
+                border: 1px solid #E0E0E0;
+                top: 28px;
+                left: -9px;
+                box-shadow: 1px 1px 5px #d0d0d0;
+            }
+
+                .wiz-table-tools .wiz-table-menu-sub > div {
+                    font-size: 15px;
+                }
+
+            .wiz-table-tools .wiz-table-menu-item.active .wiz-table-menu-sub {
+                display: block;
+            }
+
+            .wiz-table-tools .wiz-table-menu-sub:before, .wiz-table-tools .wiz-table-menu-sub:after {
+                position: absolute;
+                content: " ";
+                border-style: solid;
+                border-color: transparent;
+                border-bottom-color: #cccccc;
+                left: 22px;
+                margin-left: -14px;
+                top: -8px;
+                border-width: 0 8px 8px 8px;
+                z-index: 10;
+            }
+
+            .wiz-table-tools .wiz-table-menu-sub:after {
+                border-bottom-color: #ffffff;
+                top: -7px;
+            }
+
+            .wiz-table-tools .wiz-table-menu-sub-item {
+                padding: 4px 12px;
+                font-size: 14px;
+            }
+
+                .wiz-table-tools .wiz-table-menu-sub-item.split {
+                    border-top: 1px solid #E0E0E0;
+                }
+
+                .wiz-table-tools .wiz-table-menu-sub-item:hover {
+                    background-color: #ececec;
+                }
+
+                .wiz-table-tools .wiz-table-menu-sub-item.disabled {
+                    color: #bbbbbb;
+                    cursor: default;
+                }
+
+                    .wiz-table-tools .wiz-table-menu-sub-item.disabled:hover {
+                        background-color: transparent;
+                    }
+
+            .wiz-table-tools .wiz-table-menu-item.wiz-table-cell-bg:hover .wiz-table-color-pad {
+                display: block;
+            }
+
+            .wiz-table-tools .wiz-table-color-pad {
+                display: none;
+                padding: 10px;
+                box-sizing: border-box;
+                width: 85px;
+                height: 88px;
+                background-color: #fff;
+                cursor: default;
+            }
+
+                .wiz-table-tools .wiz-table-color-pad > div {
+                    font-size: 15px;
+                }
+
+                .wiz-table-tools .wiz-table-color-pad .wiz-table-color-pad-item {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 9px;
+                    position: relative;
+                }
+
+                    .wiz-table-tools .wiz-table-color-pad .wiz-table-color-pad-item i.pad-demo {
+                        position: absolute;
+                        top: 3px;
+                        left: 0;
+                    }
+
+                    .wiz-table-tools .wiz-table-color-pad .wiz-table-color-pad-item .icon-oblique_line {
+                        color: #cc0000;
+                    }
+
+                    .wiz-table-tools .wiz-table-color-pad .wiz-table-color-pad-item:last-child {
+                        margin-right: 0;
+                    }
+
+                    .wiz-table-tools .wiz-table-color-pad .wiz-table-color-pad-item.active i.editor-icon.icon-box {
+                        color: #448aff;
+                    }
+
+            .wiz-table-tools .wiz-table-cell-align {
+                display: none;
+                padding: 10px;
+                box-sizing: border-box;
+                width: 85px;
+                height: 65px;
+                background-color: #fff;
+                cursor: default;
+            }
+
+                .wiz-table-tools .wiz-table-cell-align .wiz-table-cell-align-item {
+                    display: inline-block;
+                    width: 15px;
+                    height: 15px;
+                    margin-right: 9px;
+                    position: relative;
+                }
+
+                    .wiz-table-tools .wiz-table-cell-align .wiz-table-cell-align-item:last-child {
+                        margin-right: 0;
+                    }
+
+                    .wiz-table-tools .wiz-table-cell-align .wiz-table-cell-align-item i.valign {
+                        position: absolute;
+                        top: 3px;
+                        left: 0;
+                        color: #d2d2d2;
+                    }
+
+            .wiz-table-tools .wiz-table-cell-align-item.active i.editor-icon.valign {
+                color: #a1c4ff;
+            }
+
+            .wiz-table-tools .wiz-table-cell-align-item.active i.editor-icon.icon-box, .wiz-table-tools .wiz-table-cell-align-item.active i.editor-icon.align {
+                color: #448aff;
+            }
+
+            .wiz-table-tools .wiz-table-color-pad .wiz-table-color-pad-item:last-child, .wiz-table-tools .wiz-table-cell-align .wiz-table-cell-align-item:last-child {
+                margin-right: 0;
+            }
+
+        th.wiz-selected-cell, td.wiz-selected-cell {
+            background: rgba(0,102,255,.05);
+        }
+
+        th:before, td:before, #wiz-table-col-line:before, #wiz-table-range-border_start_right:before, #wiz-table-range-border_range_right:before {
+            content: " ";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            right: -5px;
+            width: 9px;
+            cursor: col-resize;
+            background: transparent;
+            z-index: 100;
+        }
+
+        th:after, td:after, #wiz-table-row-line:before, #wiz-table-range-border_start_bottom:before, #wiz-table-range-border_range_bottom:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -5px;
+            height: 9px;
+            cursor: row-resize;
+            background: transparent;
+            z-index: 100;
+        }
+
+        .wiz-table-container {
+        }
+
+        .wiz-table-body {
+            position: relative;
+            padding: 0 0 10px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+        }
+
+            .wiz-table-body table {
+                margin: 0;
+                outline: none;
+            }
+
+        td, th {
+            height: 28px;
+            word-break: break-all;
+            box-sizing: border-box;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="mood-blue" spellcheck="false" contenteditable="false">
+<div class="wiz-template-sudoku-content">
+    
+    <div class="wiz-template-sudoku-btn"><a class="sudoku-btn-index"></a><a class="sudoku-btn-previous"></a><a class="sudoku-btn-next"></a>
+    </div>
+    <div class="head wiz-template-sudoku-index">
+        <div class="sudoku-grid-head">
+            <div class="sudoku-grid-title">
+                <h2>日期</h2>
+            </div>
+        </div>
+        <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+            <p></p>
+        </div>
+        <div class="wiz-template-editable quadrant-content" contenteditable="true">
+            <div>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="sudoku-grid grid1">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>年度与月度目标</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid2">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[当日]要事清单</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid3">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[昨日]学习与阅读</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid4 quadrant-content-edit editing">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[昨日]人际关系</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid5">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[昨日]饮食与运动</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid6">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[昨日]工作总结</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid7">
+
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[昨日]理财与支出</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+        <div class="sudoku-grid grid8">
+            <div class="sudoku-grid-head">
+                <div class="sudoku-grid-title">
+                    <h2>[昨日]收获与感恩</h2>
+                </div>
+            </div>
+            <div class="sudoku-placeholder wiz-template-editable" contenteditable="true">
+                <p></p>
+            </div>
+            <div class="wiz-template-editable quadrant-content" contenteditable="true">
+                <div><br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script type="text/javascript" src="file:///C:\Users\hongs\Documents\My Knowledge\templates\WizTemplate.js" wiz_style="unsave" charset="utf-8"></script><wiz_tmp_tag id="wiz-table-range-border" contenteditable="false" style="display: none;"><div id="wiz-table-col-line" style="display: none;"></div><div id="wiz-table-row-line" style="display: none;"></div><div id="wiz-table-range-border_start" style="display: none;"><div id="wiz-table-range-border_start_top"></div><div id="wiz-table-range-border_start_right"></div><div id="wiz-table-range-border_start_bottom"></div><div id="wiz-table-range-border_start_left"></div><div id="wiz-table-range-border_start_dot"></div></div><div id="wiz-table-range-border_range" style="display: none;"><div id="wiz-table-range-border_range_top"></div><div id="wiz-table-range-border_range_right"></div><div id="wiz-table-range-border_range_bottom"></div><div id="wiz-table-range-border_range_left"></div><div id="wiz-table-range-border_range_dot"></div></div></wiz_tmp_tag>
+    <script type="text/javascript" src="file:///C:\Users\hongs\Documents\My Knowledge\templates\WizTemplate.js" wiz_style="unsave" charset="utf-8"></script>
+</body>
+</html>
