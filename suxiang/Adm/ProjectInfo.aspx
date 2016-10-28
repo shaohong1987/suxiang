@@ -215,22 +215,22 @@
                     <select name="manage" id="manage">
                         <option value='-1'>请选择项目经理</option>
                     </select>
-                    <select name="productleader" id="Select1">
+                    <select name="productleader" id="productleader">
                         <option value="-1">请选择生产经理</option>
                     </select>
-                    <select name="accountant" id="Select2">
+                    <select name="accountant" id="accountant">
                         <option value="-1">请选择会计</option>
                     </select>
-                    <select name="constructionleader" id="Select3">
+                    <select name="constructionleader" id="constructionleader">
                         <option value="-1">请选择施工员</option>
                     </select>
-                    <select name="qualityleader" id="Select4">
+                    <select name="qualityleader" id="qualityleader">
                         <option value="-1">请选择质量员</option>
                     </select>
-                    <select name="safetyleader" id="Select5">
+                    <select name="safetyleader" id="safetyleader">
                         <option value="-1">请选择安全员</option>
                     </select>
-                    <select name="storekeeper" id="Select6">
+                    <select name="storekeeper" id="storekeeper">
                         <option value="-1">请选择保管员</option>
                     </select>
                     <table data-role="table" id="table-column-toggle" class="ui-responsive table-stroke"

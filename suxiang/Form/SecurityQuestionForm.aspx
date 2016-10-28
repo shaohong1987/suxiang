@@ -145,6 +145,7 @@
                 </div>
                 <div class="vocation" style="margin-left: 10px; margin-right: 7px;">
                     <select name="buildingno" id="buildingno" class="select5">
+                        <option value="-1">请选择栋号</option>
                     </select>
                 </div>
                 栋
