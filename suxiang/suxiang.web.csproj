@@ -99,6 +99,13 @@
     <Compile Include="App_Code\WebHelper.cs" />
     <Compile Include="Dal\SxDal.cs" />
     <Compile Include="Dal\DalHelper.cs" />
+    <Compile Include="Form\Complete.aspx.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\Complete.aspx.designer.cs">
+      <DependentUpon>Complete.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\LaborCostForm.aspx.cs">
       <DependentUpon>LaborCostForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -113,12 +120,26 @@
     <Compile Include="Form\ManageCostForm.aspx.designer.cs">
       <DependentUpon>ManageCostForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm.aspx.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm.aspx.designer.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\MaterialCostForm.aspx.cs">
       <DependentUpon>MaterialCostForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Form\MaterialCostForm.aspx.designer.cs">
       <DependentUpon>MaterialCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\NewForm.aspx.cs">
+      <DependentUpon>NewForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\NewForm.aspx.designer.cs">
+      <DependentUpon>NewForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\QualityQuestionForm.aspx.cs">
       <DependentUpon>QualityQuestionForm.aspx</DependentUpon>
@@ -133,6 +154,13 @@
     </Compile>
     <Compile Include="Form\SecurityQuestionForm.aspx.designer.cs">
       <DependentUpon>SecurityQuestionForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ToDo.aspx.cs">
+      <DependentUpon>ToDo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ToDo.aspx.designer.cs">
+      <DependentUpon>ToDo.aspx</DependentUpon>
     </Compile>
     <Compile Include="Handler\Auth.ashx.cs">
       <DependentUpon>Auth.ashx</DependentUpon>
@@ -690,16 +718,19 @@
     <Content Include="Content\js\Validator\style\validator.css" />
     <Content Include="Content\js\Validator\style\validatorAuto.css" />
     <Content Include="Content\js\Validator\style\validatorTidyMode.css" />
+    <Content Include="Form\Complete.aspx" />
     <Content Include="Form\LaborCostForm.aspx" />
     <Content Include="Form\ManageCostForm.aspx" />
+    <Content Include="Form\MaterialAuxiliaryCostForm.aspx" />
     <Content Include="Form\MaterialCostForm.aspx" />
+    <Content Include="Form\NewForm.aspx" />
     <Content Include="Form\QualityQuestionForm.aspx" />
     <Content Include="Form\SecurityQuestionForm.aspx" />
+    <Content Include="Form\ToDo.aspx" />
     <Content Include="Index.aspx" />
     <Content Include="Left.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Main.aspx" />
-    <Content Include="Personal\MyWorks.aspx" />
     <Content Include="Personal\PersonalCenter.aspx" />
     <Content Include="Report\LaborCostReport.aspx" />
     <Content Include="Report\ManageCostReport.aspx" />

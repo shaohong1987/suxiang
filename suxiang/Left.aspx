@@ -34,36 +34,12 @@
         <dd>
             <div class="title">
                 <span>
-                    <img src="Content/images/leftico01.png" alt="报表中心" /></span>报表中心
+                    <img src="Content/images/leftico02.png" alt="工作台" /></span>工作台
             </div>
             <ul class="menuson">
-                <li><cite></cite><a href="Report/SecurityReport.aspx" target="rightFrame">安全问题报表</a><i></i></li>
-                <li><cite></cite><a href="Report/QualityReport.aspx" target="rightFrame">质量问题报表</a><i></i></li>
-                <li><cite></cite><a href="Report/LaborCostReport.aspx" target="rightFrame">用工费用报表</a><i></i></li>
-                <li><cite></cite><a href="Report/MaterialCostReport.aspx" target="rightFrame">材料费用报表</a><i></i></li>
-                <li><cite></cite><a href="Report/ManageCostReport.aspx" target="rightFrame">管理费用报表</a><i></i></li>
-            </ul>
-        </dd>
-        <dd>
-            <div class="title">
-                <span>
-                    <img src="Content/images/leftico02.png" alt="各类表单" /></span>各类表单
-            </div>
-            <ul class="menuson">
-                <li><cite></cite><a href="Form/SecurityQuestionForm.aspx" target="rightFrame">安全问题表</a><i></i></li>
-                <li><cite></cite><a href="Form/QualityQuestionForm.aspx" target="rightFrame">质量问题表</a><i></i></li>
-                <li><cite></cite><a href="Form/LaborCostForm.aspx" target="rightFrame">用工费用表</a><i></i></li>
-                <li><cite></cite><a href="Form/MaterialCostForm.aspx" target="rightFrame">材料费用表</a><i></i></li>
-                <li><cite></cite><a href="Form/ManageCostForm.aspx" target="rightFrame">管理费用表</a><i></i></li>
-            </ul>
-        </dd>
-        <dd>
-            <div class="title">
-                <span>
-                    <img src="Content/images/leftico03.png" alt="个人中心" /></span>个人中心</div>
-            <ul class="menuson">
-                <li><cite></cite><a href="Personal/MyWorks.aspx" target="rightFrame">我的工作</a><i></i></li>
-                <li><cite></cite><a href="Personal/PersonalCenter.aspx" target="rightFrame">个人资料设置</a><i></i></li>
+                <li><cite></cite><a href="Form/NewForm.aspx" target="rightFrame">新单据</a><i></i></li>
+                <li><cite></cite><a href="Form/ToDo.aspx" target="rightFrame">待处理</a><i></i></li>
+                <li><cite></cite><a href="Form/Complete.aspx" target="rightFrame">所有单据</a><i></i></li> 
             </ul>
         </dd>
         <%
@@ -74,6 +50,19 @@
                 if (user.Group < 10)
                 {
         %>
+         <dd>
+            <div class="title">
+                <span>
+                    <img src="Content/images/leftico01.png" alt="报表中心" /></span>报表中心
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="Report/SecurityReport.aspx" target="rightFrame">安全问题报表</a><i></i></li>
+                <li><cite></cite><a href="Report/QualityReport.aspx" target="rightFrame">质量问题报表</a><i></i></li>
+                <li><cite></cite><a href="Report/LaborCostReport.aspx" target="rightFrame">用工费用报表</a><i></i></li>
+                <li><cite></cite><a href="Report/MaterialCostReport.aspx" target="rightFrame">材料费用报表</a><i></i></li>
+                <li><cite></cite><a href="Report/ManageCostReport.aspx" target="rightFrame">管理费用报表</a><i></i></li>
+            </ul>
+        </dd>
         <dd>
             <div class="title">
                 <span>
@@ -91,6 +80,14 @@
                 Response.Write("<script>window.open('../Login.aspx','_parent')</script>");
             }
         %>
+          <dd>
+            <div class="title">
+                <span>
+                    <img src="Content/images/leftico03.png" alt="个人中心" /></span>个人中心</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="Personal/PersonalCenter.aspx" target="rightFrame">个人资料设置</a><i></i></li>
+            </ul>
+        </dd>
     </dl>
     </form>
 </body>

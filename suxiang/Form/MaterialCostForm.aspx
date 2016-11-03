@@ -22,6 +22,9 @@
             $(".select3").uedSelect({
                 width: 80
             });
+            $(".select7").uedSelect({
+                width: 347
+            });
             $.post("../Handler/Process.ashx", { action: "GetBuildings" }, function (data) {
                     var json = eval(data);
                     if (json.State === true) {
@@ -138,11 +141,12 @@
                     </select>
                     <input type="hidden" id="projectname" name="projectname" />
                 </div>
-                <div class="vocation">
+                <div class="vocation" style="margin-left: 12px;">
                     <select name="buildingno" id="buildingno" class="select2">
+                         <option value="-1">栋号</option>
                     </select>
                 </div>
-                栋 </li>
+                 </li>
             <li>
                 <label>
                     日期<b>*</b>
@@ -154,7 +158,11 @@
                 <label>
                     班组<b>*</b>
                 </label>
-                <input type="text" name="workteam" placeholder="班组" class="dfinput" />
+                <div class="vocation">
+                    <select name="teamworker" id="teamworker" class="select7">
+                        <option value="-1">请选择班组</option>
+                    </select>
+                </div>
             </li>
             <li>
                 <label>

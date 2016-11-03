@@ -1,16 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "suxiang.web", "suxiang\suxiang.web.csproj", "{D869C9C2-4C30-4780-ABEE-D26BD213DF02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "suxiang.mobile", "suxiang.mobile\suxiang.mobile.csproj", "{E422C7C2-B9BD-491B-AC5B-BB573EE28BA2}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "文档", "文档", "{196E9520-EB4F-4D1D-9329-B88EA8818A01}"
-	ProjectSection(SolutionItems) = preProject
-		C:\Users\Eric\Desktop\suxiang.sql = C:\Users\Eric\Desktop\suxiang.sql
-		修改记录.txt = 修改记录.txt
-		修改进度.txt = 修改进度.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

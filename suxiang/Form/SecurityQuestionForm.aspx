@@ -22,10 +22,13 @@
                 width: 80
             });
             $(".select4").uedSelect({
-                width: 120
+                width: 100
             });
             $(".select5").uedSelect({
-                width: 50
+                width: 70
+            });
+            $(".select6").uedSelect({
+                width: 172
             });
             $.post("../Handler/Process.ashx", { action: "GetBuildings" }, function (data) {
                 var json = eval(data);
@@ -119,6 +122,7 @@
         function changepro(proid) {
             $("#projectname").val($('#projectid').find("option:selected").text());
             $("#buildingno").empty();
+            $("#buildingno").append($("<option>").val(-1).text('栋号'));
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i][0] == proid) {
                     $("#buildingno").append($("<option>").val(arr[i][1]).text(arr[i][1]));
@@ -145,7 +149,7 @@
                 </div>
                 <div class="vocation" style="margin-left: 10px; margin-right: 7px;">
                     <select name="buildingno" id="buildingno" class="select5">
-                        <option value="-1">请选择栋号</option>
+                        <option value="-1">栋号</option>
                     </select>
                 </div>
                 栋
@@ -179,7 +183,11 @@
                 <label>
                     班组/施工人员<b>*</b>
                 </label>
-                <input type="text" name="workers" placeholder="班组" class="dfinput" style="width: 169px;" />
+                 <div class="vocation" style="margin-right: 5px;">
+                    <select name="teamleader" id="teamleader" class="select6">
+                        <option value="-1">班组</option>
+                    </select>
+                </div>
                 <input type="text" name="workers" placeholder="施工人员" class="dfinput" style="width: 169px;" />
             </li>
             <li>
