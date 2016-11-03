@@ -52,6 +52,22 @@
                     "json");
 
 
+            $.ajax({
+                type: "POST",
+                url: "../Handler/Auth.ashx?action=GetUserWithOutAdmin",
+                cache: false,
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    $.each(d, function (i, item) {
+                        $("#teamleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                    });
+                },
+                error: function (data) {
+                    var json = JSON.parse(data);
+                    alert(json.Msg);
+                }
+            });
+
             $("#sqform").validate({
                 focusInvalid: false,
                 onkeyup: false,
@@ -83,11 +99,11 @@
                 rules: {
                     levelno: "required",
                     location: "required",
-                    details: "required",
-                    checktime: "required",
-                    workers: "required",
-                    managers: "required",
-                    results: "required",
+                    checkdate: "required",
+                    finishdate: "required",
+                    problemdescription: "required",
+                    causation: "required",
+                    worker: "required",
                     reworkers: "required",
                     finishtime: "required",
                     costofworktime: "required",
@@ -97,11 +113,11 @@
                 messages: {
                     levelno: "请输入层高/户型",
                     location: "请输入详细地点",
-                    details: "请输入问题说明",
-                    checktime: "请输入检查日期",
-                    workers: "请输入施工人员/班组",
-                    managers: "请输入责任人员",
-                    results: "请输入处理措施,结果",
+                    checkdate: "请输入检查日期",
+                    finishdate: "请输入整改完成日期",
+                    problemdescription: "请输入问题说明",
+                    causation: "请输入原因分析",
+                    worker: "请输入处理措施,结果",
                     reworkers: "请输入整改人员",
                     finishtime: "请输入完成时间",
                     costofworktime: "请输入整改花费工时",
@@ -153,7 +169,7 @@
                     </select>
                 </div>
                 栋
-                <input type="text" name="levelno" id="levelno" placeholder="层号/户型" class="dfinput"
+                <input type="text" name="location" id="location" placeholder="层号/户型" class="dfinput"
                     style="width: 140px;" />
             </li>
             <li>
@@ -161,23 +177,23 @@
                     <label>
                         检查日期<b>*</b>
                     </label>
-                    <input type="text" name="checktime" id="checktime" placeholder="检查日期" class="dfinput"
+                    <input type="text" name="checkdate" id="checkdate" placeholder="检查日期" class="dfinput"
                         onclick="WdatePicker()" style="width: 126px;" />
                     整改完成时间<b>*</b>
-                    <input type="text" name="finishtime" id="finishtime" placeholder="完成时间" class="dfinput"
+                    <input type="text" name="finishdate" id="finishdate" placeholder="完成时间" class="dfinput"
                         onclick="WdatePicker()" style="width: 126px;" /></div>
             </li>
             <li>
                 <label>
                     问题说明<b>*</b>
                 </label>
-                <input type="text" name="workers" placeholder="问题说明" class="dfinput" />
+                <input type="text" name="problemdescription" placeholder="问题说明" class="dfinput" />
             </li>
             <li>
                 <label>
                     原因分析<b>*</b>
                 </label>
-                <textarea class="textinput2" name="details" placeholder="原因分析"></textarea>
+                <textarea class="textinput2" name="causation" placeholder="原因分析"></textarea>
             </li>
             <li>
                 <label>
@@ -194,24 +210,24 @@
                 <label>
                     管理责任人<b>*</b>
                 </label>
-                <input type="text" name="workers" placeholder="安全员" class="dfinput" style="width: 169px;" />
-                <input type="text" name="workers" placeholder="栋号长/生产经理" class="dfinput" style="width: 169px;" />
+                <input type="text" name="responsibleperson1" placeholder="安全员" class="dfinput" style="width: 169px;" />
+                <input type="text" name="responsibleperson2" placeholder="栋号长/生产经理" class="dfinput" style="width: 169px;" />
             </li>
             <li>
                 <label>
                     整改方案<b>*</b>
                 </label>
-                <textarea class="textinput2" name="results" placeholder="整改方案"></textarea>
+                <textarea class="textinput2" name="rebuildsolution" placeholder="整改方案"></textarea>
             </li>
             <li>
                 <div style="float: left;">
                     <label>
                         整改人员<b>*</b>
                     </label>
-                    <input type="text" name="reworkers" placeholder="整改人员" class="dfinput" style="width: 208px;" />
+                    <input type="text" name="rebuilder" placeholder="整改人员" class="dfinput" style="width: 208px;" />
                     处理结果</div>
                 <div style="float: left; margin-left: 5px;">
-                    <select name="projectid" id="Select1" class="select3">
+                    <select name="treatmentmeasures" id="treatmentmeasures" class="select3">
                         <option value="-1">未完成</option>
                         <option value="-1">进行中</option>
                         <option value="-1">已完成</option>
@@ -222,16 +238,16 @@
                 <label>
                     耗费工时<b>*</b>
                 </label>
-                <input type="text" name="costofworktime" placeholder="整改花费工时（数字）" class="dfinput"
+                <input type="text" name="worktimecost_db" placeholder="整改花费工时（数字）" class="dfinput"
                     onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" style="width: 140px; margin-right: 3px;" />大工
-                <input type="text" name="costofworktime" placeholder="整改花费工时（数字）" class="dfinput"
+                <input type="text" name="worktimecost_xb" placeholder="整改花费工时（数字）" class="dfinput"
                     onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" style="width: 140px; margin-right: 3px;
                     margin-left: 6px;" />小工 </li>
             <li>
                 <label>
                     耗费材料<b>*</b>
                 </label>
-                <textarea class="textinput3" name="results" placeholder="整改耗费材料"></textarea>
+                <textarea class="textinput3" name="materialcost" placeholder="整改耗费材料"></textarea>
             </li>
             <li>
                 <div style="float: left;">
@@ -242,7 +258,7 @@
                     安全等级
                 </div>
                 <div style="float: left; margin-left: 5px;">
-                    <select name="projectid" id="Select2" class="select3">
+                    <select name="levelno" id="levelno" class="select3">
                         <option value="-1">一级</option>
                         <option value="-1">二级</option>
                         <option value="-1">三级</option>
