@@ -60,6 +60,7 @@
                 <li><cite></cite><a href="Report/QualityReport.aspx" target="rightFrame">质量问题报表</a><i></i></li>
                 <li><cite></cite><a href="Report/LaborCostReport.aspx" target="rightFrame">用工费用报表</a><i></i></li>
                 <li><cite></cite><a href="Report/MaterialCostReport.aspx" target="rightFrame">材料费用报表</a><i></i></li>
+                <li><cite></cite><a href="Report/MaterialAuxiliaryCostReport.aspx" target="rightFrame">辅材工具费用报表</a><i></i></li>
                 <li><cite></cite><a href="Report/ManageCostReport.aspx" target="rightFrame">管理费用报表</a><i></i></li>
             </ul>
         </dd>

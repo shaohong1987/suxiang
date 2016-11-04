@@ -10,6 +10,6 @@
 namespace suxiang.Form {
     
     
-    public partial class ManageCostForm {
+    public partial class QualityQuestionForm_Remark {
     }
 }

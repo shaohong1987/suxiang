@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestionForm" %>
+    CodeBehind="QualityQuestionForm_Remark.aspx.cs" Inherits="suxiang.Form.QualityQuestionForm_Remark" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
@@ -11,7 +11,7 @@
     <script type="text/javascript">
         var arr = new Array();
         $(document).ready(function () {
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>安全问题表</a></li>");
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>质量问题表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });
@@ -30,7 +30,7 @@
             $(".select6").uedSelect({
                 width: 172
             });
-            $.post("../Handler/Process.ashx", { action: "GetBuildings" }, function (data) {
+	          $.post("../Handler/Process.ashx", { action: "GetBuildings" }, function (data) {
                 var json = eval(data);
                 if (json.State === true) {
                     $.each(json.Data, function (i, item) {
@@ -156,7 +156,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <form class="formbody" id="sqform">
-    <input type="hidden" value="SecurityQuestionForm" name="action" />
+    <input type="hidden" value="QualityQuestionForm" name="action" />
     <div id="usual1" class="usual">
         <ul class="forminfo">
             <li>
@@ -216,7 +216,7 @@
                 <label>
                     管理责任人<b>*</b>
                 </label>
-                <input type="text" name="responsibleperson1" placeholder="安全员" class="dfinput" style="width: 169px;" />
+                <input type="text" name="responsibleperson1" placeholder="质量员" class="dfinput" style="width: 169px;" />
                 <input type="text" name="responsibleperson2" placeholder="栋号长/生产经理" class="dfinput" style="width: 169px;" />
             </li>
             <li>
@@ -261,7 +261,7 @@
                         复查人员<b>*</b>
                     </label>
                     <input type="text" name="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" />
-                    安全等级
+                    质量等级
                 </div>
                 <div style="float: left; margin-left: 5px;">
                     <select name="levelno" id="levelno" class="select3">

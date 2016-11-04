@@ -7,9 +7,9 @@
 // </自动生成>
 //------------------------------------------------------------------------------
 
-namespace suxiang.Form {
+namespace suxiang.Report {
     
     
-    public partial class ManageCostForm {
+    public partial class MaterialAuxiliaryCostReport {
     }
 }

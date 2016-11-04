@@ -25,6 +25,27 @@ namespace suxiang.Handler
                 context.Response.Redirect("~/Login.aspx");
             switch (action)
             {
+                case "getdata":
+                {
+                        var type= WebHelper.GetActionStr(context, "type");
+                        var formid = WebHelper.GetActionStr(context, "formid");
+                        var sql = "select * from "+type+" where id="+formid;
+                        var msg = new SxDal().GetData(sql);
+                        json = WebHelper.GetObjJson(msg);
+                        break;
+                    }
+                case "doRemark":
+                    {
+                        var type = WebHelper.GetActionStr(context, "type");
+                        var formid = WebHelper.GetActionStr(context, "formid");
+                        break;
+                }
+                case "doSummary":
+                    {
+                        var type = WebHelper.GetActionStr(context, "type");
+                        var formid = WebHelper.GetActionStr(context, "formid");
+                        break;
+                }
                 case "getproject":
                     {
                         var projectid = WebHelper.GetActionStr(context, "projectid");
@@ -176,30 +197,62 @@ namespace suxiang.Handler
                     }
                 case "SecurityQuestionForm":
                     {
+                        var levelno = WebHelper.GetActionStr(context, "levelno");
                         var projectid = WebHelper.GetActionInt(context, "projectid");
                         var projectname = WebHelper.GetActionStr(context, "projectname");
                         var buildingno = WebHelper.GetActionStr(context, "buildingno");
-                        var levelno = WebHelper.GetActionStr(context, "levelno");
                         var location = WebHelper.GetActionStr(context, "location");
-                        var details = WebHelper.GetActionStr(context, "details");
-                        var checktime = WebHelper.GetActionStr(context, "checktime");
-                        var workers = WebHelper.GetActionStr(context, "workers");
-                        var managers = WebHelper.GetActionStr(context, "managers");
-                        var results = WebHelper.GetActionStr(context, "results");
-                        var reworkers = WebHelper.GetActionStr(context, "reworkers");
-                        var finishtime = WebHelper.GetActionStr(context, "finishtime");
-                        var costofworktime = WebHelper.GetActionStr(context, "costofworktime");
-                        var costofmaterial = WebHelper.GetActionStr(context, "costofmaterial");
+                        var checkdate = WebHelper.GetActionStr(context, "checkdate");
+                        var finishdate = WebHelper.GetActionStr(context, "finishdate");
+                        var problemdescription = WebHelper.GetActionStr(context, "problemdescription");
+                        var causation = WebHelper.GetActionStr(context, "causation");
+                        var teamleaderid = -1;
+                        var teamleader = WebHelper.GetActionStr(context, "teamleader");//fffff
+                        var worker = WebHelper.GetActionStr(context, "worker");
+                        var responsibleperson1 = WebHelper.GetActionStr(context, "responsibleperson1");
+                        var responsibleperson2 = WebHelper.GetActionStr(context, "responsibleperson2");
+                        var rebuildsolution = WebHelper.GetActionStr(context, "rebuildsolution");
+                        var rebuilder = WebHelper.GetActionStr(context, "rebuilder");
+                        var treatmentmeasures = WebHelper.GetActionStr(context, "treatmentmeasures");
+                        var worktimecostDb = WebHelper.GetActionStr(context, "worktimecost_db");
+                        var worktimecostXb = WebHelper.GetActionStr(context, "worktimecost_xb");
+                        var materialcost = WebHelper.GetActionStr(context, "materialcost");
                         var rechecker = WebHelper.GetActionStr(context, "rechecker");
+                        if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
+                        {
+                            var arr = teamleader.Split('-');
+                            teamleaderid = Convert.ToInt32(arr[0]);
+                            teamleader = arr[1];
+                        }
                         if (um != null)
                         {
                             var sql =
-                                "INSERT INTO PROBLEMS(projectid,projectname,buildingno,levelno,location,problemdescription,responsibleperson,checkdate,worker,rebuilder,finishdate,rechecker,treatmentmeasures,worktimecost,materialcost,problemType,poster,posttime) VALUES(" +
-                                projectid + ",'" + projectname + "','" + buildingno + "','" + levelno + "','" + location +
-                                "','" + details + "','" + managers + "','" + checktime + "','" + workers + "','" + reworkers +
-                                "','" + finishtime + "','" + rechecker + "','" + results + "','" + costofworktime + "','" +
-                                costofmaterial + "','Security','" + um.RealName + "','" +
-                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                                "INSERT INTO problem_sercurity(levelno,projectid,projectname,buildingno,location,checkdate," +
+                                "finishdate,problemdescription,causation,teamleaderid,teamleader,worker,responsibleperson1," +
+                                "responsibleperson2,rebuildsolution,rebuilder,treatmentmeasures,worktimecost_db,worktimecost_xb," +
+                                "materialcost,rechecker,posterid,postername,posttime)values('"+levelno+"',"+projectid+",'"
+                                +projectname+"','"
+                                +buildingno+"','"
+                                +location+"','"
+                                +checkdate+"','"
+                                +finishdate+"','"
+                                +problemdescription+"','"
+                                +causation+"',"
+                                +teamleaderid+",'"
+                                +teamleader+"','"
+                                +worker+"','"
+                                +responsibleperson1+"','"
+                                +responsibleperson2+"','"
+                                +rebuildsolution+"','"
+                                +rebuilder+"','"
+                                +treatmentmeasures+"','"
+                                +worktimecostDb+"','"
+                                +worktimecostXb+"','"
+                                +materialcost+"','"
+                                +rechecker+"','"
+                                +um.Id+"','"
+                                +um.RealName+"','"
+                                +DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")+"'); ";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
@@ -207,30 +260,62 @@ namespace suxiang.Handler
                     }
                 case "QualityQuestionForm":
                     {
+                        var levelno = WebHelper.GetActionStr(context, "levelno");
                         var projectid = WebHelper.GetActionInt(context, "projectid");
                         var projectname = WebHelper.GetActionStr(context, "projectname");
                         var buildingno = WebHelper.GetActionStr(context, "buildingno");
-                        var levelno = WebHelper.GetActionStr(context, "levelno");
                         var location = WebHelper.GetActionStr(context, "location");
-                        var details = WebHelper.GetActionStr(context, "details");
-                        var checktime = WebHelper.GetActionStr(context, "checktime");
-                        var workers = WebHelper.GetActionStr(context, "workers");
-                        var managers = WebHelper.GetActionStr(context, "managers");
-                        var results = WebHelper.GetActionStr(context, "results");
-                        var reworkers = WebHelper.GetActionStr(context, "reworkers");
-                        var finishtime = WebHelper.GetActionStr(context, "finishtime");
-                        var costofworktime = WebHelper.GetActionStr(context, "costofworktime");
-                        var costofmaterial = WebHelper.GetActionStr(context, "costofmaterial");
+                        var checkdate = WebHelper.GetActionStr(context, "checkdate");
+                        var finishdate = WebHelper.GetActionStr(context, "finishdate");
+                        var problemdescription = WebHelper.GetActionStr(context, "problemdescription");
+                        var causation = WebHelper.GetActionStr(context, "causation");
+                        var teamleaderid = -1;
+                        var teamleader = WebHelper.GetActionStr(context, "teamleader");//fffff
+                        var worker = WebHelper.GetActionStr(context, "worker");
+                        var responsibleperson1 = WebHelper.GetActionStr(context, "responsibleperson1");
+                        var responsibleperson2 = WebHelper.GetActionStr(context, "responsibleperson2");
+                        var rebuildsolution = WebHelper.GetActionStr(context, "rebuildsolution");
+                        var rebuilder = WebHelper.GetActionStr(context, "rebuilder");
+                        var treatmentmeasures = WebHelper.GetActionStr(context, "treatmentmeasures");
+                        var worktimecostDb = WebHelper.GetActionStr(context, "worktimecost_db");
+                        var worktimecostXb = WebHelper.GetActionStr(context, "worktimecost_xb");
+                        var materialcost = WebHelper.GetActionStr(context, "materialcost");
                         var rechecker = WebHelper.GetActionStr(context, "rechecker");
+                        if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
+                        {
+                            var arr = teamleader.Split('-');
+                            teamleaderid = Convert.ToInt32(arr[0]);
+                            teamleader = arr[1];
+                        }
                         if (um != null)
                         {
                             var sql =
-                                "INSERT INTO PROBLEMS(projectid,projectname,buildingno,levelno,location,problemdescription,responsibleperson,checkdate,worker,rebuilder,finishdate,rechecker,treatmentmeasures,worktimecost,materialcost,problemType,poster,posttime) VALUES(" +
-                                projectid + ",'" + projectname + "','" + buildingno + "','" + levelno + "','" + location +
-                                "','" + details + "','" + managers + "','" + checktime + "','" + workers + "','" + reworkers +
-                                "','" + finishtime + "','" + rechecker + "','" + results + "','" + costofworktime + "','" +
-                                costofmaterial + "','Quality','" + um.RealName + "','" +
-                                DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                                "INSERT INTO problem_quality(levelno,projectid,projectname,buildingno,location,checkdate," +
+                                "finishdate,problemdescription,causation,teamleaderid,teamleader,worker,responsibleperson1," +
+                                "responsibleperson2,rebuildsolution,rebuilder,treatmentmeasures,worktimecost_db,worktimecost_xb," +
+                                "materialcost,rechecker,posterid,postername,posttime)values('" + levelno + "'," + projectid + ",'"
+                                + projectname + "','"
+                                + buildingno + "','"
+                                + location + "','"
+                                + checkdate + "','"
+                                + finishdate + "','"
+                                + problemdescription + "','"
+                                + causation + "',"
+                                + teamleaderid + ",'"
+                                + teamleader + "','"
+                                + worker + "','"
+                                + responsibleperson1 + "','"
+                                + responsibleperson2 + "','"
+                                + rebuildsolution + "','"
+                                + rebuilder + "','"
+                                + treatmentmeasures + "','"
+                                + worktimecostDb + "','"
+                                + worktimecostXb + "','"
+                                + materialcost + "','"
+                                + rechecker + "','"
+                                + um.Id + "','"
+                                + um.RealName + "','"
+                                + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'); ";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
@@ -242,20 +327,28 @@ namespace suxiang.Handler
                         var projectname = WebHelper.GetActionStr(context, "projectname");
                         var buildingno = WebHelper.GetActionStr(context, "buildingno");
                         var startdate = WebHelper.GetActionStr(context, "startdate");
-                        var enddate = WebHelper.GetActionStr(context, "enddate");
-                        var content = WebHelper.GetActionStr(context, "content");
+                        var endate = WebHelper.GetActionStr(context, "endate");
+                        var worktype = WebHelper.GetActionStr(context, "worktype");
+                        var teamleaderid = -1;
+                        var teamleader = WebHelper.GetActionStr(context, "teamleader");//fffff
                         var workcontent = WebHelper.GetActionStr(context, "workcontent");
                         var unit = WebHelper.GetActionStr(context, "unit");
                         var price = WebHelper.GetActionStr(context, "price");
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
-                        var remark = WebHelper.GetActionStr(context, "remark");
+                        var remarkbywork = WebHelper.GetActionStr(context, "remarkbywork");
+                        if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
+                        {
+                            var arr = teamleader.Split('-');
+                            teamleaderid = Convert.ToInt32(arr[0]);
+                            teamleader = arr[1];
+                        }
                         if (um != null)
                         {
                             var sql =
-                                "INSERT INTO cost_labor(projectid,projectname,buildingno,startdate,endate,content,workcontent,unit,price,worktime,totalprice,remark,poster,posttime,state) VALUES(" +
-                                projectid + ",'" + projectname + "','" + buildingno + "','" + startdate + "','" + enddate + "','" + content + "','" + workcontent + "','" + unit + "'," + price + "," + number +
-                                "," + totalprice + ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',1);";
+                                "INSERT INTO cost_labor(projectid,projectname,buildingno,startdate,endate,worktype,teamleaderid,teamleader,workcontent,unit,price,worktime,totalprice,remarkbywork,postid,poster,posttime,state) VALUES(" +
+                                projectid + ",'" + projectname + "','" + buildingno + "','" + startdate + "','" + endate + "','" + worktype + "',"+teamleaderid+",'"+teamleader+"','" + workcontent + "','" + unit + "'," + price + "," + number +
+                                "," + totalprice + ",'" + remarkbywork + "',"+um.Id+",'" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',1);";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
@@ -272,13 +365,13 @@ namespace suxiang.Handler
                         var price = WebHelper.GetActionStr(context, "price");
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
-                        var remark = WebHelper.GetActionStr(context, "remark");
+                        var remarkbyaccount = WebHelper.GetActionStr(context, "remarkbyaccount");
                         if (um != null)
                         {
                             var sql =
-                                 "INSERT INTO cost_management(projectid,projectname,curdate,type,content,unit,price,number,totalprice,remark,poster,posttime) VALUES(" +
+                                 "INSERT INTO cost_management(projectid,projectname,curdate,type,content,unit,price,number,totalprice,remarkbyaccount,postid,poster,posttime) VALUES(" +
                                  projectid + ",'" + projectname + "','" + curdate + "','" + type + "','" + content + "','" + unit + "'," + price + "," + number +
-                                 "," + totalprice + ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "');";
+                                 "," + totalprice + ",'" + remarkbyaccount + "',"+um.Id+",'" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "');";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
@@ -290,19 +383,57 @@ namespace suxiang.Handler
                         var projectname = WebHelper.GetActionStr(context, "projectname");
                         var buildingno = WebHelper.GetActionStr(context, "buildingno");
                         var curdate = WebHelper.GetActionStr(context, "curdate");
-                        var workteam = WebHelper.GetActionStr(context, "workteam");
-                        var content = WebHelper.GetActionStr(context, "content");
+                        var teamleaderid = -1;
+                        var teamleader = WebHelper.GetActionStr(context, "teamleader");
+                        var materialname = WebHelper.GetActionStr(context, "materialname");
                         var unit = WebHelper.GetActionStr(context, "unit");
                         var price = WebHelper.GetActionStr(context, "price");
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
-                        var remark = WebHelper.GetActionStr(context, "remark");
+                        var remarkbyworker = WebHelper.GetActionStr(context, "remarkbyworker");
+                        if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
+                        {
+                            var arr = teamleader.Split('-');
+                            teamleaderid = Convert.ToInt32(arr[0]);
+                            teamleader = arr[1];
+                        }
                         if (um != null)
                         {
                             var sql =
-                                "INSERT INTO cost_material(projectid,projectname,buildingno,curdate,workteam,materialname,unit,price,number,totalprice,remark,poster,posttime) VALUES(" +
-                                projectid + ",'" + projectname + "','" + buildingno + "','" + curdate + "','" + workteam + "','" + content + "','" + unit + "'," + price + "," + number + "," + totalprice +
-                                ",'" + remark + "','" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                                "INSERT INTO cost_material(projectid,projectname,buildingno,curdate,teamleaderid,teamleader,materialname,unit,price,number,totalprice,remarkbyworker,postid,poster,posttime) VALUES(" +
+                                projectid + ",'" + projectname + "','" + buildingno + "','" + curdate + "',"+ teamleaderid+ ",'" + teamleader + "','" + materialname + "','" + unit + "'," + price + "," + number + "," + totalprice +
+                                ",'" + remarkbyworker + "',"+um.Id+",'" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
+                            var msg = new SxDal().AddData(sql);
+                            json = WebHelper.GetObjJson(msg);
+                        }
+                        break;
+                    }
+                case "MaterialAuxiliaryCostForm":
+                {
+                        var projectid = WebHelper.GetActionInt(context, "projectid");
+                        var projectname = WebHelper.GetActionStr(context, "projectname");
+                        var buildingno = WebHelper.GetActionStr(context, "buildingno");
+                        var curdate = WebHelper.GetActionStr(context, "curdate");
+                        var teamleaderid = -1;
+                        var teamleader = WebHelper.GetActionStr(context, "teamleader");
+                        var materialname = WebHelper.GetActionStr(context, "materialname");
+                        var unit = WebHelper.GetActionStr(context, "unit");
+                        var price = WebHelper.GetActionStr(context, "price");
+                        var number = WebHelper.GetActionStr(context, "number");
+                        var totalprice = WebHelper.GetActionStr(context, "totalprice");
+                        var remarkbyworker = WebHelper.GetActionStr(context, "remarkbyworker");
+                        if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
+                        {
+                            var arr = teamleader.Split('-');
+                            teamleaderid = Convert.ToInt32(arr[0]);
+                            teamleader = arr[1];
+                        }
+                        if (um != null)
+                        {
+                            var sql =
+                                "INSERT INTO cost_materialauxiliary(projectid,projectname,buildingno,curdate,teamleaderid,teamleader,materialname,unit,price,number,totalprice,remarkbyworker,postid,poster,posttime) VALUES(" +
+                                projectid + ",'" + projectname + "','" + buildingno + "','" + curdate + "'," + teamleaderid + ",'" + teamleader + "','" + materialname + "','" + unit + "'," + price + "," + number + "," + totalprice +
+                                ",'" + remarkbyworker + "'," + um.Id + ",'" + um.RealName + "','" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "')";
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }

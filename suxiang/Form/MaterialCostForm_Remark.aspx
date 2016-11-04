@@ -1,4 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageCostForm.aspx.cs" Inherits="suxiang.Form.ManageCostForm" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="MaterialCostForm_Remark.aspx.cs" Inherits="suxiang.Form.MaterialCostForm_Remark" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
     <link href="../Content/css/select.css" rel="stylesheet" type="text/css" />
@@ -7,8 +9,10 @@
     <script src="../Content/js/My97/WdatePicker.js" type="text/javascript"></script>
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
+        
+        var arr = new Array();
         $(document).ready(function () {
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>管理成本表</a></li>");
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>材料成本表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });
@@ -18,23 +22,55 @@
             $(".select3").uedSelect({
                 width: 80
             });
+            $(".select7").uedSelect({
+                width: 347
+            });
+            $.post("../Handler/Process.ashx", { action: "GetBuildings" }, function (data) {
+                    var json = eval(data);
+                    if (json.State === true) {
+                        $.each(json.Data, function (i, item) {
+                            arr[i] = new Array();
+                            arr[i][0] = item['Projectid'];
+                            arr[i][1] = item['Buildingid'];
+                        });
+                    }
+                },
+                "json");
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "../Handler/Auth.ashx?action=GetUserWithOutAdmin",
+                cache: false,
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    $.each(d, function (i, item) {
+                        $("#teamleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                    });
+                },
+                error: function (data) {
+                    var json = JSON.parse(data);
+                    alert(json.Msg);
+                }
+            });
 
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
-                var json = eval(data);
-                if (json.State === true) {
-                    $.each(json.Data, function (i, item) {
-                        $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
-                    });
-                }
-            },
-                    "json");
+                    var json = eval(data);
+                    if (json.State === true) {
+                        $.each(json.Data, function (i, item) {
+                            $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
+                        });
+                    }
+                },
+                "json");
 
-            $("#mcgform").validate({
+            $("#mcform").validate({
                 focusInvalid: false,
                 onkeyup: false,
                 submitHandler: function () {
-                    if ($("#projectid").val() != -1) {
-                        var formData = $("#mcgform").serialize();
+                    if ($("#projectid").val() != -1 && $("#buildingno").val() != '') {
+                        var formData = $("#mcform").serialize();
                         $.ajax({
                             type: "POST",
                             url: "../Handler/Process.ashx",
@@ -44,7 +80,7 @@
                                 var json = JSON.parse(data);
 	                            alert(json.Msg);
                                 if (json.State === true) {
-                                    window.open("ManageCostForm.aspx", "_self");
+                                    window.open("MaterialCostForm.aspx", "_self");
                                 }
                             },
                             error: function (data) {
@@ -59,7 +95,7 @@
                 },
                 rules: {
                     curdate: "required",
-                    type: "required",
+                    workteam: "required",
                     content: "required",
                     unit: "required",
                     price: "required",
@@ -67,7 +103,7 @@
                 },
                 messages: {
                     curdate: "请选择日期",
-                    type: "请输入类别",
+                    workteam: "请输入班组",
                     content: "请输入材料名称",
                     unit: "请输入单位",
                     price: "请输入单价",
@@ -83,9 +119,18 @@
                 }
             });
         });
-        function changepro() {
+
+        function changepro(proid) {
             $("#projectname").val($('#projectid').find("option:selected").text());
+            $("#buildingno").empty();
+            $("#buildingno").append($("<option>").val(-1).text('栋号'));
+            for (var i = 0; i < arr.length; i++) {
+                if (arr[i][0] == proid) {
+                    $("#buildingno").append($("<option>").val(arr[i][1]).text(arr[i][1]));
+                }
+            }
         }
+
         function check(e) {
             var re = /^\d+(?=\.{0,1}\d+$|$)/;
             if (e.value != "") {
@@ -102,8 +147,8 @@
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <form class="formbody" id="mcgform">
-    <input type="hidden" value="ManageCostForm" name="action" />
+    <form class="formbody" id="mcform">
+    <input type="hidden" value="MaterialCostForm" name="action" />
     <div id="usual1" class="usual">
         <ul class="forminfo">
             <li>
@@ -111,11 +156,17 @@
                     地点
                 </label>
                 <div class="vocation">
-                    <select name="projectid" id="projectid" class="select2" onchange="changepro(this.value)" >
+                    <select name="projectid" id="projectid" onchange="changepro(this.value)" class="select2">
                         <option value="-1">请选择项目</option>
                     </select>
                     <input type="hidden" id="projectname" name="projectname" />
-                </div></li>
+                </div>
+                <div class="vocation" style="margin-left: 12px;">
+                    <select name="buildingno" id="buildingno" class="select2">
+                         <option value="-1">栋号</option>
+                    </select>
+                </div>
+                 </li>
             <li>
                 <label>
                     日期<b>*</b>
@@ -125,15 +176,19 @@
             </li>
             <li>
                 <label>
-                    类别<b>*</b>
+                    班组<b>*</b>
                 </label>
-                <input type="text" name="type" placeholder="类别（如，福利、劳保、招待等）" class="dfinput" />
+                <div class="vocation">
+                    <select name="teamleader" id="teamleader" class="select7">
+                        <option value="-1">请选择班组</option>
+                    </select>
+                </div>
             </li>
             <li>
                 <label>
-                    内容<b>*</b>
+                    材料名称<b>*</b>
                 </label>
-                <input type="text" name="content" placeholder="内容" class="dfinput" />
+                <input type="text" name="materialname" placeholder="材料名称" class="dfinput" />
             </li>
             <li>
                 <label>
@@ -166,7 +221,7 @@
                 <label>
                     备注<b>*</b>
                 </label>
-                <textarea class="textinput2" name="remarkbyaccount" placeholder="备注"></textarea>
+                <textarea class="textinput2" name="remarkbyworker" placeholder="备注"></textarea>
             </li>
             <li>
                 <button type="submit" class="btn">

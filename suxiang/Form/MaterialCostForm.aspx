@@ -36,6 +36,25 @@
                     }
                 },
                 "json");
+
+
+
+            $.ajax({
+                type: "POST",
+                url: "../Handler/Auth.ashx?action=GetUserWithOutAdmin",
+                cache: false,
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    $.each(d, function (i, item) {
+                        $("#teamleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                    });
+                },
+                error: function (data) {
+                    var json = JSON.parse(data);
+                    alert(json.Msg);
+                }
+            });
+
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
                     var json = eval(data);
                     if (json.State === true) {
@@ -104,6 +123,7 @@
         function changepro(proid) {
             $("#projectname").val($('#projectid').find("option:selected").text());
             $("#buildingno").empty();
+            $("#buildingno").append($("<option>").val(-1).text('栋号'));
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i][0] == proid) {
                     $("#buildingno").append($("<option>").val(arr[i][1]).text(arr[i][1]));
@@ -159,7 +179,7 @@
                     班组<b>*</b>
                 </label>
                 <div class="vocation">
-                    <select name="teamworker" id="teamworker" class="select7">
+                    <select name="teamleader" id="teamleader" class="select7">
                         <option value="-1">请选择班组</option>
                     </select>
                 </div>
@@ -168,7 +188,7 @@
                 <label>
                     材料名称<b>*</b>
                 </label>
-                <input type="text" name="content" placeholder="材料名称" class="dfinput" />
+                <input type="text" name="materialname" placeholder="材料名称" class="dfinput" />
             </li>
             <li>
                 <label>
@@ -201,7 +221,7 @@
                 <label>
                     备注<b>*</b>
                 </label>
-                <textarea class="textinput2" name="remark" placeholder="备注"></textarea>
+                <textarea class="textinput2" name="remarkbyworker" placeholder="备注"></textarea>
             </li>
             <li>
                 <button type="submit" class="btn">

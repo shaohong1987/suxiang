@@ -36,6 +36,21 @@
             },
            "json");
 
+            $.ajax({
+                type: "POST",
+                url: "../Handler/Auth.ashx?action=GetUserWithOutAdmin",
+                cache: false,
+                success: function (data) {
+                    var d = JSON.parse(data);
+                    $.each(d, function (i, item) {
+                        $("#teamleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                    });
+                },
+                error: function (data) {
+                    var json = JSON.parse(data);
+                    alert(json.Msg);
+                }
+            });
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
                 var json = eval(data);
                 if (json.State === true) {
@@ -104,6 +119,7 @@
         function changepro(proid) {
             $("#projectname").val($('#projectid').find("option:selected").text());
             $("#buildingno").empty();
+            $("#buildingno").append($("<option>").val(-1).text('栋号'));
             for (var i = 0; i < arr.length; i++) {
                 if (arr[i][0] == proid) {
                     $("#buildingno").append($("<option>").val(arr[i][1]).text(arr[i][1]));
@@ -158,7 +174,7 @@
                 <label>
                     结束日期<b>*</b>
                 </label>
-                <input type="text" name="enddate" id="enddate" placeholder="结束日期" class="dfinput"
+                <input type="text" name="endate" id="endate" placeholder="结束日期" class="dfinput"
                     onclick="WdatePicker()" />
             </li>
             <li>
@@ -166,7 +182,7 @@
                 <label>
                     工种/班组<b>*</b>
                 </label>            
-                <input type="text" name="content" placeholder="工种" class="dfinput" style="width: 169px;"/></div>
+                <input type="text" name="worktype" placeholder="工种" class="dfinput" style="width: 169px;"/></div>
                 <div style="float: left; margin-left: 5px;">
                          <select name="teamleader" id="teamleader" class="select6">
                         <option value="-1">班组</option>
@@ -211,7 +227,7 @@
                 <label>
                     备注<b>*</b>
                 </label>
-                <textarea class="textinput2" name="remark" placeholder="备注"></textarea>
+                <textarea class="textinput2" name="remarkbywork" placeholder="备注"></textarea>
             </li>
             <li>
                 <button type="submit" class="btn">

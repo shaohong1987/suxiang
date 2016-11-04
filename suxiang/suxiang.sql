@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50715
+Source Server         : 127.0.0.1
+Source Server Version : 50716
 Source Host           : localhost:3306
 Source Database       : suxiang
 
 Target Server Type    : MYSQL
-Target Server Version : 50715 
+Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2016-10-02 10:49:26
+Date: 2016-11-04 06:04:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -74,9 +74,17 @@ CREATE TABLE `cost_management` (
   `number` float NOT NULL,
   `price` float NOT NULL,
   `totalprice` float NOT NULL,
-  `remark` varchar(500) DEFAULT NULL,
+  `postid` int(11) NOT NULL,
   `poster` varchar(20) NOT NULL,
   `posttime` datetime NOT NULL,
+  `remarkid` int(11) DEFAULT NULL,
+  `remarkname` varchar(255) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  `remarktime` datetime DEFAULT NULL,
+  `summaryid` int(11) DEFAULT NULL,
+  `summaryname` varchar(50) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `summarytime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -107,6 +115,9 @@ CREATE TABLE `cost_material` (
   `comfirmid` int(11) DEFAULT NULL,
   `comfirmname` varchar(50) DEFAULT NULL,
   `comfirmtime` datetime DEFAULT NULL,
+  `recomfirmid` int(11) DEFAULT NULL,
+  `recomfirmname` varchar(50) DEFAULT NULL,
+  `recomfirmtime` datetime DEFAULT NULL,
   `remarkid` int(11) DEFAULT NULL,
   `remarkname` varchar(255) DEFAULT NULL,
   `remark` varchar(500) DEFAULT NULL,
@@ -116,7 +127,6 @@ CREATE TABLE `cost_material` (
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
   `state` bit(1) NOT NULL,
-  `description` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -134,15 +144,31 @@ CREATE TABLE `cost_materialauxiliary` (
   `projectname` varchar(100) NOT NULL,
   `buildingno` varchar(50) NOT NULL,
   `curdate` date NOT NULL,
-  `workteam` varchar(255) DEFAULT NULL,
+  `teamleaderid` int(11) DEFAULT NULL,
+  `teamleader` varchar(50) DEFAULT NULL,
   `materialname` varchar(50) NOT NULL,
   `unit` varchar(255) DEFAULT NULL,
   `number` float NOT NULL,
   `price` float NOT NULL,
   `totalprice` float NOT NULL,
-  `remark` varchar(500) DEFAULT NULL,
+  `postid` int(11) NOT NULL,
   `poster` varchar(20) NOT NULL,
   `posttime` datetime NOT NULL,
+  `comfirmid` int(11) DEFAULT NULL,
+  `comfirmname` varchar(50) DEFAULT NULL,
+  `comfirmtime` datetime DEFAULT NULL,
+  `recomfirmid` int(11) DEFAULT NULL,
+  `recomfirmname` varchar(50) DEFAULT NULL,
+  `recomfirmtime` datetime DEFAULT NULL,
+  `remarkid` int(11) DEFAULT NULL,
+  `remarkname` varchar(255) DEFAULT NULL,
+  `remark` varchar(500) DEFAULT NULL,
+  `remarktime` datetime DEFAULT NULL,
+  `summaryid` int(11) DEFAULT NULL,
+  `summaryname` varchar(50) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `summarytime` datetime DEFAULT NULL,
+  `state` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -151,12 +177,11 @@ CREATE TABLE `cost_materialauxiliary` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for problems
+-- Table structure for problem_quality
 -- ----------------------------
-DROP TABLE IF EXISTS `problems`;
-CREATE TABLE `problems` (
+DROP TABLE IF EXISTS `problem_quality`;
+CREATE TABLE `problem_quality` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `problemType` varchar(50) NOT NULL,
   `levelno` varchar(11) NOT NULL,
   `projectid` int(11) NOT NULL,
   `projectname` varchar(50) NOT NULL,
@@ -193,7 +218,52 @@ CREATE TABLE `problems` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of problems
+-- Records of problem_quality
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for problem_sercurity
+-- ----------------------------
+DROP TABLE IF EXISTS `problem_sercurity`;
+CREATE TABLE `problem_sercurity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `levelno` varchar(11) NOT NULL,
+  `projectid` int(11) NOT NULL,
+  `projectname` varchar(50) NOT NULL,
+  `buildingno` varchar(11) NOT NULL,
+  `location` varchar(100) NOT NULL,
+  `checkdate` date NOT NULL,
+  `finishdate` date NOT NULL,
+  `problemdescription` varchar(500) NOT NULL,
+  `causation` varchar(255) NOT NULL,
+  `teamleaderid` int(11) NOT NULL,
+  `teamleader` varchar(50) NOT NULL,
+  `worker` varchar(20) NOT NULL,
+  `responsibleperson1` varchar(20) DEFAULT NULL,
+  `responsibleperson2` varchar(20) DEFAULT NULL,
+  `rebuildsolution` varchar(255) NOT NULL,
+  `rebuilder` varchar(20) NOT NULL,
+  `treatmentmeasures` varchar(500) NOT NULL,
+  `worktimecost_db` varchar(10) NOT NULL,
+  `worktimecost_xb` varchar(10) NOT NULL,
+  `materialcost` varchar(10) NOT NULL,
+  `rechecker` varchar(20) NOT NULL,
+  `posterid` int(11) NOT NULL,
+  `postername` varchar(50) NOT NULL,
+  `posttime` datetime NOT NULL,
+  `remarkid` int(11) DEFAULT NULL,
+  `remarkname` varchar(50) DEFAULT NULL,
+  `remark` varchar(255) DEFAULT NULL,
+  `remarktime` datetime DEFAULT NULL,
+  `summaryid` int(11) DEFAULT NULL,
+  `summaryname` varchar(50) DEFAULT NULL,
+  `summary` varchar(255) DEFAULT NULL,
+  `summarytime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of problem_sercurity
 -- ----------------------------
 
 -- ----------------------------

@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="SecurityQuestionForm.aspx.cs" Inherits="suxiang.Form.SecurityQuestionForm" %>
+    CodeBehind="SecurityQuestionForm_Remark.aspx.cs" Inherits="suxiang.Form.SecurityQuestionForm_Remark" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
