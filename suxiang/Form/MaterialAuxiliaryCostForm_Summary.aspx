@@ -22,6 +22,7 @@
                     $("#number").val(d[0].number);
                     $("#totalprice").val(d[0].totalprice);
                     $("#remarkbyworker").val(d[0].remarkbyworker);
+                    $("#remark").val(d[0].remark);
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -42,14 +43,14 @@
         }
 
         function doRemark() {
-            var r = $("#remark").val();
+            var r = $("#summary").val();
             var t = $("#formtype").val();
             var fid = $("#formId").val();
             if (r.length > 0) {
                 $.ajax({
                     type: "POST",
                     url: "../Handler/Process.ashx",
-                    data: { action: 'doRemark', type: t, formid: fid, remark: r },
+                    data: { action: 'doRemark', type: t, formid: fid, summary: r },
                     cache: false,
                     success: function (data) {
                         var json = JSON.parse(data);
@@ -81,7 +82,6 @@
                 </label>
                  <input type="text" name="addr" id="addr" placeholder="班组" class="dfinput" readonly="readonly"/>
                  </li>
-            <a href="MaterialCostForm.aspx">MaterialCostForm.aspx</a>
             <li>
                 <label>
                     日期<b>*</b>
@@ -135,7 +135,11 @@
                 <label>
                     备注 
                 </label>
-                <textarea class="textinput2" id="remark" placeholder="备注"></textarea>
+                <textarea class="textinput2" id="remark" placeholder="备注" readonly="readonly"></textarea>
+            </li>
+            <li>
+                <label>总结</label>
+                <textarea class="textinput2" id="summary" placeholder="总结" ></textarea>
             </li>
             <li>
                 <button type="button" class="btn" onclick="doRemark();">

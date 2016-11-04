@@ -54,6 +54,25 @@ namespace suxiang.Handler
                     {
                         var type = WebHelper.GetActionStr(context, "type");
                         var formid = WebHelper.GetActionStr(context, "formid");
+                        var summary = WebHelper.GetActionStr(context, "summary");
+                        if (um != null)
+                        {
+                            var sql = "update " + type + " set summaryid=" + um.Id + ",summaryname='" + um.RealName +
+                                      "',summary='" + summary +
+                                      "',summarytime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id=" +
+                                      formid;
+                            if (type == "problem_sercurity" || type == "problem_quality")
+                            {
+                                var levelno = WebHelper.GetActionStr(context, "levelno");
+                                var treatmentmeasures = WebHelper.GetActionStr(context, "treatmentmeasures");
+                                sql  = "update " + type + " set levelno='"+levelno+"',treatmentmeasures='"+treatmentmeasures+"',summaryid=" + um.Id + ",summaryname='" + um.RealName +
+                                      "',summary='" + summary +
+                                      "',summarytime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id=" +
+                                      formid;
+                            }
+                            var msg = new SxDal().AddData(sql);
+                            json = WebHelper.GetObjJson(msg);
+                        }
                         break;
                 }
                 case "getproject":

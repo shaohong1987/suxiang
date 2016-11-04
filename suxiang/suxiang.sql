@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2016-11-04 06:04:36
+Date: 2016-11-04 14:26:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -52,12 +52,16 @@ CREATE TABLE `cost_labor` (
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
   `state` bit(1) NOT NULL,
+  `remarkbywork` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cost_labor
 -- ----------------------------
+INSERT INTO `cost_labor` VALUES ('1', '1', '都市枫林', '1', '2016-10-04', '2016-10-20', '木工', '3', '员工', 'aaaa', '立方', '100', '100', '10000', '1', '财务', '2016-11-04 09:37:11', null, null, null, null, null, null, '1', '财务', '', '2016-11-04 14:14:06', null, null, null, null, '', 'aaa');
+INSERT INTO `cost_labor` VALUES ('2', '1', '都市枫林', '1', '2016-10-31', '2016-11-02', '架子工', '3', '员工', 'aa', '平方', '1000', '20', '20000', '1', '财务', '2016-11-04 09:38:57', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '', 'aaaa');
+INSERT INTO `cost_labor` VALUES ('3', '1', '都市枫林', '1', '2016-10-30', '2016-10-31', '架子工', '3', '员工', '11', '件', '100', '100', '10000', '1', '财务', '2016-11-04 09:40:02', null, null, null, null, null, null, null, null, null, null, null, null, null, null, '', 'ddd');
 
 -- ----------------------------
 -- Table structure for cost_management
@@ -85,12 +89,14 @@ CREATE TABLE `cost_management` (
   `summaryname` varchar(50) DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
+  `remarkbyaccount` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cost_management
 -- ----------------------------
+INSERT INTO `cost_management` VALUES ('1', '1', '都市枫林', '2016-10-31', '福利', '呢子大衣', '件', '10', '2000', '20000', '1', '财务', '2016-11-04 09:25:40', '1', '财务', '', '2016-11-04 14:14:39', null, null, null, null, 'aaaaa');
 
 -- ----------------------------
 -- Table structure for cost_material
@@ -126,13 +132,15 @@ CREATE TABLE `cost_material` (
   `summaryname` varchar(50) DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
-  `state` bit(1) NOT NULL,
+  `state` bit(1) NOT NULL DEFAULT b'1',
+  `remarkbyworker` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cost_material
 -- ----------------------------
+INSERT INTO `cost_material` VALUES ('1', '1', '都市枫林', '1', '2016-10-30', '3', '员工', '钢筋', '吨', '1', '2300', '2300', '1', '财务', '2016-11-04 09:50:03', null, null, null, null, null, null, '1', '财务', '', '2016-11-04 14:14:22', null, null, null, null, '', '顶顶顶');
 
 -- ----------------------------
 -- Table structure for cost_materialauxiliary
@@ -168,13 +176,15 @@ CREATE TABLE `cost_materialauxiliary` (
   `summaryname` varchar(50) DEFAULT NULL,
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
-  `state` bit(1) NOT NULL,
+  `state` bit(1) NOT NULL DEFAULT b'1',
+  `remarkbyworker` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cost_materialauxiliary
 -- ----------------------------
+INSERT INTO `cost_materialauxiliary` VALUES ('1', '1', '都市枫林', '1', '2016-10-31', '3', '员工', '扫帚', '把', '20', '25', '500', '1', '财务', '2016-11-04 09:52:56', null, null, null, null, null, null, '1', '财务', '', '2016-11-04 14:15:37', null, null, null, null, '', '点点滴滴');
 
 -- ----------------------------
 -- Table structure for problem_quality
@@ -215,11 +225,12 @@ CREATE TABLE `problem_quality` (
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of problem_quality
 -- ----------------------------
+INSERT INTO `problem_quality` VALUES ('1', '3', '1', '都市枫林', '1', '1312', '2016-10-30', '2016-10-31', '23123', '123213', '3', '员工', '123', '123', '123', '123', '123', '0', '11', '23', '3321', '123', '1', '财务', '2016-11-04 09:20:17', '1', '财务', 'test', '2016-11-04 13:25:11', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for problem_sercurity
@@ -260,11 +271,12 @@ CREATE TABLE `problem_sercurity` (
   `summary` varchar(255) DEFAULT NULL,
   `summarytime` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of problem_sercurity
 -- ----------------------------
+INSERT INTO `problem_sercurity` VALUES ('1', '2', '1', '都市枫林', '1', '111', '2016-10-30', '2016-10-31', '1111', '1111', '3', '员工', 'aaa', 'da', 'dde', 'adf', 'adfaf', '1', '11', '11', '123', 'da', '1', '财务', '2016-11-04 09:14:24', '1', '财务', 'test', '2016-11-04 13:39:54', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for projectinfo
@@ -279,11 +291,12 @@ CREATE TABLE `projectinfo` (
   `buildingleaderid` int(11) DEFAULT NULL,
   `buildingleader` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of projectinfo
 -- ----------------------------
+INSERT INTO `projectinfo` VALUES ('1', '1', '都市枫林', '1', '', '3', '员工');
 
 -- ----------------------------
 -- Table structure for projects
@@ -309,11 +322,12 @@ CREATE TABLE `projects` (
   `buildingTotal` int(11) NOT NULL,
   `state` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of projects
 -- ----------------------------
+INSERT INTO `projects` VALUES ('1', '都市枫林', '3', '员工', '3', '员工', '3', '员工', '3', '员工', '3', '员工', '3', '员工', '3', '员工', '1', '');
 
 -- ----------------------------
 -- Table structure for users
