@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
-    CodeBehind="QualityQuestionForm_Remark.aspx.cs" Inherits="suxiang.Form.QualityQuestionForm_Remark" %>
+    CodeBehind="SecurityQuestionForm_Summary.aspx.cs" Inherits="suxiang.Form.SecurityQuestionForm_Summary" %>
+
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
@@ -10,7 +11,7 @@
                 $(".placeul").html("<li><a>各类表单</a></li><li><a>质量问题表</a></li>");
             $.ajax({
                 type: "POST",
-                url: "../Handler/Process.ashx?action=getdata&type=problem_quality&formid=1",
+                url: "../Handler/Process.ashx?action=getdata&type=problem_sercurity&formid=1",
                 cache: false,
                 success: function (data) {
                     var d = JSON.parse(data);
@@ -98,7 +99,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <form class="formbody" id="sqform">
     <input type="hidden" id="formId" value="-1"/>
-        <input type="hidden" id="formtype" value="problem_quality"/>
+        <input type="hidden" id="formtype" value="problem_sercurity"/>
         <input type="hidden" value="doRemark" name="action" />
     <div id="usual1" class="usual">
         <ul class="forminfo">
@@ -180,9 +181,9 @@
                         复查人员 
                     </label>
                     <input type="text" id="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" readonly="readonly"/>
-                    质量等级
+                    安全等级
                 </div>
-                <input name="levelno" id="levelno" placeholder="质量等级" class="dfinput" style="width: 80px;" readonly="readonly"/>
+                <input name="levelno" id="levelno" placeholder="安全等级" class="dfinput" style="width: 80px;" readonly="readonly"/>
             </li>
              <li>
                 <label>

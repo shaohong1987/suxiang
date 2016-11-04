@@ -106,6 +106,13 @@
     <Compile Include="Form\Complete.aspx.designer.cs">
       <DependentUpon>Complete.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\LaborCostForm_Summary.aspx.cs">
+      <DependentUpon>LaborCostForm_Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_Summary.aspx.designer.cs">
+      <DependentUpon>LaborCostForm_Summary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\LaborCostForm_Remark.aspx.cs">
       <DependentUpon>LaborCostForm_Remark.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -119,6 +126,13 @@
     </Compile>
     <Compile Include="Form\LaborCostForm.aspx.designer.cs">
       <DependentUpon>LaborCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ManageCostForm_Summary.aspx.cs">
+      <DependentUpon>ManageCostForm_Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ManageCostForm_Summary.aspx.designer.cs">
+      <DependentUpon>ManageCostForm_Summary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\ManageCostForm_Remark.aspx.cs">
       <DependentUpon>ManageCostForm_Remark.aspx</DependentUpon>
@@ -134,6 +148,13 @@
     <Compile Include="Form\ManageCostForm.aspx.designer.cs">
       <DependentUpon>ManageCostForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_Summary.aspx.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_Summary.aspx.designer.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_Summary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\MaterialAuxiliaryCostForm_Remark.aspx.cs">
       <DependentUpon>MaterialAuxiliaryCostForm_Remark.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -147,6 +168,13 @@
     </Compile>
     <Compile Include="Form\MaterialAuxiliaryCostForm.aspx.designer.cs">
       <DependentUpon>MaterialAuxiliaryCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_Summary.aspx.cs">
+      <DependentUpon>MaterialCostForm_Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_Summary.aspx.designer.cs">
+      <DependentUpon>MaterialCostForm_Summary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\MaterialCostForm_Remark.aspx.cs">
       <DependentUpon>MaterialCostForm_Remark.aspx</DependentUpon>
@@ -169,6 +197,13 @@
     <Compile Include="Form\NewForm.aspx.designer.cs">
       <DependentUpon>NewForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\QualityQuestionForm_Summary.aspx.cs">
+      <DependentUpon>QualityQuestionForm_Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\QualityQuestionForm_Summary.aspx.designer.cs">
+      <DependentUpon>QualityQuestionForm_Summary.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\QualityQuestionForm_Remark.aspx.cs">
       <DependentUpon>QualityQuestionForm_Remark.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -182,6 +217,13 @@
     </Compile>
     <Compile Include="Form\QualityQuestionForm.aspx.designer.cs">
       <DependentUpon>QualityQuestionForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm_Summary.aspx.cs">
+      <DependentUpon>SecurityQuestionForm_Summary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm_Summary.aspx.designer.cs">
+      <DependentUpon>SecurityQuestionForm_Summary.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\SecurityQuestionForm_Remark.aspx.cs">
       <DependentUpon>SecurityQuestionForm_Remark.aspx</DependentUpon>
@@ -768,17 +810,23 @@
     <Content Include="Content\js\Validator\style\validatorAuto.css" />
     <Content Include="Content\js\Validator\style\validatorTidyMode.css" />
     <Content Include="Form\Complete.aspx" />
+    <Content Include="Form\LaborCostForm_Summary.aspx" />
     <Content Include="Form\LaborCostForm_Remark.aspx" />
     <Content Include="Form\LaborCostForm.aspx" />
+    <Content Include="Form\ManageCostForm_Summary.aspx" />
     <Content Include="Form\ManageCostForm_Remark.aspx" />
     <Content Include="Form\ManageCostForm.aspx" />
+    <Content Include="Form\MaterialAuxiliaryCostForm_Summary.aspx" />
     <Content Include="Form\MaterialAuxiliaryCostForm_Remark.aspx" />
     <Content Include="Form\MaterialAuxiliaryCostForm.aspx" />
+    <Content Include="Form\MaterialCostForm_Summary.aspx" />
     <Content Include="Form\MaterialCostForm_Remark.aspx" />
     <Content Include="Form\MaterialCostForm.aspx" />
     <Content Include="Form\NewForm.aspx" />
+    <Content Include="Form\QualityQuestionForm_Summary.aspx" />
     <Content Include="Form\QualityQuestionForm_Remark.aspx" />
     <Content Include="Form\QualityQuestionForm.aspx" />
+    <Content Include="Form\SecurityQuestionForm_Summary.aspx" />
     <Content Include="Form\SecurityQuestionForm_Remark.aspx" />
     <Content Include="Form\SecurityQuestionForm.aspx" />
     <Content Include="Form\ToDo.aspx" />

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageCostForm_Remark.aspx.cs" Inherits="suxiang.Form.ManageCostForm_Remark" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageCostForm_Summary.aspx.cs" Inherits="suxiang.Form.ManageCostForm_Summary" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
     <link href="../Content/css/select.css" rel="stylesheet" type="text/css" />

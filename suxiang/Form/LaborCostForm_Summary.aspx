@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LaborCostForm_Remark.aspx.cs" Inherits="suxiang.Form.LaborCostForm_Remark" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="LaborCostForm_Summary.aspx.cs" Inherits="suxiang.Form.LaborCostForm_Summary" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
     <script src="../content/js/jquery-1.11.1.min.js" type="text/javascript"></script>

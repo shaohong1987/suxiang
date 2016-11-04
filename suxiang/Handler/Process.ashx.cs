@@ -38,6 +38,16 @@ namespace suxiang.Handler
                     {
                         var type = WebHelper.GetActionStr(context, "type");
                         var formid = WebHelper.GetActionStr(context, "formid");
+                        var remark = WebHelper.GetActionStr(context, "remark");
+                        if (um != null)
+                        {
+                            var sql = "update " + type + " set remarkid="+ um .Id+ ",remarkname='"+ um.RealName+ "',remark='" + remark +
+                                      "',remarktime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "' where id=" +
+                                      formid;
+                            var msg = new SxDal().AddData(sql);
+                            json = WebHelper.GetObjJson(msg);
+                        }
+                        
                         break;
                 }
                 case "doSummary":
@@ -156,7 +166,7 @@ namespace suxiang.Handler
                                 };
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             msg = new MsgModel
                             {

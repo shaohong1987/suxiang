@@ -1,30 +1,28 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageCostForm_Remark.aspx.cs" Inherits="suxiang.Form.ManageCostForm_Remark" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+    CodeBehind="MaterialCostForm_Summary.aspx.cs" Inherits="suxiang.Form.MaterialCostForm_Summary" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="../Content/css/select.css" rel="stylesheet" type="text/css" />
     <script src="../content/js/jquery-1.11.1.min.js" type="text/javascript"></script>
-    <script src="../Content/js/select-ui.min.js" type="text/javascript"></script>
-    <script src="../Content/js/My97/WdatePicker.js" type="text/javascript"></script>
-    <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>管理成本表</a></li>");
+            $(".placeul").html("<li><a>各类表单</a></li><li><a>材料成本表</a></li>");
             $.ajax({
                 type: "POST",
-                url: "../Handler/Process.ashx?action=getdata&type=cost_management&formid=1",
+                url: "../Handler/Process.ashx?action=getdata&type=cost_material&formid=1",
                 cache: false,
                 success: function (data) {
                     var d = JSON.parse(data);
                     $("#formId").val(d[0].id);
-                    $("#addr").val(d[0].projectname);
+                    $("#addr").val(d[0].projectname + d[0].buildingno + '栋');
                     $("#curdate").val(jsonDateFormat(d[0].curdate));
-                    $("#type").val(d[0].type);
-                    $("#content").val(d[0].content);
+                    $("#teamleader").val(d[0].teamleader);
+                    $("#materialname").val(d[0].materialname);
                     $("#unit").val(d[0].unit);
                     $("#price").val(d[0].price);
                     $("#number").val(d[0].number);
                     $("#totalprice").val(d[0].totalprice);
-                    $("#remarkbyaccount").val(d[0].remarkbyaccount);
+                    $("#remarkbyworker").val(d[0].remarkbyworker);
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -67,74 +65,75 @@
                     }
                 });
             }
+
         }
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <form class="formbody" id="mcgform">
-    <input type="hidden" value="cost_management" id="formtype" name="formtype"/>
-    <input type="hidden" id="formId" value="-1"/>
-    <input type="hidden" value="doRemark" id="action" name="action"/>
+    <form class="formbody" id="mcform">
+   <input type="hidden" id="formId" value="-1"/>
+        <input type="hidden" id="formtype" value="cost_material"/>
+        <input type="hidden" value="doRemark" name="action" />
     <div id="usual1" class="usual">
         <ul class="forminfo">
             <li>
                 <label>
                     地点
                 </label>
-                 <input type="text" id="addr" placeholder="地点" class="dfinput" readonly="readonly"/>
-                </li>
+                 <input type="text" name="addr" id="addr" placeholder="班组" class="dfinput" readonly="readonly"/>
+                 </li>
             <li>
                 <label>
-                    日期
+                    日期<b>*</b>
                 </label>
-                <input type="text" id="curdate" placeholder="日期" class="dfinput" readonly="readonly"/>
+                <input type="text" name="curdate" id="curdate" placeholder="日期" class="dfinput" readonly="readonly"/>
             </li>
             <li>
                 <label>
-                    类别
+                    班组<b>*</b>
                 </label>
-                <input type="text" id="type" placeholder="类别（如，福利、劳保、招待等）" class="dfinput" readonly="readonly"/>
+                 <input type="text" name="teamleader" id="teamleader" placeholder="班组" class="dfinput" readonly="readonly"/>
             </li>
             <li>
                 <label>
-                    内容
+                    材料名称
                 </label>
-                <input type="text" id="content" placeholder="内容" class="dfinput" readonly="readonly"/>
+                <input type="text" id="materialname" placeholder="材料名称" class="dfinput" readonly="readonly"/>
             </li>
             <li>
                 <label>
-                    单位
+                    单位 
                 </label>
-                <input type="text" id='unit' placeholder="单位" class="dfinput" readonly="readonly"/>
+                <input type="text" name='unit' id='unit' placeholder="单位" class="dfinput" readonly="readonly"/>
             </li>
             <li>
                 <label>
-                    单价
+                    单价 
                 </label>
-                <input type="text" class="dfinput"  id='price' placeholder="单价" readonly="readonly"/>
+                <input type="text" class="dfinput" name='price' id='price' placeholder="单价"readonly="readonly"/>
             </li>
             <li>
                 <label>
-                    数量
+                    数量 
                 </label>
-                <input type="text" class="dfinput"id='number' placeholder="数量"readonly="readonly"/>
+                <input type="text" class="dfinput" name='number' id='number' placeholder="数量" readonly="readonly"/>
             </li>
             <li>
                 <label>
-                    小计
+                    小计 
                 </label>
-                <input type="text" id='totalprice' placeholder="小计" readonly="readonly"
+                <input type="text" name='totalprice' id='totalprice' placeholder="小计" readonly="readonly"
                     class="dfinput" />
             </li>
             <li>
                 <label>
-                    说明
+                    说明 
                 </label>
-                <textarea class="textinput2"  id="remarkbyaccount" placeholder="说明" readonly="readonly"></textarea>
+                <textarea class="textinput2" id="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
             </li>
              <li>
                 <label>
-                    备注
+                    备注 
                 </label>
                 <textarea class="textinput2" id="remark" placeholder="备注"></textarea>
             </li>
