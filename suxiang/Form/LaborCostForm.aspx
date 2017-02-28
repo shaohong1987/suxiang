@@ -10,7 +10,7 @@
         var arr = new Array();
         $(document).ready(function () {
 
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>用工成本表</a></li>");
+            $(".placeul").html("<li><a href='NewForm.aspx'>各类表单</a></li><li><a>用工成本表</a></li>");
 
             $(".select1").uedSelect({
                 width: 345

@@ -78,14 +78,14 @@
 <body>
     <div data-role="page">
         <div data-role="header" data-position="fixed">
-            <a href="../FormList.aspx" target="_self" data-rel="back" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
+            <a href="NewForm.aspx" target="_self" class="ui-btn ui-btn-left ui-alt-icon ui-nodisc-icon ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
             <h1>填写——管理成本记录</h1>
         </div>
         <div data-role="content">
             <form id="managecostForm">
                 <div data-role="fieldcontain">
                     <input type='hidden' name='projectname' id='projectname' />
-                    <label for="projectid">项目：</label>
+                    <label for="projectid">地点：</label>
                     <select name="projectid" id="projectid" onchange="changepro(this.value)">
                         <option value='-1'>请选择项目</option>
                     </select>
@@ -101,12 +101,12 @@
                     <input type="text" name='price' id="price" placeholder="单价" onblur="check(this)" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" />
                     <label for="number">数量：</label>
                     <input type="text" name='number' id='number' placeholder="数量" onblur="check(this)" onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" />
-                    <label for="totalprice">总价：</label>
-                    <input type="text" name='totalprice' id='totalprice' placeholder="总价" readonly="readonly" />
-                    <label for="remark">备注：</label>
-                    <textarea cols="40" rows="8" id="remark" name="remark" placeholder="备注"></textarea>
+                    <label for="totalprice">小计：</label>
+                    <input type="text" name='totalprice' id='totalprice' placeholder="小计" readonly="readonly" />
+                    <label for="remarkbyaccount">备注：</label>
+                    <textarea cols="40" rows="8" id="remarkbyaccount" name="remarkbyaccount" placeholder="备注"></textarea>
                     <h3 id="notification"></h3>
-                    <button data-theme="b" id="submit" type="button" onclick="doPost()">提交报告</button>
+                    <button data-theme="b" id="submit" type="button" onclick="doPost()">提交</button>
                 </div>
             </form>
         </div>

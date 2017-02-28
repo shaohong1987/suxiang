@@ -73,13 +73,17 @@
                 height: "auto",
                 datatype: "json",
                 colModel: [
-                           { label: '日期', name: 'curdate', width: '80' },
+                            { label: '项目', name: 'projectname', width: '100' },
+                            { label: '日期', name: 'curdate', width: '80' },
                             { label: '类型', name: 'type' },
                             { label: '内容', name: 'content' },
                             { label: '单位', name: 'unit', width: '70' },
-                            { label: '数量', name: 'worktime', width: '70' },
+                            { label: '数量', name: 'number', width: '70' },
                             { label: '单价', name: 'price', width: '70' },
-                            { label: '小计', name: 'totalprice', width: '70' }
+                            { label: '小计', name: 'totalprice', width: '70' },
+                            { label: '填表人', name: 'poster', width: '70' },
+                            { label: '确认人', name: 'remarkname', width: '70' },
+                            { label: '备注', name: 'remark', width: '70' }
                         ],
                 viewrecords: true,
                 rownumbers: true,

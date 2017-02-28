@@ -36,10 +36,10 @@
                 <span>
                     <img src="Content/images/leftico02.png" alt="工作台" /></span>工作台
             </div>
-            <ul class="menuson">
-                <li><cite></cite><a href="Form/NewForm.aspx" target="rightFrame">新单据</a><i></i></li>
-                <li><cite></cite><a href="Form/ToDo.aspx" target="rightFrame">待处理</a><i></i></li>
-                <li><cite></cite><a href="Form/Complete.aspx" target="rightFrame">所有单据</a><i></i></li> 
+            <ul class="menuson"> 
+                <li><cite></cite><a href="Form/ToDo.aspx" target="rightFrame">待处理表单</a><i></i></li>
+                <li><cite></cite><a href="Form/Complete.aspx" target="rightFrame">已处理表单</a><i></i></li> 
+                 <li><cite></cite><a href="Form/NewForm.aspx" target="rightFrame">填写表单</a><i></i></li>
             </ul>
         </dd>
         <%

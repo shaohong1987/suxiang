@@ -14,6 +14,7 @@
                 url: "../Handler/Auth.ashx?action=GetUserWithOutAdmin",
                 cache: false,
                 success: function (data) {
+                   
                     $.ajax({
                         type: "POST",
                         url: "../Handler/Process.ashx?action=getproject&projectid=<%=ProjectId %>",
@@ -30,37 +31,53 @@
                                         } else {
                                             $("#manage").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         }
+                                        
                                          if (json.Data[0].Productleaderid + "-" + json.Data[0].Productleader == item['Id'] + "-" + item["realname"]) {
                                             $("#productleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#productleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
-                                        }
+                                         }
+
                                          if (json.Data[0].Accountantid + "-" + json.Data[0].Accountant == item['Id'] + "-" + item["realname"]) {
                                             $("#accountant").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#accountant").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
-                                        }
+                                         }
+
                                          if (json.Data[0].Constructionleaderid + "-" + json.Data[0].Constructionleader == item['Id'] + "-" + item["realname"]) {
                                             $("#constructionleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#constructionleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
-                                        }
+                                         }
+
                                          if (json.Data[0].Qualityleaderid + "-" + json.Data[0].Qualityleader == item['Id'] + "-" + item["realname"]) {
                                             $("#qualityleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#qualityleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
-                                        }
+                                         }
+
                                          if (json.Data[0].Safetyleaderid + "-" + json.Data[0].Safetyleader == item['Id'] + "-" + item["realname"]) {
                                             $("#safetyleader").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#safetyleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
-                                        }
+                                         }
+
                                          if (json.Data[0].Storekeeperid + "-" + json.Data[0].Storekeeper == item['Id'] + "-" + item["realname"]) {
                                             $("#storekeeper").append("<option selected='selected' value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
                                         } else {
                                             $("#storekeeper").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
-                                        }
-                                        $("#buildingleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                         }
+
+                                         $("#buildingleader").append("<option value='" + item['Id'] + "-" + item["realname"] + "'>" + item['realname'] + "</option>");
+                                         $("#manage").selectmenu("refresh", true);
+                                         $("#productleader").selectmenu("refresh", true);
+                                         $("#accountant").selectmenu("refresh", true);
+                                         $("#constructionleader").selectmenu("refresh", true);
+                                         $("#qualityleader").selectmenu("refresh", true);
+                                         $("#safetyleader").selectmenu("refresh", true);
+                                         $("#storekeeper").selectmenu("refresh", true);
+                                         
+
                                     });
                                 }
                             }

@@ -5,26 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="Content/css/jquery.mobile-1.4.5.min.css" />
-    <script src="Content/js/jquery.min.js" type="text/javascript"></script>
-    <script src="Content/js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
-    <script src="Content/js/jquery.md5.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        function doPost() {
-            $.post("Handler/Auth.ashx?action=loginaction",
-			    {
-			        usercode: $("#usercode").val(),
-			        userpass: $.md5($("#userpass").val())
-			    },
-			    function (data) {
-			        var json = eval(data);
-			        if (json.State === true) {
-			            window.location.href = "index.aspx";
-			        } else {
-			            $("#notification").html(json.Msg);
-			        }
-			    }, "json");
-        }
-    </script>
+   
 </head>
 <body>
     <div data-role="page">
@@ -52,6 +33,42 @@
             <h1>
                 版权所有2016 苏ICP备16042802号-1</h1>
         </div>
+        <script src="Content/js/jquery.min.js" type="text/javascript"></script>
+        <script src="Content/js/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
+        <script src="Content/js/jquery.md5.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            var u = JSON.parse(window.localStorage ? localStorage.getItem("SXMobile") : document.Cookie.read("SXMobile"));
+            $('#usercode').val(u.usercode);
+            $("#userpass").val(u.userpass);
+
+            function doPost() {
+                $.post("Handler/Auth.ashx?action=Login",
+                    {
+                        usercode: $("#usercode").val(),
+                        userpass: $.md5($("#userpass").val())
+                    },
+                    function (data) {
+                        var json = eval(data);
+                        if (json.State === true) {
+                            var uinfo = {
+                                usercode:$("#usercode").val(),
+                                userpass:$("#userpass").val()
+                            };
+                            if (window.localStorage) {
+                                localStorage.clear();
+                                localStorage.setItem("SXMobile", JSON.stringify(uinfo));
+                            } else {
+                               
+                                document.Cookie.write("SXMobile", JSON.stringify(uinfo));
+                            }
+                            window.location.href = "index.aspx";
+                        } else {
+                            $("#notification").html(json.Msg);
+                        }
+                    }, "json");
+            }
+
+        </script>
     </div>
 </body>
 </html>

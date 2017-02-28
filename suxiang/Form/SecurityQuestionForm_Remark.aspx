@@ -1,17 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="SecurityQuestionForm_Remark.aspx.cs" Inherits="suxiang.Form.SecurityQuestionForm_Remark" %>
-
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
     <script src="../content/js/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document)
             .ready(function() {
-                $(".placeul").html("<li><a>各类表单</a></li><li><a>质量问题表</a></li>");
+                $(".placeul").html("<li><a href='ToDo.aspx'>待处理</a></li><li><a>安全问题表</a></li>");
+                var formid = GetQueryString('formId');
+                $("#formId").val(formid);
             $.ajax({
                 type: "POST",
-                url: "../Handler/Process.ashx?action=getdata&type=problem_sercurity&formid=1",
+                url: "../Handler/Process.ashx?action=getdata&type=problem_sercurity&formid=" + formid,
                 cache: false,
                 success: function (data) {
                     var d = JSON.parse(data);
@@ -41,14 +41,14 @@
                     $("#materialcost").val(d[0].materialcost);
                     $("#rechecker").val(d[0].rechecker); 
                     $("#levelno").val(d[0].levelno);
-                    if (d[0].levelno == "1") {
-                        $("#levelno").val('一级');
-                    }
-                    if (d[0].levelno == "2") {
-                        $("#levelno").val('二级');
-                    }
                     if (d[0].levelno == "3") {
                         $("#levelno").val('三级');
+                    }
+                    if (d[0].levelno == "4") {
+                        $("#levelno").val('四级');
+                    }
+                    if (d[0].levelno == "5") {
+                        $("#levelno").val('五级');
                     }
                 },
                 error: function (data) {
@@ -57,7 +57,11 @@
                 }
             });
         });
-
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
         function jsonDateFormat(jsonDate) {
             try {
                 var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));
@@ -99,8 +103,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <form class="formbody" id="sqform">
     <input type="hidden" id="formId" value="-1"/>
-        <input type="hidden" id="formtype" value="problem_sercurity"/>
-        <input type="hidden" value="doRemark" name="action" />
+    <input type="hidden" id="formtype" value="problem_sercurity"/>
+    <input type="hidden" value="doRemark" name="action" />
     <div id="usual1" class="usual">
         <ul class="forminfo">
             <li>

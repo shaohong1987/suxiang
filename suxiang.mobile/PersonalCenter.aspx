@@ -20,10 +20,10 @@
                 $("#notification").text("请填写完整数据,并保两次输入的新密码一致.");
                 return false;
             }
-            $.post("Handler/process.ashx?action=updatepwdaction",
+            $.post("Handler/auth.ashx?action=updatepwd",
 			    {
-			        oldpass: $.md5($("#oldpass").val()),
-			        newpass: $.md5($("#pass").val())
+			        oldpassword: $("#oldpass").val(),
+			        newpassword:$("#pass").val()
 			    },
 			    function (data) {
 			        var json = eval(data);
@@ -66,8 +66,8 @@
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href='FormList.aspx' data-icon='star' target='_self'>各类表单</a></li>
                     <li><a href="index.aspx" data-icon="grid" target="_self">报表中心</a></li>
+                    <li><a href='Form/NewForm.aspx' data-icon='star' target='_self'>工作台</a></li>
                     <li><a href="#" data-icon="gear" class="ui-btn-active">个人设置</a></li>
                 </ul>
             </div>

@@ -23,14 +23,15 @@
                 <li><a href='Report/QualityReport.aspx' target='_self'>质量问题表</a></li>
                 <li><a href='Report/LaborCostReport.aspx' target='_self'>用工成本表</a></li>
                 <li><a href='Report/MaterialCostReport.aspx' target='_self'>材料成本表</a></li>
+                <li><a href='Report/MaterialAuxiliaryCostReport.aspx' target='_self'>辅材工具成本表</a></li>
                 <li><a href='Report/ManageCostReport.aspx' target='_self'>管理成本表</a></li>
             </ul>
         </div>
         <div data-role="footer" data-position="fixed">
             <div data-role="navbar">
                 <ul>
-                    <li><a href='FormList.aspx' data-icon='star' target='_self'>各类表单</a></li>
                     <li><a href="#" data-icon="grid" class="ui-btn-active">报表中心</a></li>
+                    <li><a href='Form/NewForm.aspx' data-icon='star' target='_self'>工作台</a></li>
                     <li><a href="PersonalCenter.aspx" data-icon="gear" target='_self'>个人设置</a></li>
                 </ul>
             </div>

@@ -8,10 +8,12 @@
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>管理成本表</a></li>");
+            $(".placeul").html("<li><a href='ToDo.aspx'>待处理</a></li><li><a>管理成本表</a></li>");
+            var formid = GetQueryString('formId');
+            $("#formId").val(formid);
             $.ajax({
                 type: "POST",
-                url: "../Handler/Process.ashx?action=getdata&type=cost_management&formid=1",
+                url: "../Handler/Process.ashx?action=getdata&type=cost_management&formid=" + formid,
                 cache: false,
                 success: function (data) {
                     var d = JSON.parse(data);
@@ -32,7 +34,11 @@
                 }
             });
         });
-
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
         function jsonDateFormat(jsonDate) {
             try {
                 var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));

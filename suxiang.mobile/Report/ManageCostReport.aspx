@@ -9,69 +9,7 @@
     <link rel="stylesheet" href="../Content/css/jquery.mobile-1.4.5.min.css">
     <link href="../Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../Content/css/jquery.mobile.datepicker.css">
-    <script src="../Content/js/jquery.min.js"></script>
-    <script src="../Content/js/jquery.mobile-1.4.5.min.js"></script>
-    <script src="../Content/js/jquery.ui.datepicker.js"></script>
-    <script src="../Content/js/jquery.mobile.datepicker.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var nowdays = new Date();
-            var year = nowdays.getFullYear();
-            var month = nowdays.getMonth();
-            if (month == 0) {
-                month = 12;
-                year = year - 1;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            $("#fmonths").val(year + "-" + month + "-" + "01");
-            var myDate = new Date(year, month, 0);
-            $("#fmonthe").val(year + "-" + month + "-" + myDate.getDate());
-
-            $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
-                var json = eval(data);
-                if (json.State === true) {
-                    $.each(json.Data, function (i, item) {
-                        $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
-                    });
-                }
-            },
-                "json");
-        });
-
-        function doPost() {
-            var projectid = $("#projectid").val();
-            var startdate = $("#fmonths").val();
-            var enddate = $("#fmonthe").val();
-            if (projectid == '-1' || startdate.length == 0 || enddate.length == 0) {
-                alert('请补全搜索条件.');
-                return false;
-            }
-            $.post("../Handler/Process.ashx", { action: "GetManageCosts", pid: projectid, sdate: startdate, edate: enddate }, function (data) {
-                var json = eval(data);
-                $("table tbody").html('');
-                if (json.length == 0) {
-                    $("table tbody").html("<tr><td colspan='8'>暂无数据</td></tr>");
-                } else {
-                    var sum = 0;
-                    var newRow;
-                    $.each(json, function (i, item) {
-                        if (i == 0) {
-                            $("#lid").html(item["projectname"]);
-                        }
-                            sum += parseFloat(item["totalprice"]);
-                            newRow += "<tr><td>" + (i + 1) + "</td><td>" + item["curdate"] + "</td><td>" + item["type"] + "</td><td>" + item["content"] + "</td><td>" + item["unit"] + "</td><td>" + item["number"] + "</td><td>" + item["price"] + "</td><td>" + item["totalprice"] + "</td></tr>";
-                            $("table tbody tr:last").after(newRow);
-                    });
-                    newRow += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td>合计：</td><td>" + sum + "</td></tr>";
-                    $("table tbody").html(newRow);
-                }
-            },
-                "json");
-            return false;
-        }
-    </script>
+    
 </head>
 <body>
     <div data-role="page">
@@ -92,10 +30,13 @@
                             序号
                         </th>
                         <th>
+                            项目
+                        </th>
+                        <th>
                             日期
                         </th>
                         <th>
-                            类型
+                            类别
                         </th>
                         <th>
                             内容
@@ -103,20 +44,23 @@
                         <th>
                             单位
                         </th>
+                         <th>
+                            单价(元)
+                        </th>
                         <th>
                             数量
                         </th>
                         <th>
-                            单价
+                            小计(元)
                         </th>
-                        <th>
-                            小计
+                         <th>
+                            备注
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="8">
+                        <td colspan="10">
                             请点击右上角查询按钮进行数据检索。
                         </td>
                     </tr>
@@ -133,14 +77,87 @@
                     <select name="projectid" id="projectid" onchange="changepro(this.value)">
                         <option value='-1'>请选择项目</option>
                     </select>
-                    <input type="text" name='fmonths' id="fmonths" data-role="date" placeholder="开始日期" />
-                    <input type="text" name='fmonthe' id="fmonthe" data-role="date" placeholder="截止日期" />
-                    <button data-theme="b" data-rel="close" type="button" onclick='doPost()'>
+                    <input type="text" name='fmonths' id="fmonths" data-role="date" placeholder="月份" />
+                    <button data-theme="b" data-rel="close" type="button" onclick='doPost(-1)'>
                         确认</button>
+						<button data-theme="b" data-rel="close" type="button" onclick='doPost(1)'>
+                        上月</button>
                 </div>
                 </form>
             </div>
         </div>
+		<script src="../Content/js/jquery.min.js"></script>
+    <script src="../Content/js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../Content/js/jquery.ui.datepicker.js"></script>
+    <script src="../Content/js/jquery.mobile.datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var nowdays = new Date();
+            var year = nowdays.getFullYear();
+            var month = nowdays.getMonth()+1;
+            if (month == 0) {
+                month = 12;
+                year = year - 1;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            $("#fmonths").val(year + "-" + month);
+            $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
+                var json = eval(data);
+                if (json.State === true) {
+                    $.each(json.Data, function (i, item) {
+                        $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
+                    });
+                }
+            },
+                "json");
+				doPost(-1);
+        });
+
+        function doPost(i) {
+            var projectid = $("#projectid").val();
+            var startdate = $("#fmonths").val();
+			if (i =="1") {			
+                var date = new Date();		
+                var ndate = new Date(date.setMonth(date.getMonth() - 1));
+                startdate = ndate.getFullYear() + "-" + (ndate.getMonth() + 1);
+				$("#fmonths").val(startdate);
+            }
+            $.post("../Handler/Process.ashx", { action: "GetManageCosts", ProjectId: projectid, month: startdate }, function (data) {
+                var json = eval(data);
+                $("table tbody").html('');
+                if (json.length == 0) {
+                    $("table tbody").html("<tr><td colspan='10'>暂无数据</td></tr>");
+                } else {
+                    var sum = 0;
+                    var newRow;
+                    $.each(json, function (i, item) {
+                        if (i == 0) {
+                            $("#lid").html(item["projectname"]);
+                        }
+                            sum += parseFloat(item["totalprice"]);
+                            newRow += "<tr><td>" + (i + 1) + "</td>" +
+                                "<td>" + item["projectname"] + "</td>" +
+                                "<td>" + item["curdate"] + "</td>" +
+                                "<td>" + item["type"] + "</td>" +
+                                "<td>" + item["content"] + "</td>" +
+                                "<td>" + item["unit"] + "</td>" +
+                                "<td>" + item["number"] + "</td>" +
+                                "<td>" + item["price"] + "</td>" + 
+                                "<td>" + item["totalprice"] + "</td>" +
+                                "<td>" + item["remarkbyaccount"] + "</td>" +
+                                    "</tr>";
+                            $("table tbody tr:last").after(newRow);
+                    });
+                    newRow += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>合计：</td><td>" + sum + "</td><td></td></tr>";
+                    $("table tbody").html(newRow);
+                }
+            },
+                "json");
+            return false;
+        }
+    </script>
     </div>
 </body>
 </html>

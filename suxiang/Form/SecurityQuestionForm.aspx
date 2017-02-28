@@ -11,7 +11,7 @@
     <script type="text/javascript">
         var arr = new Array();
         $(document).ready(function () {
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>安全问题表</a></li>");
+            $(".placeul").html("<li><a href='NewForm.aspx'>各类表单</a></li><li><a>安全问题表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });
@@ -265,9 +265,9 @@
                 </div>
                 <div style="float: left; margin-left: 5px;">
                     <select name="levelno" id="levelno" class="select3">
-                        <option value="1">一级</option>
-                        <option value="2">二级</option>
-                        <option value="3">三级</option>
+                       <option value="3">三级</option>
+                        <option value="4">四级</option>
+                        <option value="5">五级</option>
                     </select>
                 </div>
             </li>

@@ -19,7 +19,7 @@
     <form id="form1" runat="server">
     <div class="topleft">
         <a href="Index.aspx" target="_parent">
-            <img src="Content/images/logo.png" title="系统首页" alt="Home" /></a>
+            </a>
     </div>
     <div class="topright">
         <ul>

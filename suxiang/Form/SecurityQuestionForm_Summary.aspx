@@ -3,22 +3,22 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-       <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../content/css/style.css" rel="stylesheet" type="text/css" />
     <link href="../Content/css/select.css" rel="stylesheet" type="text/css" />
     <script src="../content/js/jquery-1.11.1.min.js" type="text/javascript"></script>
     <script src="../Content/js/select-ui.min.js" type="text/javascript"></script>
-    <script src="../Content/js/My97/WdatePicker.js" type="text/javascript"></script>
-    <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(document)
             .ready(function() {
-                $(".placeul").html("<li><a>各类表单</a></li><li><a>质量问题表</a></li>");
+                $(".placeul").html("<li><a href='ToDo.aspx'>待处理</a></li><li><a>安全问题表</a></li>");
                 $(".select3").uedSelect({
                     width: 80
                 });
+                var formid = GetQueryString('formId');
+                $("#formId").val(formid);
             $.ajax({
                 type: "POST",
-                url: "../Handler/Process.ashx?action=getdata&type=problem_sercurity&formid=1",
+                url: "../Handler/Process.ashx?action=getdata&type=problem_sercurity&formid=" + formid,
                 cache: false,
                 success: function (data) {
                     var d = JSON.parse(data);
@@ -34,36 +34,15 @@
                     $("#responsibleperson2").val(d[0].responsibleperson2);
                     $("#rebuildsolution").val(d[0].rebuildsolution);
                     $("#rebuilder").val(d[0].rebuilder);
-                    if (d[0].treatmentmeasures == "0") {
-                        $("#treatmentmeasures").val('正在进行');
-                        $("#treatmentmeasures").text('正在进行');
-                    }
-                    if (d[0].treatmentmeasures == "-1") {
-                        $("#treatmentmeasures").val('未完成');
-                        $("#treatmentmeasures").text('未完成');
-                    }
-                    if (d[0].treatmentmeasures == "1") {
-                        $("#treatmentmeasures").val('已完成');
-                        $("#treatmentmeasures").text('已完成');
-                    }
+                    $("#treatmentmeasures").val(d[0].treatmentmeasures);
                     $("#worktimecost_db").val(d[0].worktimecost_db);
                     $("#worktimecost_xb").val(d[0].worktimecost_xb);
                     $("#materialcost").val(d[0].materialcost);
                     $("#rechecker").val(d[0].rechecker); 
                     $("#levelno").val(d[0].levelno);
-                    if (d[0].levelno == "1") {
-                        $("#levelno").val('1');
-                        $("#levelno").text('1');
-                    }
-                    if (d[0].levelno == "2") {
-                        $("#levelno").val('2');
-                        $("#levelno").text('2');
-                    }
-                    if (d[0].levelno == "3") {
-                        $("#levelno").val('3');
-                        $("#levelno").text('3');
-                    }
                     $("#remark").val(d[0].remark);
+                    $("#treatmentmeasures").parent().find(".uew-select-text").text($("#treatmentmeasures").find(":selected").text());
+                    $("#levelno").parent().find(".uew-select-text").text($("#levelno").find(":selected").text());
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -71,7 +50,11 @@
                 }
             });
         });
-
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
         function jsonDateFormat(jsonDate) {
             try {
                 var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));
@@ -83,15 +66,17 @@
             }
         }
 
-        function doRemark() {
+        function doSummary() {
             var r = $("#summary").val();
             var t = $("#formtype").val();
             var fid = $("#formId").val();
+            var treatmentmeasures = $("#treatmentmeasures").val();
+            var levelno = $("#levelno").val();
             if (r.length > 0) {
                 $.ajax({
                     type: "POST",
                     url: "../Handler/Process.ashx",
-                    data: { action: 'doRemark', type: t, formid: fid, summary: r },
+                    data: { action: 'doSummary', type: t, formid: fid, summary: r, levelno: levelno, treatmentmeasures: treatmentmeasures },
                     cache: false,
                     success: function (data) {
                         var json = JSON.parse(data);
@@ -114,7 +99,7 @@
     <form class="formbody" id="sqform">
     <input type="hidden" id="formId" value="-1"/>
         <input type="hidden" id="formtype" value="problem_sercurity"/>
-        <input type="hidden" value="doRemark" name="action" />
+        <input type="hidden" value="doSummary" name="action" />
    <div id="usual1" class="usual">
         <ul class="forminfo">
             <li>
@@ -170,7 +155,7 @@
                     <label>
                         整改人员<b>*</b>
                     </label>
-                    <input type="text" name="rebuilder" placeholder="整改人员" class="dfinput" style="width: 208px;" />
+                    <input type="text" id="rebuilder" placeholder="整改人员" class="dfinput" style="width: 208px;" />
                     处理结果</div>
                 <div style="float: left; margin-left: 5px;">
                     <select name="treatmentmeasures" id="treatmentmeasures" class="select3">
@@ -200,14 +185,14 @@
                     <label>
                         复查人员<b>*</b>
                     </label>
-                    <input type="text" name="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" />
+                    <input type="text" id="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" />
                     安全等级
                 </div>
                 <div style="float: left; margin-left: 5px;">
                     <select name="levelno" id="levelno" class="select3">
-                        <option value="1">一级</option>
-                        <option value="2">二级</option>
                         <option value="3">三级</option>
+                        <option value="4">四级</option>
+                        <option value="5">五级</option>
                     </select>
                 </div>
             </li>
@@ -222,7 +207,7 @@
                 <textarea class="textinput2" id="summary" placeholder="总结" ></textarea>
             </li>
             <li>
-                <button type="button" class="btn" onclick="doRemark();">
+                <button type="button" class="btn" onclick="doSummary();">
                     确认保存
                 </button>
             </li>

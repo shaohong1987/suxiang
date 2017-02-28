@@ -7,10 +7,12 @@
     <script type="text/javascript">
         $(document)
             .ready(function() {
-                $(".placeul").html("<li><a>各类表单</a></li><li><a>质量问题表</a></li>");
+                $(".placeul").html("<li><a href='ToDo.aspx'>待处理</a></li><li><a>质量问题表</a></li>");
+                var formid = GetQueryString('formId');
+                $("#formId").val(formid);
             $.ajax({
                 type: "POST",
-                url: "../Handler/Process.ashx?action=getdata&type=problem_quality&formid=1",
+                url: "../Handler/Process.ashx?action=getdata&type=problem_quality&formid=" + formid,
                 cache: false,
                 success: function (data) {
                     var d = JSON.parse(data);
@@ -40,14 +42,14 @@
                     $("#materialcost").val(d[0].materialcost);
                     $("#rechecker").val(d[0].rechecker); 
                     $("#levelno").val(d[0].levelno);
-                    if (d[0].levelno == "1") {
-                        $("#levelno").val('一级');
-                    }
-                    if (d[0].levelno == "2") {
-                        $("#levelno").val('二级');
-                    }
                     if (d[0].levelno == "3") {
                         $("#levelno").val('三级');
+                    }
+                    if (d[0].levelno == "4") {
+                        $("#levelno").val('四级');
+                    }
+                    if (d[0].levelno == "5") {
+                        $("#levelno").val('五级');
                     }
                 },
                 error: function (data) {
@@ -56,7 +58,11 @@
                 }
             });
         });
-
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
         function jsonDateFormat(jsonDate) {
             try {
                 var date = new Date(parseInt(jsonDate.replace("/Date(", "").replace(")/", ""), 10));

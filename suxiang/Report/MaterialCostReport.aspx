@@ -73,13 +73,18 @@
                 height: "auto",
                 datatype: "json",
                 colModel: [
+                            { label: '具体位置', name: 'addr', width: '120' },
                             { label: '日期', name: 'curdate', width: '80' },
-                            { label: '班组', name: 'workteam' },
+                            { label: '班组', name: 'teamleader' },
                             { label: '材料名称', name: 'materialname' },
                             { label: '单位', name: 'unit', width: '70' },
-                            { label: '数量', name: 'number', width: '70' },
                             { label: '单价', name: 'price', width: '70' },
-                            { label: '小计', name: 'totalprice', width: '70' }
+                            { label: '数量', name: 'number', width: '70' },
+                            { label: '小计', name: 'totalprice', width: '70' },
+                            { label: '填表人', name: 'poster', width: '70' },
+                            { label: '确认人1', name: 'comfirmname', width: '70' },
+                            { label: '确认人2', name: 'recomfirmname', width: '70' },
+                            { label: '备注', name: 'remarkbyworker', width: '70' }
                         ],
                 viewrecords: true,
                 rownumbers: true,
@@ -91,7 +96,7 @@
                         $(".ui-jqgrid-sdiv").show();
                         var totalprice = jQuery(this).getCol('totalprice', false, 'sum');
                         $(this).footerData("set", {
-                            price: '合计',
+                            number: '合计',
                             totalprice: totalprice
                         });
                     } else {

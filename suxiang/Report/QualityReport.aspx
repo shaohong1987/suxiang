@@ -24,6 +24,12 @@
             height: auto !important;
             padding: 0px;
         }
+        .r{
+            background-color:red;
+            }
+        .y{
+            background-color:yellow;
+            }
     </style>
     <script type="text/javascript">
         var date = new Date;
@@ -70,42 +76,49 @@
                 height: "auto",
                 datatype: "json",
                 colModel: [
-			        { label: '栋号', name: 'buildingno', width: '40' },
-			        { label: '楼层/户型', name: 'levelno', width: '50' },
-			        { label: '具体位置', name: 'location', width: '80' },
-			        { label: '问题描述', name: 'problemdescription', width: '150' },
+                    { label: '质量等级', name: 'levelno', width: '80' },
+			        { label: '具体部位', name: 'addr', width: '120' },
 			        { label: '检查日期', name: 'checkdate', width: '80' },
-			        { label: '施工人/班组', name: 'worker', width: '60' },
-			        { label: '整改完成时间', name: 'finishdate', width: '80' },
+                    { label: '完成日期', name: 'finishdate', width: '80' },
+			        { label: '问题说明', name: 'problemdescription', width: '150' },
+			        { label: '原因分析', name: 'causation', width: '150' },
+			        { label: '班组/施工人', name: 'worker', width: '100' },
+			        { label: '管理责任人', name: 'manager', width: '100' },
+                    { label: '整改方案', name: 'rebuildsolution', width: '150' },
 			        { label: '整改人', name: 'rebuilder', width: '60' },
-			        { label: '责任人', name: 'responsibleperson', width: '60' },
-			        { label: '处理措施/结果', name: 'treatmentmeasures', width: '150' },
-			        { label: '整改消耗工时', name: 'worktimecost', width: '70' },
-			        { label: '整改消耗材料', name: 'materialcost', width: '70' },
+			        { label: '处理结果', name: 'treatmentmeasures', width: '80', formatter: customFmatter },
+			        { label: '花费工时', name: 'worktimecost', width: '120' },
+			        { label: '消耗材料', name: 'materialcost', width: '80' },
 			        { label: '复查人', name: 'rechecker', width: '60' }
 		        ],
                 viewrecords: true,
                 rownumbers: true,
-                footerrow: true,
                 gridComplete: function () {
-                    $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x": "hidden" });
-                    var rowNum = parseInt($(this).getGridParam('records'), 10);
-                    if (rowNum > 0) {
-                        $(".ui-jqgrid-sdiv").show();
-                        var worktimecost = jQuery(this).getCol('worktimecost', false, 'sum');
-                        var materialcost = jQuery(this).getCol('materialcost', false, 'sum');
-                        $(this).footerData("set", {
-                            name: "合计",
-                            treatmentmeasures: '合计',
-                            worktimecost: worktimecost,
-                            materialcost: materialcost
-                        });
-                    } else {
-                        $(".ui-jqgrid-sdiv").hide();
+                    var ids = $("#jqGrid").getDataIDs();
+                    for (var i = 0; i < ids.length; i++) {
+                        var rowData = $("#jqGrid").getRowData(ids[i]);
+                        if (rowData.levelno == '3级') { //如果天数等于0，则背景色置灰显示
+                            $('#' + ids[i]).find("td").addClass("r");
+                        } else {
+                            $('#' + ids[i]).find("td").addClass("y");
+                        }
                     }
                 }
             });
         }
+
+        function customFmatter(cellvalue) {
+            if (cellvalue == '-1') {
+                return '未完成';
+            }
+            if (cellvalue == '0') {
+                return '进行中';
+            }
+            if (cellvalue == '1') {
+                return '已完成';
+            }
+        };
+
         function selectMonth() {
             WdatePicker({ dateFmt: 'yyyy-MM', isShowToday: false, isShowClear: false });
         }

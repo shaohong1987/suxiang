@@ -8,10 +8,9 @@
     <script src="../Content/js/My97/WdatePicker.js" type="text/javascript"></script>
     <script src="../Content/js/jquery.validate.min.js" type="text/javascript"></script>
     <script type="text/javascript">
-        
         var arr = new Array();
         $(document).ready(function () {
-            $(".placeul").html("<li><a>各类表单</a></li><li><a>工具辅材成本表</a></li>");
+            $(".placeul").html("<li><a href='NewForm.aspx'>各类表单</a></li><li><a>工具辅材成本表</a></li>");
             $(".select1").uedSelect({
                 width: 345
             });

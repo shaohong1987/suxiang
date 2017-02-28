@@ -8,71 +8,7 @@
     <link rel="stylesheet" href="../Content/css/jquery.mobile-1.4.5.min.css">
     <link href="../Content/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="../Content/css/jquery.mobile.datepicker.css">
-    <script src="../Content/js/jquery.min.js"></script>
-    <script src="../Content/js/jquery.mobile-1.4.5.min.js"></script>
-    <script src="../Content/js/jquery.ui.datepicker.js"></script>
-    <script src="../Content/js/jquery.mobile.datepicker.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            var nowdays = new Date();
-            var year = nowdays.getFullYear();
-            var month = nowdays.getMonth();
-            if (month == 0) {
-                month = 12;
-                year = year - 1;
-            }
-            if (month < 10) {
-                month = "0" + month;
-            }
-            $("#fmonths").val(year + "-" + month + "-" + "01");
-            var myDate = new Date(year, month, 0);
-            $("#fmonthe").val(year + "-" + month + "-" + myDate.getDate());
-
-            $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
-                var json = eval(data);
-                if (json.State === true) {
-                    $.each(json.Data, function (i, item) {
-                        $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
-                    });
-                }
-            },
-                "json");
-        });
-
-        function doPost() {
-            var projectid = $("#projectid").val();
-            var startdate = $("#fmonths").val();
-            var enddate = $("#fmonthe").val();
-            if (projectid == '-1' || startdate.length == 0 || enddate.length == 0) {
-                alert('请补全搜索条件.');
-                return false;
-            }
-            $.post("../Handler/Process.ashx", { action: "GetSercurityProblems", pid: projectid, sdate: startdate, edate: enddate }, function (data) {
-                var json = eval(data);
-                $("table tbody").html('');
-                if (json.length == 0) {
-                    $("table tbody").html("<tr><td colspan='14'>暂无数据</td></tr>");
-                } else {
-                    var sum1 = 0;
-                    var sum2 = 0;
-                    var newRow;
-                    $.each(json, function (i, item) {
-                        if (i == 0) {
-                            $("#lid").html(item["projectname"]);
-                        }
-                        sum1 += parseFloat(item["worktimecost"]);
-                        sum2 += parseFloat(item["materialcost"]);
-                        newRow += "<tr><td>" + (i + 1) + "</td><td>" + item["buildingno"] + "</td><td>" + item["levelno"] + "</td><td>" + item["location"] + "</td><td>" + item["problemdescription"] + "</td><td>" + item["checkdate"] + "</td><td>" + item["worker"] + "</td><td>" + item["finishdate"] + "</td><td>" + item["rebuilder"] + "</td><td>" + item["responsibleperson"] + "</td><td>" + item["treatmentmeasures"] + "</td><td>" + item["worktimecost"] + "</td><td>" + item["materialcost"] + "</td><td>" + item["rechecker"] + "</td></tr>";
-                        $("table tbody tr:last").after(newRow);
-                    });
-                    newRow += "<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>合计：</td><td>" + sum1 + "</td><td>" + sum2 + "</td><td></td></tr>";
-                    $("table tbody").html(newRow);
-                }
-            },
-                "json");
-            return false;
-        }
-    </script>
+   
 </head>
 <body>
     <div data-role="page">
@@ -93,40 +29,43 @@
                             序号
                         </th>
                         <th>
-                            栋号
-                        </th>
-                        <th>
-                            楼层/户型
+                            问题等级
                         </th>
                         <th>
                             具体部位
                         </th>
                         <th>
-                            问题说明
-                        </th>
-                        <th>
                             检查日期
                         </th>
                         <th>
-                            施工人/班组
+                            完成时间
                         </th>
                         <th>
-                            整改完成时间
+                            问题说明
+                        </th>
+                        <th>
+                            原因分析
+                        </th>
+                        <th>
+                            班组/施工人
+                        </th>
+                        <th>
+                            管理责任人
+                        </th>
+                        <th>
+                            整改方案
                         </th>
                         <th>
                             整改人
                         </th>
                         <th>
-                            责任人
+                            处理结果
                         </th>
                         <th>
-                            处理措施/结果
+                            花费工时
                         </th>
-                        <th>
-                            整改消耗工时
-                        </th>
-                        <th>
-                            整改消耗材料
+                         <th>
+                            消耗材料
                         </th>
                         <th>
                             复查人
@@ -135,7 +74,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="14">
+                        <td colspan="15">
                             请点击右上角查询按钮进行数据检索。
                         </td>
                     </tr>
@@ -146,20 +85,102 @@
             data-theme="a">
             <div data-role="content">
                 <h3>
-                   安全问题查询</h3>
+                    质量问题查询</h3>
                 <form id="laborcostForm">
                 <div data-role="fieldcontain">
                     <select name="projectid" id="projectid" onchange="changepro(this.value)">
                         <option value='-1'>请选择项目</option>
                     </select>
-                    <input type="text" name='fmonths' id="fmonths" data-role="date" placeholder="开始日期" />
-                    <input type="text" name='fmonthe' id="fmonthe" data-role="date" placeholder="截止日期" />
-                    <button data-theme="b" data-rel="close" type="button" onclick='doPost()'>
+                    <input type="text" name='fmonths' id="fmonths" data-role="date" placeholder="月份" />
+                    <button data-theme="b" data-rel="close" type="button" onclick='doPost(-1)'>
                         确认</button>
+						<button data-theme="b" data-rel="close" type="button" onclick='doPost(1)'>
+                        上月</button>
                 </div>
                 </form>
             </div>
         </div>
+		 <script src="../Content/js/jquery.min.js"></script>
+    <script src="../Content/js/jquery.mobile-1.4.5.min.js"></script>
+    <script src="../Content/js/jquery.ui.datepicker.js"></script>
+    <script src="../Content/js/jquery.mobile.datepicker.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var nowdays = new Date();
+            var year = nowdays.getFullYear();
+            var month = nowdays.getMonth()+1;
+            if (month == 0) {
+                month = 12;
+                year = year - 1;
+            }
+            if (month < 10) {
+                month = "0" + month;
+            }
+            $("#fmonths").val(year + "-" + month);
+
+            $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
+                var json = eval(data);
+                if (json.State === true) {
+                    $.each(json.Data, function (i, item) {
+                        $("#projectid").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
+                    });
+                }
+            },
+                "json");
+				doPost(-1);
+        });
+
+        function doPost(i) {
+            var projectid = $("#projectid").val();
+            var startdate = $("#fmonths").val();
+			if (i =="1") {
+                var date = new Date();			
+                var ndate = new Date(date.setMonth(date.getMonth() - 1));
+                startdate = ndate.getFullYear() + "-" + (ndate.getMonth() + 1);
+				$("#fmonths").val(startdate);
+            }
+            $.post("../Handler/Process.ashx", { action: "GetSercurityProblems", ProjectId: projectid, month: startdate }, function (data) {
+                var json = eval(data);
+                $("table tbody").html('');
+                if (json.length == 0) {
+                    $("table tbody").html("<tr><td colspan='15'>暂无数据</td></tr>");
+                } else {
+                    var newRow;
+                    $.each(json, function (i, item) {
+                        if (i == 0) {
+                            $("#lid").html(item["projectname"]);
+                        }
+                        var style = "style='background-color:yellow;'";
+                        if (item["levelno"] == "3级") {
+                            style = "style='background-color:red;'";
+                        } 
+                        newRow += "<tr " + style + "><td>" + (i + 1) + "</td>" +
+                            "<td>" + item["levelno"] + "</td" +
+                            "><td>" + item["addr"] + "</td>" +
+                            "<td>" + item["checkdate"] + "</td>" +
+                            "<td>" + item["finishdate"] + "</td>" +
+                            "<td>" + item["problemdescription"] + "</td>" +
+                            "<td>" + item["causation"] + "</td>" +
+                            "<td>" + item["worker"] + "</td>" +
+                            "<td>" + item["manager"] + "</td>" +
+                            "<td>" + item["rebuildsolution"] + "</td>" +
+                            "<td>" + item["rebuilder"] + "</td>" +
+                            "<td>" + item["treatmentmeasures"] + "</td>" +
+                            "<td>" + item["worktimecost"] + "</td>" +
+                            "<td>" + item["materialcost"] + "</td>" +
+                             "<td>" + item["rechecker"] + "</td>" +
+                            "</tr>";
+                        $("table tbody tr:last").after(newRow);
+                    });
+                    $("table tbody").html(newRow);
+                }
+            },
+                "json");
+            return false;
+        }
+		
+		doPost(-1);
+    </script>
     </div>
 </body>
 </html>

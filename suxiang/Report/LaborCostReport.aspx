@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
+﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="LaborCostReport.aspx.cs" Inherits="suxiang.Report.LaborCostReport" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
@@ -61,26 +61,28 @@
         });
 
         function getdata() {
-            $("#jqGrid").jqGrid({
-                url: "../Handler/Process.ashx?action=GetLaborCosts",
-                postData: {
-                    ProjectId: $("#project").val(),
-                    month: $("#fmonth").val()
-                },
-                mtype: "GET",
-                styleUI: 'Bootstrap',
-                height: "auto",
-                datatype: "json",
-                colModel: [
-				    { label: '开始日期', name: 'startdate', width: '80' },
-				    { label: '结束日期', name: 'endate', width: '80' },
-				    { label: '栋号', name: 'buildingno', width: '50' },
-				    { label: '工种', name: 'content' },
-				    { label: '工作内容', name: 'workcontent' },
-				    { label: '单位', name: 'unit', width: '70' },
-				    { label: '工作量', name: 'worktime', width: '70' },
-				    { label: '单价', name: 'price', width: '70' },
-				    { label: '小计', name: 'totalprice', width: '70' }
+            $("#jqGrid")
+                .jqGrid({
+                    url: "../Handler/Process.ashx?action=GetLaborCosts",
+                    postData: {
+                        ProjectId: $("#project").val(),
+                        month: $("#fmonth").val()
+                    },
+                    mtype: "GET",
+                    styleUI: 'Bootstrap',
+                    height: "auto",
+                    datatype: "json",
+                    colModel: [
+                        { label: '具体位置', name: 'addr', width: '120' },
+                        { label: '开始日期', name: 'startdate', width: '80' },
+                        { label: '结束日期', name: 'endate', width: '80' },
+                        { label: '工种/班组', name: 'worker', width: '100' },
+                        { label: '施工范围', name: 'workcontent' },
+                        { label: '单位', name: 'unit', width: '70' },
+                        { label: '单价', name: 'price', width: '70' },
+                        { label: '工作量', name: 'worktime', width: '70' },
+                        { label: '小计', name: 'totalprice', width: '70' },
+                        { label: '备注', name: 'remarkbywork', width: '150' }
 			    ],
                 viewrecords: true,
                 rownumbers: true,
@@ -92,7 +94,7 @@
                         $(".ui-jqgrid-sdiv").show();
                         var totalprice = jQuery(this).getCol('totalprice', false, 'sum');
                         $(this).footerData("set", {
-                            price: '合计',
+                            worktime: '合计',
                             totalprice: totalprice
                         });
                     } else {

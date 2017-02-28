@@ -106,6 +106,34 @@
     <Compile Include="Form\Complete.aspx.designer.cs">
       <DependentUpon>Complete.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\LaborCostForm_View.aspx.cs">
+      <DependentUpon>LaborCostForm_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_View.aspx.designer.cs">
+      <DependentUpon>LaborCostForm_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_Update.aspx.cs">
+      <DependentUpon>LaborCostForm_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_Update.aspx.designer.cs">
+      <DependentUpon>LaborCostForm_Update.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_ReComfirm.aspx.cs">
+      <DependentUpon>LaborCostForm_ReComfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_ReComfirm.aspx.designer.cs">
+      <DependentUpon>LaborCostForm_ReComfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_Comfirm.aspx.cs">
+      <DependentUpon>LaborCostForm_Comfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\LaborCostForm_Comfirm.aspx.designer.cs">
+      <DependentUpon>LaborCostForm_Comfirm.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\LaborCostForm_Summary.aspx.cs">
       <DependentUpon>LaborCostForm_Summary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -126,6 +154,20 @@
     </Compile>
     <Compile Include="Form\LaborCostForm.aspx.designer.cs">
       <DependentUpon>LaborCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ManageCostForm_View.aspx.cs">
+      <DependentUpon>ManageCostForm_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ManageCostForm_View.aspx.designer.cs">
+      <DependentUpon>ManageCostForm_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\ManageCostForm_Update.aspx.cs">
+      <DependentUpon>ManageCostForm_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\ManageCostForm_Update.aspx.designer.cs">
+      <DependentUpon>ManageCostForm_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\ManageCostForm_Summary.aspx.cs">
       <DependentUpon>ManageCostForm_Summary.aspx</DependentUpon>
@@ -148,6 +190,34 @@
     <Compile Include="Form\ManageCostForm.aspx.designer.cs">
       <DependentUpon>ManageCostForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_View.aspx.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_View.aspx.designer.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_Comfirm.aspx.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_Comfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_Comfirm.aspx.designer.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_Comfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_ReComfirm.aspx.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_ReComfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_ReComfirm.aspx.designer.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_ReComfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_Update.aspx.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialAuxiliaryCostForm_Update.aspx.designer.cs">
+      <DependentUpon>MaterialAuxiliaryCostForm_Update.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\MaterialAuxiliaryCostForm_Summary.aspx.cs">
       <DependentUpon>MaterialAuxiliaryCostForm_Summary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -168,6 +238,34 @@
     </Compile>
     <Compile Include="Form\MaterialAuxiliaryCostForm.aspx.designer.cs">
       <DependentUpon>MaterialAuxiliaryCostForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_View.aspx.cs">
+      <DependentUpon>MaterialCostForm_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_View.aspx.designer.cs">
+      <DependentUpon>MaterialCostForm_View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_ReComfirm.aspx.cs">
+      <DependentUpon>MaterialCostForm_ReComfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_ReComfirm.aspx.designer.cs">
+      <DependentUpon>MaterialCostForm_ReComfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_Comfirm.aspx.cs">
+      <DependentUpon>MaterialCostForm_Comfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_Comfirm.aspx.designer.cs">
+      <DependentUpon>MaterialCostForm_Comfirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_Update.aspx.cs">
+      <DependentUpon>MaterialCostForm_Update.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\MaterialCostForm_Update.aspx.designer.cs">
+      <DependentUpon>MaterialCostForm_Update.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\MaterialCostForm_Summary.aspx.cs">
       <DependentUpon>MaterialCostForm_Summary.aspx</DependentUpon>
@@ -197,6 +295,13 @@
     <Compile Include="Form\NewForm.aspx.designer.cs">
       <DependentUpon>NewForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\QualityQuestionForm_View.aspx.cs">
+      <DependentUpon>QualityQuestionForm_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\QualityQuestionForm_View.aspx.designer.cs">
+      <DependentUpon>QualityQuestionForm_View.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\QualityQuestionForm_Summary.aspx.cs">
       <DependentUpon>QualityQuestionForm_Summary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -217,6 +322,13 @@
     </Compile>
     <Compile Include="Form\QualityQuestionForm.aspx.designer.cs">
       <DependentUpon>QualityQuestionForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm_View.aspx.cs">
+      <DependentUpon>SecurityQuestionForm_View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm_View.aspx.designer.cs">
+      <DependentUpon>SecurityQuestionForm_View.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\SecurityQuestionForm_Summary.aspx.cs">
       <DependentUpon>SecurityQuestionForm_Summary.aspx</DependentUpon>
@@ -285,9 +397,11 @@
     <Compile Include="Model\ManageCostModel.cs" />
     <Compile Include="Model\MaterialCostModel.cs" />
     <Compile Include="Model\MsgModel.cs" />
+    <Compile Include="Model\NextStep.cs" />
     <Compile Include="Model\ProjectInfoModel.cs" />
     <Compile Include="Model\ProjectModel.cs" />
     <Compile Include="Model\QuestionModel.cs" />
+    <Compile Include="Model\TempEntity.cs" />
     <Compile Include="Model\UsersModel.cs" />
     <Compile Include="Personal\PersonalCenter.aspx.cs">
       <DependentUpon>PersonalCenter.aspx</DependentUpon>
@@ -810,22 +924,38 @@
     <Content Include="Content\js\Validator\style\validatorAuto.css" />
     <Content Include="Content\js\Validator\style\validatorTidyMode.css" />
     <Content Include="Form\Complete.aspx" />
+    <Content Include="Form\LaborCostForm_View.aspx" />
+    <Content Include="Form\LaborCostForm_Update.aspx" />
+    <Content Include="Form\LaborCostForm_ReComfirm.aspx" />
+    <Content Include="Form\LaborCostForm_Comfirm.aspx" />
     <Content Include="Form\LaborCostForm_Summary.aspx" />
     <Content Include="Form\LaborCostForm_Remark.aspx" />
     <Content Include="Form\LaborCostForm.aspx" />
+    <Content Include="Form\ManageCostForm_View.aspx" />
+    <Content Include="Form\ManageCostForm_Update.aspx" />
     <Content Include="Form\ManageCostForm_Summary.aspx" />
     <Content Include="Form\ManageCostForm_Remark.aspx" />
     <Content Include="Form\ManageCostForm.aspx" />
+    <Content Include="Form\MaterialAuxiliaryCostForm_View.aspx" />
+    <Content Include="Form\MaterialAuxiliaryCostForm_Comfirm.aspx" />
+    <Content Include="Form\MaterialAuxiliaryCostForm_ReComfirm.aspx" />
+    <Content Include="Form\MaterialAuxiliaryCostForm_Update.aspx" />
     <Content Include="Form\MaterialAuxiliaryCostForm_Summary.aspx" />
     <Content Include="Form\MaterialAuxiliaryCostForm_Remark.aspx" />
     <Content Include="Form\MaterialAuxiliaryCostForm.aspx" />
+    <Content Include="Form\MaterialCostForm_View.aspx" />
+    <Content Include="Form\MaterialCostForm_ReComfirm.aspx" />
+    <Content Include="Form\MaterialCostForm_Comfirm.aspx" />
+    <Content Include="Form\MaterialCostForm_Update.aspx" />
     <Content Include="Form\MaterialCostForm_Summary.aspx" />
     <Content Include="Form\MaterialCostForm_Remark.aspx" />
     <Content Include="Form\MaterialCostForm.aspx" />
     <Content Include="Form\NewForm.aspx" />
+    <Content Include="Form\QualityQuestionForm_View.aspx" />
     <Content Include="Form\QualityQuestionForm_Summary.aspx" />
     <Content Include="Form\QualityQuestionForm_Remark.aspx" />
     <Content Include="Form\QualityQuestionForm.aspx" />
+    <Content Include="Form\SecurityQuestionForm_View.aspx" />
     <Content Include="Form\SecurityQuestionForm_Summary.aspx" />
     <Content Include="Form\SecurityQuestionForm_Remark.aspx" />
     <Content Include="Form\SecurityQuestionForm.aspx" />
@@ -841,7 +971,6 @@
     <Content Include="Report\MaterialCostReport.aspx" />
     <Content Include="Report\QualityReport.aspx" />
     <Content Include="Report\SecurityReport.aspx" />
-    <Content Include="suxiang.sql" />
     <Content Include="Top.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -864,6 +993,7 @@
     <Content Include="Handler\Auth.ashx" />
     <Content Include="Site.Master" />
     <Content Include="Handler\Process.ashx" />
+    <None Include="Properties\PublishProfiles\suxiang_pc.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\css\images\" />
