@@ -63,6 +63,29 @@
                             .trigger("reloadGrid");
             });
 
+            $("#BtnExport").on("click",
+                function () {
+                    window.location
+                        .href = "../Handler/Process.ashx?action=ExportProjects&projectId="+ $("#project").val()+"&month="+$("#fmonth").val()+"&type=problem_sercurity";
+                });
+
+            $("#BtnClear").on("click",
+                function() {
+                    $.post("../Handler/Process.ashx",
+                        {
+                            action: "ClearProjects",
+                            projectId: $("#project").val(),
+                            month: $("#fmonth").val(),
+                            type: "problem_sercurity"
+                        },
+                        function(data) {
+                            var json = eval(data);
+                            if (json.State === true) {
+
+                            }
+                        },
+                        "json");
+                });
 
             $(".placeul").html("<li><a>报表中心</a></li><li><a>安全问题报表</a></li>");
         });
@@ -78,7 +101,7 @@
                 height: "auto",
                 datatype: "json",
                 colModel: [
-			        { label: '质量等级', name: 'levelno', width: '80' },
+			        { label: '安全等级', name: 'levelno', width: '80' },
 			        { label: '具体部位', name: 'addr', width: '120' },
 			        { label: '检查日期', name: 'checkdate', width: '80' },
                     { label: '完成日期', name: 'finishdate', width: '80' },
@@ -140,6 +163,10 @@
         </div>
         <button id="BtnSearch" type="button" class="btn btn-default">
             查询</button>
+        <button id="BtnExport" type="button" class="btn btn-default">
+            导出</button>
+        <button id="BtnClear" type="button" class="btn btn-default">
+            清理</button>
     </div>
     <div style="margin-top: 15px;">
         <table id="jqGrid">

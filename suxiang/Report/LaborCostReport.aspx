@@ -55,7 +55,29 @@
 			    }).trigger("reloadGrid");
             });
 
+            $("#BtnExport").on("click",
+    function () {
+        window.location
+            .href = "../Handler/Process.ashx?action=ExportProjects&projectId=" + $("#project").val() + "&month=" + $("#fmonth").val() + "&type=cost_labor";
+    });
 
+            $("#BtnClear").on("click",
+                function () {
+                    $.post("../Handler/Process.ashx",
+                        {
+                            action: "ClearProjects",
+                            projectId: $("#project").val(),
+                            month: $("#fmonth").val(),
+                            type: "cost_labor"
+                        },
+                        function (data) {
+                            var json = eval(data);
+                            if (json.State === true) {
+
+                            }
+                        },
+                        "json");
+                });
 
             $(".placeul").html("<li><a>报表中心</a></li><li><a>用工成本报表</a></li>");
         });
@@ -124,6 +146,10 @@
         </div>
         <button id="BtnSearch" type="button" class="btn btn-default">
             查询</button>
+                 <button id="BtnExport" type="button" class="btn btn-default">
+            导出</button>
+        <button id="BtnClear" type="button" class="btn btn-default">
+            清理</button>
     </div>
     <hr />
     <div>

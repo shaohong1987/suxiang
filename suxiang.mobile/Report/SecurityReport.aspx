@@ -178,8 +178,6 @@
                 "json");
             return false;
         }
-		
-		doPost(-1);
     </script>
     </div>
 </body>

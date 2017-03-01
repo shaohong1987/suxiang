@@ -177,7 +177,7 @@
                     </select>
                     <label for="worker">施工人员：</label>
                     <input type="text" name='worker' id="worker" placeholder="施工人员" />
-                    <label for="responsibleperson1">安全员：</label>
+                    <label for="responsibleperson1">质量员：</label>
                     <input type="text" name='responsibleperson1' id="responsibleperson1" placeholder="安全员" />
                     <label for="responsibleperson2">责任人员：</label>
                    <input type="text" name='responsibleperson2' id="responsibleperson2" placeholder="栋号长/生产经理" />  

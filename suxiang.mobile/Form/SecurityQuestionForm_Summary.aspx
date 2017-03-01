@@ -117,9 +117,9 @@
                     <label for="finishdate">整改完成时间：</label> 
                     <input type="text" name='finishdate' id="finishdate" readonly="readonly"/>
                     <label for="problemdescription">问题说明：</label>
-                    <textarea cols="40" rows="8" name="problemdescription" id="problemdescription" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" name="problemdescription" id="problemdescription" readonly="readonly"></textarea>
                     <label for="causation">原因分析：</label>
-                    <textarea cols="40" rows="8" name="causation" id="causation" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" name="causation" id="causation" readonly="readonly"></textarea>
                     <label for="teamleader">班组：</label>
                     <input type="text" name='teamleader' id="teamleader" readonly="readonly"/>
                     <label for="worker">施工人员：</label>
@@ -129,7 +129,7 @@
                     <label for="responsibleperson2">责任人员：</label>
                     <input type="text" name='responsibleperson2' id="responsibleperson2" readonly="readonly"/>  
                     <label for="rebuildsolution">整改方案：</label>
-                    <textarea cols="40" rows="8" id="rebuildsolution" name="rebuildsolution" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="rebuildsolution" name="rebuildsolution" readonly="readonly"></textarea>
                     <label for="rebuilder">整改人员：</label>
                     <input type="text" name='rebuilder' id="rebuilder" readonly="readonly"/>
                     <label for="treatmentmeasures">处理结果：</label>
@@ -152,11 +152,11 @@
                         <option value="4">四级</option>
                         <option value="5">五级</option>
                     </select>
-                    <img  id="pic"/>
+                    <img  id="pic" width="98%"/>
                     <label for="remark">备注：</label>
-                    <textarea cols="40" rows="8" id="remark" name="remark" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remark" name="remark" readonly="readonly"></textarea>
                     <label for="remark">总结：</label>
-                    <textarea cols="40" rows="8" id="summary" name="summary" ></textarea>
+                    <textarea cols="40" rows="18" id="summary" name="summary" ></textarea>
                     <h3 id="notification"></h3>
                     <button data-theme="b" type="button" onclick="doSummary();">确认提交</button> 
                 </div>

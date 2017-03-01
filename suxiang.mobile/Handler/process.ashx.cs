@@ -136,8 +136,8 @@ namespace suxiang.mobile.Handler
                         {
                             #region 总经理和财务的处理
                             var sql =
-                                string.Format(
-                                    " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CASE WHEN currentUser=" +
+                                string.Format( 
+                                    "select * from ( SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CASE WHEN currentUser=" +
                                     um.Id +
                                     " THEN CONCAT(currentPage,id) ELSE CONCAT('LaborCostForm_View.aspx?formId=',id) END AS url,status FROM cost_labor where  state>0 "
                                     +
@@ -159,7 +159,7 @@ namespace suxiang.mobile.Handler
                                     +
                                     " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CASE WHEN currentUser=" +
                                     um.Id +
-                                    " THEN CONCAT(currentPage,id) ELSE CONCAT('SecurityQuestionForm_View.aspx?formId=',id) END AS url,status FROM problem_sercurity where  state>0 ");
+                                    " THEN CONCAT(currentPage,id) ELSE CONCAT('SecurityQuestionForm_View.aspx?formId=',id) END AS url,status FROM problem_sercurity where  state>0 ) a order by posttime  ");
                             #endregion
                             #region 除总经理和财务之外的处理
                             //if (um.Group > 10&&um.Id!=11) //直接取所有表单，总经理和财务
@@ -244,7 +244,8 @@ namespace suxiang.mobile.Handler
                                         "  and projectid=" + projectid + " "
                                         +
                                         " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'管理成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('ManageCostForm_View.aspx?formId=',id) as url FROM cost_management where (postid =" +
-                                        um.Id + " OR summaryid=" + um.Id + " OR remarkid=" + um.Id + ") AND currentUser<>" +
+                                        um.Id + " OR summaryid=" + um.Id + " OR remarkid=" + um.Id +
+                                        ") AND currentUser<>" +
                                         um.Id + "  and projectid=" + projectid + " "
                                         +
                                         " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号材料成本表' as dtype,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d %H:%i:%s') AS posttime, CONCAT('MaterialCostForm_View.aspx?formId=',id) as url FROM cost_material where (postid =" +
@@ -258,18 +259,21 @@ namespace suxiang.mobile.Handler
                                         "  and projectid=" + projectid + " "
                                         +
                                         " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'质量问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('QualityQuestionForm_View.aspx?formId=',id) as url FROM problem_quality  where (postid =" +
-                                        um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" +
+                                        um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
+                                        ") AND currentUser<>" +
                                         um.Id + "  and projectid=" + projectid + " "
                                         +
                                         " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('SecurityQuestionForm_View.aspx?formId=',id) as url FROM problem_sercurity where (postid =" +
-                                        um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" +
+                                        um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
+                                        ") AND currentUser<>" +
                                         um.Id + "  and projectid=" + projectid + " ";
 
                                     if (!string.IsNullOrEmpty(month))
                                     {
                                         sql =
                                             " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('LaborCostForm_View.aspx?formId=',id) as url FROM cost_labor where (postid=" +
-                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id + " OR remarkid=" +
+                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id +
+                                            " OR remarkid=" +
                                             um.Id + " OR summaryid=" + um.Id + ") AND currentUser <> " + um.Id +
                                             "  and projectid=" + projectid + " and posttime>'" + month + "-01' "
                                             +
@@ -279,12 +283,14 @@ namespace suxiang.mobile.Handler
                                             um.Id + "  and projectid=" + projectid + " and posttime>'" + month + "-01' "
                                             +
                                             " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号材料成本表' as dtype,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d %H:%i:%s') AS posttime, CONCAT('MaterialCostForm_View.aspx?formId=',id) as url FROM cost_material where (postid =" +
-                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id + " OR remarkid=" +
+                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id +
+                                            " OR remarkid=" +
                                             um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" + um.Id +
                                             "  and projectid=" + projectid + " and posttime>'" + month + "-01' "
                                             +
                                             " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号工具辅材成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('MaterialAuxiliaryCostForm_View.aspx?formId=',id) as url FROM cost_materialauxiliary where (postid =" +
-                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id + " OR remarkid=" +
+                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id +
+                                            " OR remarkid=" +
                                             um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" + um.Id +
                                             "  and projectid=" + projectid + " and posttime>'" + month + "-01' "
                                             +
@@ -297,6 +303,102 @@ namespace suxiang.mobile.Handler
                                             um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
                                             ") AND currentUser<>" +
                                             um.Id + "  and projectid=" + projectid + " and posttime>'" + month + "-01' ";
+                                    }
+                                }
+                                var result = new SxDal().GetData(sql);
+                                json = WebHelper.GetObjJson(result);
+                            }
+                            else
+                            {
+                                var sql =
+       " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('LaborCostForm_View.aspx?formId=',id) as url FROM cost_labor where  summaryid is not null  "
+       +
+       " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'管理成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('ManageCostForm_View.aspx?formId=',id) as url FROM cost_management where  summaryid is not null "
+       +
+       " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号材料成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime, CONCAT('MaterialCostForm_View.aspx?formId=',id) as url FROM cost_material where  summaryid is not null   "
+       +
+       " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号工具辅材成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('MaterialAuxiliaryCostForm_View.aspx?formId=',id) as url FROM cost_materialauxiliary where  summaryid is not null   "
+       +
+       " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'质量问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('QualityQuestionForm_View.aspx?formId=',id) as url FROM problem_quality  where  summaryid is not null   "
+       +
+       " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('SecurityQuestionForm_View.aspx?formId=',id) as url FROM problem_sercurity where  summaryid is not null  ";
+
+                                if (!string.IsNullOrEmpty(month))
+                                {
+                                    sql =
+                                        " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('LaborCostForm_View.aspx?formId=',id) as url FROM cost_labor where  summaryid is not null and posttime>'" + month + "-01' "
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'管理成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('ManageCostForm_View.aspx?formId=',id) as url FROM cost_management where  summaryid is not null   and posttime>'" + month + "-01' "
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号材料成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime, CONCAT('MaterialCostForm_View.aspx?formId=',id) as url FROM cost_material where  summaryid is not null  and posttime>'" + month + "-01' "
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号工具辅材成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('MaterialAuxiliaryCostForm_View.aspx?formId=',id) as url FROM cost_materialauxiliary where  summaryid is not null  and posttime>'" + month + "-01' "
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'质量问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('QualityQuestionForm_View.aspx?formId=',id) as url FROM problem_quality  where  summaryid is not null   and posttime>'" + month + "-01' "
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('SecurityQuestionForm_View.aspx?formId=',id) as url FROM problem_sercurity where  summaryid is not null  and posttime>'" + month + "-01' ";
+                                }
+                                if (um.Group > 10) //直接取所有表单，总经理和财务
+                                {
+                                    sql =
+                                        " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('LaborCostForm_View.aspx?formId=',id) as url FROM cost_labor where (postid=" +
+                                        um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id + " OR remarkid=" +
+                                        um.Id + " OR summaryid=" + um.Id + ") AND currentUser <> " + um.Id  
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'管理成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('ManageCostForm_View.aspx?formId=',id) as url FROM cost_management where (postid =" +
+                                        um.Id + " OR summaryid=" + um.Id + " OR remarkid=" + um.Id +
+                                        ") AND currentUser<>" +
+                                        um.Id +  
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号材料成本表' as dtype,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d %H:%i:%s') AS posttime, CONCAT('MaterialCostForm_View.aspx?formId=',id) as url FROM cost_material where (postid =" +
+                                        um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id + " OR remarkid=" +
+                                        um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" + um.Id 
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号工具辅材成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('MaterialAuxiliaryCostForm_View.aspx?formId=',id) as url FROM cost_materialauxiliary where (postid =" +
+                                        um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id + " OR remarkid=" +
+                                        um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" + um.Id  
+                                        +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'质量问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('QualityQuestionForm_View.aspx?formId=',id) as url FROM problem_quality  where (postid =" +
+                                        um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
+                                        ") AND currentUser<>" +um.Id  +
+                                        " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('SecurityQuestionForm_View.aspx?formId=',id) as url FROM problem_sercurity where (postid =" +
+                                        um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
+                                        ") AND currentUser<>" +um.Id ;
+
+                                    if (!string.IsNullOrEmpty(month))
+                                    {
+                                        sql =
+                                            " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('LaborCostForm_View.aspx?formId=',id) as url FROM cost_labor where (postid=" +
+                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id +
+                                            " OR remarkid=" +
+                                            um.Id + " OR summaryid=" + um.Id + ") AND currentUser <> " + um.Id +
+                                            "  and posttime>'" + month + "-01' "
+                                            +
+                                            " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'管理成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('ManageCostForm_View.aspx?formId=',id) as url FROM cost_management where (postid =" +
+                                            um.Id + " OR summaryid=" + um.Id + " OR remarkid=" + um.Id +
+                                            ") AND currentUser<>" +
+                                            um.Id + "   and posttime>'" + month + "-01' "
+                                            +
+                                            " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号材料成本表' as dtype,poster,DATE_FORMAT(`posttime`,'%Y-%m-%d %H:%i:%s') AS posttime, CONCAT('MaterialCostForm_View.aspx?formId=',id) as url FROM cost_material where (postid =" +
+                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id +
+                                            " OR remarkid=" +
+                                            um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" + um.Id +
+                                            "   and posttime>'" + month + "-01' "
+                                            +
+                                            " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'栋号工具辅材成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('MaterialAuxiliaryCostForm_View.aspx?formId=',id) as url FROM cost_materialauxiliary where (postid =" +
+                                            um.Id + " OR comfirmid=" + um.Id + " OR recomfirmid=" + um.Id +
+                                            " OR remarkid=" +
+                                            um.Id + " OR summaryid=" + um.Id + ") AND currentUser<>" + um.Id +
+                                            "   and posttime>'" + month + "-01' "
+                                            +
+                                            " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'质量问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('QualityQuestionForm_View.aspx?formId=',id) as url FROM problem_quality  where (postid =" +
+                                            um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
+                                            ") AND currentUser<>" +
+                                            um.Id + "   and posttime>'" + month + "-01' "
+                                            +
+                                            " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CONCAT('SecurityQuestionForm_View.aspx?formId=',id) as url FROM problem_sercurity where (postid =" +
+                                            um.Id + " OR remarkid =" + um.Id + " OR summaryid=" + um.Id +
+                                            ") AND currentUser<>" +
+                                            um.Id + "   and posttime>'" + month + "-01' ";
                                     }
                                 }
                                 var result = new SxDal().GetData(sql);
