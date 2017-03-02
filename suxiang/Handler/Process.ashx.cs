@@ -76,7 +76,8 @@ namespace suxiang.Handler
                             break;
                         case "problem_sercurity":
                             sql =
-                                "SELECT CONCAT(levelno,'级') as '安全问题等级',CONCAT(projectname,'|',buildingno,'栋|',location) as '具体位置',DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS  '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS '完成日期',problemdescription as  '问题说明',causation as '原因分析',concat(teamleader,'/',worker)  as '班组/施工人',concat(responsibleperson1,'/',responsibleperson1) as '管理责任人',rebuildsolution as '整改方案',rebuilder as '整改人',CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end  '处理结果',CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as '花费工时',materialcost as '消耗材料',rechecker as '复查人'  FROM	problem_sercurity A WHERE   A.projectid=" +
+                                "SELECT CONCAT(levelno,'级') as '安全问题等级',CONCAT(projectname,'|',buildingno,'栋|',location) as '具体位置',DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS  '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS '完成日期',problemdescription as  '问题说明',causation as '原因分析',concat(teamleader,'/',worker)  as '班组/施工人',concat(responsibleperson1,'/',responsibleperson1) as '管" +
+                                "理责任人',rebuildsolution as '整改方案',rebuilder as '整改人',CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end  '处理结果',CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as '花费工时',materialcost as '消耗材料',rechecker as '复查人'  FROM	problem_sercurity A WHERE   A.projectid=" +
                                 projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "安全问题表";
