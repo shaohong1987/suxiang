@@ -241,11 +241,11 @@
                     <select name="constructionleader" id="constructionleader">
                         <option value="-1">请选择施工员</option>
                     </select>
-                    <select name="qualityleader" id="qualityleader">
-                        <option value="-1">请选择质量员</option>
-                    </select>
                     <select name="safetyleader" id="safetyleader">
                         <option value="-1">请选择安全员</option>
+                    </select>
+                    <select name="qualityleader" id="qualityleader">
+                        <option value="-1">请选择质量员</option>
                     </select>
                     <select name="storekeeper" id="storekeeper">
                         <option value="-1">请选择保管员</option>

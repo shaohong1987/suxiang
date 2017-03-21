@@ -73,6 +73,13 @@ namespace suxiang.Handler
                         json = WebHelper.GetObjJson(result);
                         break;
                     }
+                case "deluser":
+                {
+                    var un = WebHelper.GetActionStr(context, "uname");
+                    var result=new SxDal().DelUser(un);
+                    json = WebHelper.GetObjJson(result);
+                    break;
+                }
                 case "checkusername":
                     {
                         var userName = WebHelper.GetActionStr(context, "uname");

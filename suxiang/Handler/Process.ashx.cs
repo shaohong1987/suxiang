@@ -41,43 +41,42 @@ namespace suxiang.Handler
                     {
                         case "cost_labor":
                             sql =
-                                "SELECT	projectname as '项目名称',concat(projectname,'|',buildingno,'栋') as '具体位置',DATE_FORMAT(`startdate`, '%Y-%m-%d') AS '开始日期',DATE_FORMAT(`endate`, '%Y-%m-%d') AS '结束日期',concat(worktype,'/',teamleader) as '工种/班组',workcontent as '施工范围',unit as '单位',price as '单价',worktime as '工作量',totalprice as '小计',remarkbywork as '备注' FROM cost_labor A WHERE A.projectid=" +
+                                "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`startdate`, '%Y-%m-%d') AS '开始日期',DATE_FORMAT(`endate`, '%Y-%m-%d') AS '结束日期',worktype as '工种',teamleader as '班组',workcontent as '施工范围',unit as '单位',price as '单价',worktime as '工作量',totalprice as '小计',remarkbywork as '备注' FROM cost_labor A WHERE A.projectid=" +
                                 projectid + " and a.startdate>='" + month + "-01" + "'  and a.startdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "栋号用工成本表";
                             break;
                         case "cost_management":
                             sql =
-                                "SELECT	projectname as '项目名称',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate as '日期',type as '类型',content as '内容',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_management A WHERE  A.projectid=" +
+                                "SELECT	projectname as '项目',DATE_FORMAT(`curdate`, '%Y-%m-%d') as '日期',type as '类型',content as '内容',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_management A WHERE  A.projectid=" +
                                 projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "管理成本表";
                             break;
                         case "cost_material":
                             sql =
-                                "SELECT concat(projectname,'|',buildingno,'栋') as '具体位置',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number  as '数量',price as '单价',totalprice as '小计',remark as '备注' FROM	cost_material A WHERE A.projectid=" +
+                                "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number  as '数量',price as '单价',totalprice as '小计',remark as '备注' FROM	cost_material A WHERE A.projectid=" +
                                 projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "栋号材料成本表";
                             break;
                         case "cost_materialauxiliary":
                             sql =
-                                "SELECT concat(projectname,'|',buildingno,'栋') as  '具体位置',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_materialauxiliary A WHERE A.projectid=" +
+                                "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_materialauxiliary A WHERE A.projectid=" +
                                 projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "栋号辅材成本表";
                             break;
                         case "problem_quality":
                             sql =
-                                "SELECT CONCAT(levelno,'级') as '质量问题等级',CONCAT(projectname,'|',buildingno,'栋|',location) as '具体位置',DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS '完成日期',problemdescription as '问题说明',causation as '原因分析',concat(teamleader,'/',worker) as '班组/施工人',concat(responsibleperson1,'/',responsibleperson1) as '管理责任人',rebuildsolution as '整改方案',rebuilder as '整改人',CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end '处理结果',CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as '花费工时',materialcost as '消耗材料',rechecker as '复查人' FROM	problem_quality A WHERE  A.projectid=" +
+                                "SELECT levelno as '质量问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '质量员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改人员',CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end  '处理结果',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',rechecker as '复查人员',remark as '备注',summary as '总结' FROM	problem_quality A WHERE  A.projectid=" +
                                 projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "质量问题表";
                             break;
                         case "problem_sercurity":
                             sql =
-                                "SELECT CONCAT(levelno,'级') as '安全问题等级',CONCAT(projectname,'|',buildingno,'栋|',location) as '具体位置',DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS  '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS '完成日期',problemdescription as  '问题说明',causation as '原因分析',concat(teamleader,'/',worker)  as '班组/施工人',concat(responsibleperson1,'/',responsibleperson1) as '管" +
-                                "理责任人',rebuildsolution as '整改方案',rebuilder as '整改人',CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end  '处理结果',CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as '花费工时',materialcost as '消耗材料',rechecker as '复查人'  FROM	problem_sercurity A WHERE   A.projectid=" +
+                                "SELECT levelno as '安全问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '安全员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改人员',CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end  '处理结果',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',rechecker as '复查人员',remark as '备注',summary as '总结' FROM	problem_sercurity A WHERE   A.projectid=" +
                                 projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                 (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             tableName = "安全问题表";
@@ -705,7 +704,7 @@ namespace suxiang.Handler
                                 (current, item) =>
                                     current +
                                     ("insert into projectinfo (projectid,projectname,buildingid,buildingleaderid,buildingleader,state)values(" +
-                                     id + ",'" + projectname + "'," + item[0] + "," + item[1] + ",'" + item[2] + "',1);"));
+                                     id + ",'" + projectname + "','" + item[0] + "'," + item[1] + ",'" + item[2] + "',1);"));
                             msg = new SxDal().AddData(sql);
                         }
                         else
@@ -736,6 +735,14 @@ namespace suxiang.Handler
                     var state = WebHelper.GetActionStr(context, "state");
                     var sql = "update projects set state=" + state + " where id=" + id + ";";
                     var msg = new SxDal().UpdateProjectState(sql);
+                    json = WebHelper.GetObjJson(msg);
+                    break;
+                }
+                case "delProject":
+                {
+                    var id = WebHelper.GetActionInt(context, "id");
+                    var sql = "delete from projects  where id=" + id + ";";
+                    var msg = new SxDal().DelProject(sql);
                     json = WebHelper.GetObjJson(msg);
                     break;
                 }

@@ -265,7 +265,7 @@ namespace suxiang.Dal
                         if (DBNull.Value != row["projectname"])
                             project.Projectname = Convert.ToString(row["projectname"]);
                         if (DBNull.Value != row["Buildingid"])
-                            project.Buildingid = Convert.ToInt32(row["Buildingid"]);
+                            project.Buildingid = Convert.ToString(row["Buildingid"]);
                         if (DBNull.Value != row["BuildingLeader"])
                             project.BuildingLeader = Convert.ToString(row["BuildingLeader"]);
                         if (DBNull.Value != row["BuildingLeaderId"])
@@ -350,7 +350,7 @@ namespace suxiang.Dal
                         if (DBNull.Value != row["projectid"])
                             project.Projectid = Convert.ToInt32(row["projectid"]);
                         if (DBNull.Value != row["buildingid"])
-                            project.Buildingid = Convert.ToInt32(row["buildingid"]);
+                            project.Buildingid = Convert.ToString(row["buildingid"]);
                         projects.Add(project);
                     }
                     msg.State = true;

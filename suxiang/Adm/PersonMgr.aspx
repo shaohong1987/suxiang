@@ -182,6 +182,35 @@
             }
         }
 
+        function doDel() {
+            type = "updateuser";
+            var rowid = $("#grid").getGridParam("selrow");
+            if (rowid) {
+                var rowData = $("#grid").getRowData(rowid);
+                var un = rowData["username"];
+                $.ajax({
+                    type: "POST",
+                    url: "../Handler/Auth.ashx?action=deluser",
+                    cache: false,
+                    data: { uname: un },
+                    success: function (data) {
+                        var json = JSON.parse(data);
+                        if (json.State != false) {
+                            alert("删除成功");
+                            $("#BtnSearch").click();
+                        }
+                    },
+                    error: function (data) {
+                        var json = JSON.parse(data);
+                        alert(json.Msg);
+                        return false;
+                    }
+                });
+            } else {
+                alert("请先选中一个用户!");
+            }
+        }
+
         function closeWin() {
             $(".tip").fadeOut(100);
         }
@@ -199,6 +228,7 @@
         <ul class="toolbar1">
             <li class="click" onclick="javascript:doAdd();"><span><img src="../Content/images/t01.png" /></span>添加</li>
             <li class="click" onclick="javascript:doUpdate();"><span><img src="../Content/images/t02.png" /></span>修改</li>
+            <li class="click" onclick="javascript:doDel();"><span><img src="../Content/images/t03.png" /></span>删除</li>
         </ul>
     </div>
     <div id="grid_div">

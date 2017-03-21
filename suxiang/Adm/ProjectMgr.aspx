@@ -29,7 +29,7 @@
                                 newRow += "<td>" + (item.State ? "进行中" : "已结束") + "</td>";
                                 newRow += "<td>" + (item.State ? "<a onclick='changeState(" + item.Id + ",0);' style='cursor:pointer;'>结束项目</a>" : "<a onclick='changeState(" + item.Id + ",1);' style='cursor:pointer;'>启用项目</a>") + "</td>";
                                 newRow += "<td><a href=ProjectInfo.aspx?u=" + item.Id + " target='_self'>编辑信息</a></td>";
-                                newRow += "</tr>";
+                                newRow += "<td><a onclick='delProject(" + item.Id + ");' style='cursor:pointer;'>删除项目</a></td></tr>"; 
                                 $("#table-column-toggle tr:last").after(newRow);
                             });
                         } else {
@@ -64,6 +64,17 @@
                 url: "../Handler/Process.ashx",
                 cache: false,
                 data: { action: 'changeProjectState', id: uid, state: s },
+                success: onSuccess,
+                error: onError
+            });
+        }
+        
+        function delProject(uid) {
+            $.ajax({
+                type: "POST",
+                url: "../Handler/Process.ashx",
+                cache: false,
+                data: { action: 'delProject', id: uid},
                 success: onSuccess,
                 error: onError
             });
