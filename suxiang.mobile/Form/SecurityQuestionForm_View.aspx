@@ -34,19 +34,9 @@
                     $("#responsibleperson2").val(d[0].responsibleperson2);
                     $("#rebuildsolution").val(d[0].rebuildsolution);
                     $("#rebuilder").val(d[0].rebuilder);
-                    if (d[0].treatmentmeasures == "0") {
-                        $("#treatmentmeasures").val('正在进行');
-                    }
-                    if (d[0].treatmentmeasures == "-1") {
-                        $("#treatmentmeasures").val('未完成');
-                    }
-                    if (d[0].treatmentmeasures == "1") {
-                        $("#treatmentmeasures").val('已完成');
-                    }
                     $("#worktimecost_db").val(d[0].worktimecost_db);
                     $("#worktimecost_xb").val(d[0].worktimecost_xb);
                     $("#materialcost").val(d[0].materialcost);
-                    $("#rechecker").val(d[0].rechecker); 
                     $("#levelno").val(d[0].levelno);
                     if (d[0].attachment.length>0) {
                         $("#pic").attr("src", "../uploads/" + d[0].attachment);
@@ -121,20 +111,16 @@
                    <input type="text" name='responsibleperson2' id="responsibleperson2" readonly="readonly"/>  
                     <label for="rebuildsolution">整改方案：</label>
                     <textarea cols="40" rows="18" id="rebuildsolution" name="rebuildsolution"></textarea>
-                    <label for="rebuilder">整改人员：</label>
+                    <label for="rebuilder">整改班组：</label>
                     <input type="text" name='rebuilder' id="rebuilder" readonly="readonly"/>
-                    <label for="treatmentmeasures">处理结果：</label>
-                    <input type="text" name='treatmentmeasures' id="treatmentmeasures" readonly="readonly"/>
+                    <label for="levelno">安全等级：</label>
+                    <input type="text" name='levelno' id="levelno" readonly="readonly" />
                     <label for="worktimecost_db">耗费工时（大工）：</label>
                     <input type="text" name='worktimecost_db' id="worktimecost_db" readonly="readonly" />
                     <label for="worktimecost_xb">耗费工时（小工）：</label>
                     <input type="text" name='worktimecost_xb' id="worktimecost_xb"readonly="readonly" />
                     <label for="materialcost">耗费材料：</label>
                     <input type="text" name='materialcost' id="materialcost" readonly="readonly" />
-                    <label for="rechecker">复查人员：</label>
-                    <input type="text" name='rechecker' id="rechecker" readonly="readonly" />
-                    <label for="levelno">安全等级：</label>
-                    <input type="text" name='levelno' id="levelno" readonly="readonly" />
                     <img  id="pic" width="98%"/>
                     <label for="remark">备注：</label>
                     <textarea cols="40" rows="18" id="remark" name="remark"></textarea>

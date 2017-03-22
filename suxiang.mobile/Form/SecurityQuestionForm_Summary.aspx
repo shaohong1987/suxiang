@@ -31,12 +31,9 @@
                     $("#responsibleperson2").val(d[0].responsibleperson2);
                     $("#rebuildsolution").val(d[0].rebuildsolution);
                     $("#rebuilder").val(d[0].rebuilder);
-                    $("#treatmentmeasures").val(d[0].treatmentmeasures);
-                    $("#treatmentmeasures").selectmenu("refresh", true);
                     $("#worktimecost_db").val(d[0].worktimecost_db);
                     $("#worktimecost_xb").val(d[0].worktimecost_xb);
                     $("#materialcost").val(d[0].materialcost);
-                    $("#rechecker").val(d[0].rechecker);
                     $("#levelno").val(d[0].levelno);
                     if (d[0].attachment.length > 0) {
                         $("#pic").attr("src", "../uploads/" + d[0].attachment);
@@ -72,13 +69,12 @@
             var r = $("#summary").val();
             var t = $("#formtype").val();
             var fid = $("#formId").val();
-            var treatmentmeasures = $("#treatmentmeasures").val();
             var levelno = $("#levelno").val();
             if (r.length > 0) {
                 $.ajax({
                     type: "POST",
                     url: "../Handler/Process.ashx",
-                    data: { action: 'doSummary', type: t, formid: fid, summary: r, levelno: levelno, treatmentmeasures: treatmentmeasures },
+                    data: { action: 'doSummary', type: t, formid: fid, summary: r, levelno: levelno},
                     cache: false,
                     success: function (data) {
                         var json = JSON.parse(data);
@@ -130,13 +126,13 @@
                     <input type="text" name='responsibleperson2' id="responsibleperson2" readonly="readonly"/>  
                     <label for="rebuildsolution">整改方案：</label>
                     <textarea cols="40" rows="18" id="rebuildsolution" name="rebuildsolution" readonly="readonly"></textarea>
-                    <label for="rebuilder">整改人员：</label>
+                    <label for="rebuilder">整改班组：</label>
                     <input type="text" name='rebuilder' id="rebuilder" readonly="readonly"/>
-                    <label for="treatmentmeasures">处理结果：</label>
-                    <select name="treatmentmeasures" id="treatmentmeasures">
-                        <option value="-1">未完成</option>
-                        <option value="0">进行中</option>
-                        <option value="1">已完成</option>
+                    <label for="levelno">安全等级：</label>
+                    <select name="levelno" id="levelno">
+                        <option value="3">三级</option>
+                        <option value="4">四级</option>
+                        <option value="5">五级</option>
                     </select>
                     <label for="worktimecost_db">耗费工时（大工）：</label>
                     <input type="text" name='worktimecost_db' id="worktimecost_db" readonly="readonly" />
@@ -144,14 +140,6 @@
                     <input type="text" name='worktimecost_xb' id="worktimecost_xb"readonly="readonly" />
                     <label for="materialcost">耗费材料：</label>
                     <input type="text" name='materialcost' id="materialcost" readonly="readonly" />
-                    <label for="rechecker">复查人员：</label>
-                    <input type="text" name='rechecker' id="rechecker" readonly="readonly" />
-                    <label for="levelno">安全等级：</label>
-                    <select name="levelno" id="levelno">
-                        <option value="3">三级</option>
-                        <option value="4">四级</option>
-                        <option value="5">五级</option>
-                    </select>
                     <img  id="pic" width="98%"/>
                     <label for="remark">备注：</label>
                     <textarea cols="40" rows="18" id="remark" name="remark" readonly="readonly"></textarea>

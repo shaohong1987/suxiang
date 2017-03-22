@@ -91,15 +91,10 @@
                     finishdate: "required",
                     problemdescription: "required",
                     causation: "required",
-                    worker: "required",
                     responsibleperson1: "required",
                     responsibleperson2: "required",
                     rebuildsolution: "required",
-                    rebuilder: "required",
-                    worktimecost_db: "required",
-                    worktimecost_xb: "required",
-                    materialcost: "required",
-                    rechecker: "required"
+                    rebuilder: "required"
                 },
                 messages: {
                     levelno: "请填写层高/户型",
@@ -108,15 +103,10 @@
                     finishdate: "请填写整改完成日期",
                     problemdescription: "请输入问题说明",
                     causation: "请填写原因分析",
-                    worker: "请填写处理措施,结果",
                     responsibleperson1: "请选择班组长",
                     responsibleperson2: "请填写栋号长/生产经理",
                     rebuildsolution: "请填写整改方案",
-                    rebuilder: "请填写整改人员",
-                    worktimecost_db: "请填写耗费工时(大工)",
-                    worktimecost_xb: "请填写耗费工时(小工)",
-                    materialcost: "请填写消耗的材料",
-                    rechecker: "请填写复查人员"
+                    rebuilder: "请填写整改班组"
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {
@@ -183,13 +173,13 @@
                    <input type="text" name='responsibleperson2' id="responsibleperson2" placeholder="栋号长/生产经理" />  
                     <label for="rebuildsolution">整改方案：</label>
                     <textarea cols="40" rows="8" id="rebuildsolution" name="rebuildsolution" placeholder="整改方案"></textarea>
-                    <label for="rebuilder">整改人员：</label>
-                    <input type="text" name='rebuilder' id="rebuilder" placeholder="整改人员" />
-                    <label for="treatmentmeasures">处理结果：</label>
-                    <select name="treatmentmeasures" id="treatmentmeasures"> 
-                        <option value='-1'>未完成</option>
-                        <option value='0'>进行中</option>
-                        <option value='1'>已完成</option>
+                    <label for="rebuilder">整改班组：</label>
+                    <input type="text" name='rebuilder' id="rebuilder" placeholder="整改班组" />
+                    <label for="levelno">质量等级：</label>
+                    <select name="levelno" id="levelno">
+                        <option value='3'>三级</option> 
+                        <option value='4'>四级</option> 
+                        <option value='5'>五级</option> 
                     </select>
                     <label for="worktimecost_db">耗费工时（大工）：</label>
                     <input type="text" name='worktimecost_db' id="worktimecost_db" placeholder="耗费工时（大工）" />
@@ -197,14 +187,7 @@
                     <input type="text" name='worktimecost_xb' id="worktimecost_xb" placeholder="耗费工时（小工）" />
                     <label for="materialcost">耗费材料：</label>
                     <input type="text" name='materialcost' id="materialcost" placeholder="耗费材料" />
-                    <label for="rechecker">复查人员：</label>
-                    <input type="text" name='rechecker' id="rechecker" placeholder="复查人员" />
-                    <label for="levelno">质量等级：</label>
-                    <select name="levelno" id="levelno">
-                        <option value='3'>三级</option> 
-                        <option value='4'>四级</option> 
-                        <option value='5'>五级</option> 
-                    </select>
+
                      <label id="piclabel">附件</label>
                     <input type="file" name="pic" id="pic"  />
                     <h3 id="notification"></h3>

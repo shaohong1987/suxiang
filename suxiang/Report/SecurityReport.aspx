@@ -111,10 +111,8 @@
 			        { label: '管理责任人', name: 'manager', width: '100' },
                     { label: '整改方案', name: 'rebuildsolution', width: '150' },
 			        { label: '整改人', name: 'rebuilder', width: '60' },
-			        { label: '处理结果', name: 'treatmentmeasures', width: '80', formatter: customFmatter },
 			        { label: '花费工时', name: 'worktimecost', width: '120' },
-			        { label: '消耗材料', name: 'materialcost', width: '80' },
-			        { label: '复查人', name: 'rechecker', width: '60' }
+			        { label: '消耗材料', name: 'materialcost', width: '80' }
 		        ],
                 viewrecords: true,
                 rownumbers: true,
@@ -132,17 +130,6 @@
             });
         }
 
-        function customFmatter(cellvalue) {
-            if (cellvalue == '-1') {
-                return '未完成';
-            }
-            if (cellvalue == '0') {
-                return '进行中';
-            }
-            if (cellvalue == '1') {
-                return '已完成';
-            }
-        };
         function selectMonth() {
             WdatePicker({ dateFmt: 'yyyy-MM', isShowToday: false, isShowClear: false });
         }

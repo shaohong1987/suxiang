@@ -699,6 +699,7 @@
     <None Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Content\img\Thumbs.db" />
     <Content Include="Handler\process.ashx" />
+    <Content Include="Content\js\jquery-1.11.1.min.map" />
     <None Include="Properties\PublishProfiles\mobile.pubxml" />
   </ItemGroup>
   <ItemGroup>

@@ -1008,6 +1008,7 @@
     <Content Include="Handler\Auth.ashx" />
     <Content Include="Site.Master" />
     <Content Include="Handler\Process.ashx" />
+    <Content Include="Content\js\jquery-1.11.1.min.map" />
     <None Include="Properties\PublishProfiles\suxiang_pc.pubxml" />
   </ItemGroup>
   <ItemGroup>

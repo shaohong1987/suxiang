@@ -107,11 +107,7 @@
                     responsibleperson1: "required",
                     responsibleperson2: "required",
                     rebuildsolution: "required",
-                    rebuilder: "required",
-                    worktimecost_db: "required",
-                    worktimecost_xb: "required",
-                    materialcost: "required",
-                    rechecker: "required"
+                    rebuilder: "required"
                 },
                 messages: {
                     levelno: "请填写层高/户型",
@@ -124,11 +120,7 @@
                     responsibleperson1: "请选择班组长",
                     responsibleperson2: "请填写栋号长/生产经理",
                     rebuildsolution: "请填写整改方案",
-                    rebuilder: "请填写整改人员",
-                    worktimecost_db: "请填写耗费工时(大工)",
-                    worktimecost_xb: "请填写耗费工时(小工)",
-                    materialcost: "请填写消耗的材料",
-                    rechecker: "请填写复查人员"
+                    rebuilder: "请填写整改班组"
                 },
                 errorElement: "em",
                 errorPlacement: function (error, element) {
@@ -228,15 +220,15 @@
             <li>
                 <div style="float: left;">
                     <label>
-                        整改人员<b>*</b>
+                        整改班组<b>*</b>
                     </label>
-                    <input type="text" name="rebuilder" placeholder="整改人员" class="dfinput" style="width: 208px;" />
-                    处理结果</div>
-                <div style="float: left; margin-left: 5px;">
-                    <select name="treatmentmeasures" id="treatmentmeasures" class="select3">
-                        <option value="-1">未完成</option>
-                        <option value="0">进行中</option>
-                        <option value="1">已完成</option>
+                    <input type="text" name="rebuilder" placeholder="整改班组" class="dfinput" style="width: 208px;" />
+                    安全等级</div>
+                    <div style="float: left; margin-left: 5px;">
+                    <select name="levelno" id="levelno" class="select3">
+                       <option value="3">三级</option>
+                        <option value="4">四级</option>
+                        <option value="5">五级</option>
                     </select>
                 </div>
             </li>
@@ -254,22 +246,6 @@
                     耗费材料<b>*</b>
                 </label>
                 <textarea class="textinput3" name="materialcost" placeholder="整改耗费材料"></textarea>
-            </li>
-            <li>
-                <div style="float: left;">
-                    <label>
-                        复查人员<b>*</b>
-                    </label>
-                    <input type="text" name="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" />
-                    安全等级
-                </div>
-                <div style="float: left; margin-left: 5px;">
-                    <select name="levelno" id="levelno" class="select3">
-                       <option value="3">三级</option>
-                        <option value="4">四级</option>
-                        <option value="5">五级</option>
-                    </select>
-                </div>
             </li>
             <li>
                 <button type="submit" class="btn">

@@ -35,14 +35,10 @@
                     $("#responsibleperson2").val(d[0].responsibleperson2);
                     $("#rebuildsolution").val(d[0].rebuildsolution);
                     $("#rebuilder").val(d[0].rebuilder);
-                    $("#treatmentmeasures").val(d[0].treatmentmeasures);
                     $("#worktimecost_db").val(d[0].worktimecost_db);
                     $("#worktimecost_xb").val(d[0].worktimecost_xb);
                     $("#materialcost").val(d[0].materialcost);
-                    $("#rechecker").val(d[0].rechecker); 
-                    $("#levelno").val(d[0].levelno);
                     $("#remark").val(d[0].remark);
-                    $("#treatmentmeasures").parent().find(".uew-select-text").text($("#treatmentmeasures").find(":selected").text());
                     $("#levelno").parent().find(".uew-select-text").text($("#levelno").find(":selected").text());
                 },
                 error: function (data) {
@@ -71,13 +67,12 @@
             var r = $("#summary").val();
             var t = $("#formtype").val();
             var fid = $("#formId").val();
-            var treatmentmeasures = $("#treatmentmeasures").val();
             var levelno = $("#levelno").val();
             if (r.length > 0) {
                 $.ajax({
                     type: "POST",
                     url: "../Handler/Process.ashx",
-                    data: { action: 'doSummary', type: t, formid: fid, summary: r, levelno: levelno, treatmentmeasures: treatmentmeasures },
+                    data: { action: 'doSummary', type: t, formid: fid, summary: r, levelno: levelno },
                     cache: false,
                     success: function (data) {
                         var json = JSON.parse(data);
@@ -154,15 +149,15 @@
            <li>
                 <div style="float: left;">
                     <label>
-                        整改人员<b>*</b>
+                        整改班组<b>*</b>
                     </label>
-                    <input type="text" id="rebuilder" placeholder="整改人员" class="dfinput" style="width: 208px;" />
-                    处理结果</div>
+                    <input type="text" id="rebuilder" placeholder="整改班组" class="dfinput" style="width: 208px;" />
+                    质量等级</div>
                 <div style="float: left; margin-left: 5px;">
-                    <select name="treatmentmeasures" id="treatmentmeasures" class="select3">
-                        <option value="-1">未完成</option>
-                        <option value="0">进行中</option>
-                        <option value="1">已完成</option>
+                    <select name="levelno" id="levelno" class="select3">
+                        <option value="3">三级</option>
+                        <option value="4">四级</option>
+                        <option value="5">五级</option>
                     </select>
                 </div>
             </li>
@@ -180,22 +175,6 @@
                     耗费材料 
                 </label>
                 <textarea class="textinput3" id="materialcost" placeholder="整改耗费材料" readonly="readonly"></textarea>
-            </li>
-              <li>
-                <div style="float: left;">
-                    <label>
-                        复查人员<b>*</b>
-                    </label>
-                    <input type="text" id="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" />
-                    质量等级
-                </div>
-                <div style="float: left; margin-left: 5px;">
-                    <select name="levelno" id="levelno" class="select3">
-                        <option value="3">三级</option>
-                        <option value="4">四级</option>
-                        <option value="5">五级</option>
-                    </select>
-                </div>
             </li>
              <li>
                 <label>

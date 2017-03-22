@@ -35,22 +35,9 @@
                     $("#responsibleperson2").val(d[0].responsibleperson2);
                     $("#rebuildsolution").val(d[0].rebuildsolution);
                     $("#rebuilder").val(d[0].rebuilder);
-                    if (d[0].treatmentmeasures == "0") {
-                        $("#treatmentmeasures").val('正在进行');
-                        $("#treatmentmeasures").text('正在进行');
-                    }
-                    if (d[0].treatmentmeasures == "-1") {
-                        $("#treatmentmeasures").val('未完成');
-                        $("#treatmentmeasures").text('未完成');
-                    }
-                    if (d[0].treatmentmeasures == "1") {
-                        $("#treatmentmeasures").val('已完成');
-                        $("#treatmentmeasures").text('已完成');
-                    }
                     $("#worktimecost_db").val(d[0].worktimecost_db);
                     $("#worktimecost_xb").val(d[0].worktimecost_xb);
                     $("#materialcost").val(d[0].materialcost);
-                    $("#rechecker").val(d[0].rechecker); 
                     if (d[0].levelno == "3") {
                         $("#levelno").val('三级');
                     }
@@ -142,12 +129,13 @@
            <li>
                 <div style="float: left;">
                     <label>
-                        整改人员<b>*</b>
+                        整改班组<b>*</b>
                     </label>
-                    <input type="text" id="rebuilder" placeholder="整改人员" class="dfinput" style="width: 208px;" />
-                    处理结果</div>
+                    <input type="text" id="rebuilder" placeholder="整改班组" class="dfinput" style="width: 208px;" />
+                  安全等级
+                </div>
                 <div style="float: left; margin-left: 5px;">
-                    <input type="text" id="treatmentmeasures" placeholder="处理结果" class="dfinput" style="width: 80px;" readonly="readonly"/>
+                   <input type="text" id="levelno" placeholder="安全等级" class="dfinput" style="width: 80px" readonly="readonly"/>
                 </div>
             </li>
             <li>
@@ -164,18 +152,6 @@
                     耗费材料 
                 </label>
                 <textarea class="textinput3" id="materialcost" placeholder="整改耗费材料" readonly="readonly"></textarea>
-            </li>
-              <li>
-                <div style="float: left;">
-                    <label>
-                        复查人员<b>*</b>
-                    </label>
-                    <input type="text" id="rechecker" placeholder="复查人员" class="dfinput" style="width: 208px" />
-                    安全等级
-                </div>
-                <div style="float: left; margin-left: 5px;">
-                   <input type="text" id="levelno" placeholder="安全等级" class="dfinput" style="width: 80px" readonly="readonly"/>
-                </div>
             </li>
              <li>
                 <label>

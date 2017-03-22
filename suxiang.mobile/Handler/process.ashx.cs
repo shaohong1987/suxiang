@@ -463,9 +463,7 @@ namespace suxiang.mobile.Handler
                                 if (type == "problem_sercurity" || type == "problem_quality")
                                 {
                                     var levelno = WebHelper.GetActionStr(context, "levelno");
-                                    var treatmentmeasures = WebHelper.GetActionStr(context, "treatmentmeasures");
-                                    sql = "update " + type + " set levelno='" + levelno + "',treatmentmeasures='" +
-                                          treatmentmeasures + "',summaryid=" + um.Id + ",summaryname='" + um.RealName +
+                                    sql = "update " + type + " set levelno='" + levelno +"',summaryid=" + um.Id + ",summaryname='" + um.RealName +
                                           "',summary='" + summary +
                                           "',summarytime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
                                           "',currentUser=" + step.CurrentUser +
@@ -756,7 +754,7 @@ namespace suxiang.mobile.Handler
                         var location = WebHelper.GetActionStr(context, "location");
                         var checkdate = WebHelper.GetActionStr(context, "checkdate");
                         var finishdate = WebHelper.GetActionStr(context, "finishdate");
-                        var problemdescription = WebHelper.GetActionStr(context, "problemdescription");
+                        var problemdescription = WebHelper.GetActionStr(context, "problemdescription"); 
                         var causation = WebHelper.GetActionStr(context, "causation");
                         var teamleaderid = -1;
                         var teamleader = WebHelper.GetActionStr(context, "teamleader"); //fffff
@@ -765,19 +763,26 @@ namespace suxiang.mobile.Handler
                         var responsibleperson2 = WebHelper.GetActionStr(context, "responsibleperson2");
                         var rebuildsolution = WebHelper.GetActionStr(context, "rebuildsolution");
                         var rebuilder = WebHelper.GetActionStr(context, "rebuilder");
-                        var treatmentmeasures = WebHelper.GetActionStr(context, "treatmentmeasures");
                         var worktimecostDb = WebHelper.GetActionStr(context, "worktimecost_db");
                         var worktimecostXb = WebHelper.GetActionStr(context, "worktimecost_xb");
                         var materialcost = WebHelper.GetActionStr(context, "materialcost");
-                        var rechecker = WebHelper.GetActionStr(context, "rechecker");
                         var attachment = "";
                         HttpPostedFile file = context.Request.Files["pic"];
-                        if (file != null)
+                        if (file != null&&!string.IsNullOrEmpty(file.FileName))
                         {
-                            string filename = DateTime.Now.Ticks.ToString();
-                            string path = context.Server.MapPath("~/uploads/" + filename+"_"+file.FileName);
-                            attachment = filename + "_" + file.FileName;
-                            file.SaveAs(path);
+                            try
+                            {
+                                var index = file.FileName.LastIndexOf(".", StringComparison.Ordinal);
+                                string filename = DateTime.Now.Ticks+ file.FileName.Substring(index,file.FileName.Length-index);
+                                string path = context.Server.MapPath("~/uploads/" + filename) ;
+                                attachment = filename;
+                                file.SaveAs(path);
+                            }
+                            catch (Exception e)
+                            {
+                                throw e;
+                            }
+                           
                         }
                         
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
@@ -794,8 +799,8 @@ namespace suxiang.mobile.Handler
                                 var sql =
                                     "INSERT INTO problem_sercurity(levelno,projectid,projectname,buildingno,location,checkdate," +
                                     "finishdate,problemdescription,causation,teamleaderid,teamleader,worker,responsibleperson1," +
-                                    "responsibleperson2,rebuildsolution,rebuilder,treatmentmeasures,worktimecost_db,worktimecost_xb," +
-                                    "materialcost,rechecker,postid,postername,posttime,currentUser,currentPage,status,state,attachment)values('"
+                                    "responsibleperson2,rebuildsolution,rebuilder,worktimecost_db,worktimecost_xb," +
+                                    "materialcost,postid,postername,posttime,currentUser,currentPage,status,state,attachment)values('"
                                     + levelno + "',"
                                     + projectid + ",'"
                                     + projectname + "','"
@@ -812,11 +817,9 @@ namespace suxiang.mobile.Handler
                                     + responsibleperson2 + "','"
                                     + rebuildsolution + "','"
                                     + rebuilder + "','"
-                                    + treatmentmeasures + "','"
                                     + worktimecostDb + "','"
                                     + worktimecostXb + "','"
                                     + materialcost + "','"
-                                    + rechecker + "','"
                                     + um.Id + "','"
                                     + um.RealName + "','"
                                     + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',"
@@ -848,18 +851,17 @@ namespace suxiang.mobile.Handler
                         var responsibleperson2 = WebHelper.GetActionStr(context, "responsibleperson2");
                         var rebuildsolution = WebHelper.GetActionStr(context, "rebuildsolution");
                         var rebuilder = WebHelper.GetActionStr(context, "rebuilder");
-                        var treatmentmeasures = WebHelper.GetActionStr(context, "treatmentmeasures");
                         var worktimecostDb = WebHelper.GetActionStr(context, "worktimecost_db");
                         var worktimecostXb = WebHelper.GetActionStr(context, "worktimecost_xb");
                         var materialcost = WebHelper.GetActionStr(context, "materialcost");
-                        var rechecker = WebHelper.GetActionStr(context, "rechecker");
                         var attachment = "";
                         HttpPostedFile file = context.Request.Files["pic"];
-                        if (file != null)
+                        if (file != null && !string.IsNullOrEmpty(file.FileName))
                         {
-                            string filename = DateTime.Now.Ticks.ToString();
-                            string path = context.Server.MapPath("~/uploads/" + filename + "_" + file.FileName);
-                            attachment = filename + "_" + file.FileName;
+                            var index = file.FileName.LastIndexOf(".", StringComparison.Ordinal);
+                            string filename = DateTime.Now.Ticks + file.FileName.Substring(index, file.FileName.Length - index);
+                            string path = context.Server.MapPath("~/uploads/" + filename);
+                            attachment = filename;
                             file.SaveAs(path);
                         }
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
@@ -877,8 +879,8 @@ namespace suxiang.mobile.Handler
                                 var sql =
                                     "INSERT INTO problem_quality(levelno,projectid,projectname,buildingno,location,checkdate," +
                                     "finishdate,problemdescription,causation,teamleaderid,teamleader,worker,responsibleperson1," +
-                                    "responsibleperson2,rebuildsolution,rebuilder,treatmentmeasures,worktimecost_db,worktimecost_xb," +
-                                    "materialcost,rechecker,postid,postername,posttime,currentUser,currentPage,status,state,attachment)values('"
+                                    "responsibleperson2,rebuildsolution,rebuilder,worktimecost_db,worktimecost_xb," +
+                                    "materialcost,postid,postername,posttime,currentUser,currentPage,status,state,attachment)values('"
                                     + levelno + "',"
                                     + projectid + ",'"
                                     + projectname + "','"
@@ -895,11 +897,9 @@ namespace suxiang.mobile.Handler
                                     + responsibleperson2 + "','"
                                     + rebuildsolution + "','"
                                     + rebuilder + "','"
-                                    + treatmentmeasures + "','"
                                     + worktimecostDb + "','"
                                     + worktimecostXb + "','"
                                     + materialcost + "','"
-                                    + rechecker + "','"
                                     + um.Id + "','"
                                     + um.RealName + "','"
                                     + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "',"
@@ -1079,9 +1079,9 @@ namespace suxiang.mobile.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_sercurity a where   a.projectid=" +
+                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a where   a.projectid=" +
                                   projectid
-                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_sercurity A WHERE   A.projectid=" +
+                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   A.projectid=" +
                                   projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                   (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);
@@ -1090,8 +1090,8 @@ namespace suxiang.mobile.Handler
                         else
                         {
                             var sql = string.IsNullOrEmpty(month)
-                               ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_sercurity a " 
-                               : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_sercurity A WHERE   " +
+                               ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a " 
+                               : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   " +
                                  " a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                  (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);
@@ -1106,9 +1106,9 @@ namespace suxiang.mobile.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_quality a where  a.projectid=" +
+                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a where  a.projectid=" +
                                   projectid
-                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_quality A WHERE  A.projectid=" +
+                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  A.projectid=" +
                                   projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                   (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);
@@ -1117,8 +1117,8 @@ namespace suxiang.mobile.Handler
                         else
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_quality a "
-                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CASE WHEN  treatmentmeasures='-1' THEN '未完成' WHEN treatmentmeasures ='0' THEN '正在进行' ELSE  '已完成' end treatmentmeasures,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost,rechecker FROM	problem_quality A WHERE  " +
+                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a "
+                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  " +
                                   "a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                   (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);

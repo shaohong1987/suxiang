@@ -16,8 +16,6 @@ namespace suxiang.Model
         public string Worker { get; set; }
         public string Rebuilder { get; set; }
         public DateTime Finishdate { get; set; }
-        public string Rechecker { get; set; }
-        public string Treatmentmeasures { get; set; }
         public string Worktimecost { get; set; }
         public string Materialcost { get; set; }
         public string ProblemType { get; set; }

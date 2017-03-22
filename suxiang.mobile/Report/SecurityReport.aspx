@@ -165,10 +165,8 @@
                             "<td>" + item["manager"] + "</td>" +
                             "<td>" + item["rebuildsolution"] + "</td>" +
                             "<td>" + item["rebuilder"] + "</td>" +
-                            "<td>" + item["treatmentmeasures"] + "</td>" +
                             "<td>" + item["worktimecost"] + "</td>" +
                             "<td>" + item["materialcost"] + "</td>" +
-                             "<td>" + item["rechecker"] + "</td>" +
                             "</tr>";
                         $("table tbody tr:last").after(newRow);
                     });
