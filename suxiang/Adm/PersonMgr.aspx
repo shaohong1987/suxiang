@@ -26,6 +26,7 @@
                         altRows: true,
                         hoverrows: true,
                         viewrecords: true,
+                        rowNum: 300,
                         jsonReader: {
                             repeatitems: false
                         },
@@ -38,7 +39,7 @@
                         datatype: "json",
                         colNames: ['员工号', '姓名', '邮箱', '角色', '状态'],
                         colModel: [
-                            { "name": "username" }, { "name": "realname" }, { "name": "email", width: "400px" }, {
+                            { "name": "username" }, { "name": "realname" }, { "name": "email", width: "200px" }, {
                                 name: 'group',
                                 formatter: function(cellValue) {
                                     if (cellValue == 0) {
@@ -102,37 +103,19 @@
                 return false;
             }
             if (type == "adduser") {
-                $.ajax({
-                    type: "POST",
-                    url: "../Handler/Auth.ashx?action=checkusername",
-                    cache: false,
-                    data: { uname: username },
-                    success: function (data) {
-                        var json = JSON.parse(data);
-                        if (json.State != false) {
-                            alert("该员工号已存在");
-                            $("input[name='username']").val('').focus();
-                            return false;
-                        }
-                    },
-                    error: function (data) {
-                        var json = JSON.parse(data);
-                        alert(json.Msg);
-                        return false;
-                    }
-                });
-
                 if (password == null || password.length == 0) {
                     alert("请输入密码");
                     $("input[name='password']").focus();
                     return false;
                 }
+
                 if (password != repassword) {
                     alert("两次密码不一致");
                     $("input[name='repassword']").val('').focus();
                     return false;
                 }
             }
+
             if (type == "updateuser") {
                 if (password != repassword) {
                     alert("两次密码不一致");
@@ -146,7 +129,6 @@
                 $("input[name='realname']").focus();
                 return false;
             }
-          
             return true;
         }
 

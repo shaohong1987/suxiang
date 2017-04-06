@@ -48,8 +48,23 @@ namespace suxiang.Handler
                             Group = group,
                             State = state > 0
                         };
-                        var result = new SxDal().AddNewUser(model);
-                        json = WebHelper.GetObjJson(result);
+                        var t = new SxDal().CheckUserName(username);
+                        if (!t.State)
+                        {
+                            var result = new SxDal().AddNewUser(model);
+                            json = WebHelper.GetObjJson(result);
+                        }
+                        else
+                        {
+                            var msg = new MsgModel
+                            {
+                                State = false,
+                                Msg = "该员工账号已经存在!",
+                                Data = null
+                            };
+                            json = WebHelper.GetObjJson(msg);
+                        }
+                        
                         break;
                     }
                 case "updateuser":
