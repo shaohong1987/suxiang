@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Data.Common;
-using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;  
 
 namespace suxiang.mobile.Dal
 {

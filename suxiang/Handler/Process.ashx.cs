@@ -425,6 +425,34 @@ namespace suxiang.Handler
                     json = WebHelper.GetObjJson(msg);
                     break;
                 }
+                case "doUpdateWM":
+                    {
+                        var type = WebHelper.GetActionStr(context, "type");
+                        var formid = WebHelper.GetActionStr(context, "formid");
+                        var worktimeDb = WebHelper.GetActionStr(context, "db"); 
+                        var worktimeXb = WebHelper.GetActionStr(context, "xb");
+                        var materialcost = WebHelper.GetActionStr(context, "mc");
+                        if (um != null)
+                        {
+                            var step = SxDal.GetNextStep(-1, -1, type, 2);
+                            if (step != null)
+                            {
+                                var sql = "update " + type +
+                                          " set remarkname='" + um.RealName +
+                                          "',worktimecost_db='" + worktimeDb +
+                                          "',worktimecost_xb='" + worktimeXb +
+                                          "',materialcost='" + materialcost +
+                                          "',currentUser=" + step.CurrentUser +
+                                          ",currentPage='" + step.CurrentPage +
+                                          "',status='" + step.Status +
+                                          "',state=" + step.State +
+                                          " where id=" + formid;
+                                var msg = new SxDal().AddData(sql);
+                                json = WebHelper.GetObjJson(msg);
+                            }
+                        }
+                        break;
+                    }
                 case "doRemark":
                 {
                     var type = WebHelper.GetActionStr(context, "type");
@@ -791,7 +819,7 @@ namespace suxiang.Handler
                     }
                     if (um != null)
                     {
-                        var nextStep = SxDal.GetNextStep(projectid, -1, "problem_sercurity", 2);
+                        var nextStep = SxDal.GetNextStep(projectid, -1, "problem_sercurity", 3,teamleaderid);
                         if (nextStep != null)
                         {
                             var sql =
@@ -861,8 +889,8 @@ namespace suxiang.Handler
                     if (um != null)
                     {
                         var dal = new SxDal();
-                        var nextStep = SxDal.GetNextStep(projectid, -1, "problem_quality", 2);
-                        if (nextStep != null)
+                        var nextStep = SxDal.GetNextStep(projectid, -1, "problem_quality", 3, teamleaderid);
+                            if (nextStep != null)
                         {
                             var sql =
                                 "INSERT INTO problem_quality(levelno,projectid,projectname,buildingno,location,checkdate," +
