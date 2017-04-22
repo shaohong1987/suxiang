@@ -35,6 +35,7 @@
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
                 var json = eval(data);
                 if (json.State === true) {
+                    $("#project").append("<option value='-1'>全部</option>");
                     $.each(json.Data, function (i, item) {
                         $("#project").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
                     });

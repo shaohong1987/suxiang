@@ -234,7 +234,7 @@
             </li>
             <li>
                 <label>
-                    耗费工时<b>*</b>
+                    耗费工时<b></b>
                 </label>
                 <input type="text" name="worktimecost_db" placeholder="整改花费工时（数字）" class="dfinput"
                     onkeyup="this.value=this.value.replace(/[^0-9.]/g,'')" style="width: 140px; margin-right: 3px;" />大工
@@ -243,7 +243,7 @@
                     margin-left: 6px;" />小工 </li>
             <li>
                 <label>
-                    耗费材料<b>*</b>
+                    耗费材料<b></b>
                 </label>
                 <textarea class="textinput3" name="materialcost" placeholder="整改耗费材料"></textarea>
             </li>

@@ -521,7 +521,7 @@ namespace suxiang.Dal
         /// <param name="formType"></param>
         /// <param name="step"></param>
         /// <returns></returns>
-        public static NextStep GetNextStep(int projectId, int buildingid, string formType, int step)
+        public static NextStep GetNextStep(int projectId, int buildingid, string formType, int step, int teamleaderid = 0)
         {
             NextStep result = null;
             switch (formType)
@@ -529,6 +529,15 @@ namespace suxiang.Dal
                 case "problem_sercurity":
                     switch (step)
                     {
+                        case 3://班组长处理消费工时和材料
+                            result = new NextStep
+                            {
+                                CurrentPage = "SecurityQuestionForm_Team.aspx?formId=",
+                                CurrentUser = teamleaderid,
+                                State = step,
+                                Status = "等待班组长处理"
+                            };
+                            break;
                         case 2://项目负责人/生产经理处理
                             result = new NextStep
                             {
@@ -561,6 +570,15 @@ namespace suxiang.Dal
                 case "problem_quality":
                     switch (step)
                     {
+                        case 3://班组长处理消费工时和材料
+                            result = new NextStep
+                            {
+                                CurrentPage = "QualityQuestionForm_Team.aspx?formId=",
+                                CurrentUser = teamleaderid,
+                                State = step,
+                                Status = "等待班组长处理"
+                            };
+                            break;
                         case 2://项目负责人/生产经理处理
                             result = new NextStep
                             {

@@ -47,7 +47,10 @@
                             原因分析
                         </th>
                         <th>
-                            班组/施工人
+                            班组
+                        </th>
+                        <th>
+                            施工人
                         </th>
                         <th>
                             管理责任人
@@ -59,16 +62,10 @@
                             整改人
                         </th>
                         <th>
-                            处理结果
-                        </th>
-                        <th>
                             花费工时
                         </th>
                          <th>
                             消耗材料
-                        </th>
-                        <th>
-                            复查人
                         </th>
                     </tr>
                 </thead>
@@ -155,12 +152,13 @@
                             style = "style='background-color:red;'";
                         } 
                         newRow += "<tr " + style + "><td>" + (i + 1) + "</td>" +
-                            "<td>" + item["levelno"] + "</td" +
-                            "><td>" + item["addr"] + "</td>" +
+                            "<td>" + item["levelno"] + "</td>" +
+                            "<td>" +item["addr"] + "</td>" +
                             "<td>" + item["checkdate"] + "</td>" +
                             "<td>" + item["finishdate"] + "</td>" +
                             "<td>" + item["problemdescription"] + "</td>" +
                             "<td>" + item["causation"] + "</td>" +
+                            "<td>" + item["teamleader"] + "</td>" +
                             "<td>" + item["worker"] + "</td>" +
                             "<td>" + item["manager"] + "</td>" +
                             "<td>" + item["rebuildsolution"] + "</td>" +

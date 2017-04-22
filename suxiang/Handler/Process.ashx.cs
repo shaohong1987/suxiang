@@ -37,51 +37,97 @@ namespace suxiang.Handler
                     }
                     string sql = null;
                     string tableName = "";
-                    switch (table)
+                    if (projectid > 0)
                     {
-                        case "cost_labor":
-                            sql =
-                                "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`startdate`, '%Y-%m-%d') AS '开始日期',DATE_FORMAT(`endate`, '%Y-%m-%d') AS '结束日期',worktype as '工种',teamleader as '班组',workcontent as '施工范围',unit as '单位',price as '单价',worktime as '工作量',totalprice as '小计',remarkbywork as '备注' FROM cost_labor A WHERE A.projectid=" +
-                                projectid + " and a.startdate>='" + month + "-01" + "'  and a.startdate<'" +
-                                (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            tableName = "栋号用工成本表";
-                            break;
-                        case "cost_management":
-                            sql =
-                                "SELECT	projectname as '项目',DATE_FORMAT(`curdate`, '%Y-%m-%d') as '日期',type as '类型',content as '内容',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_management A WHERE  A.projectid=" +
-                                projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
-                                (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            tableName = "管理成本表";
-                            break;
-                        case "cost_material":
-                            sql =
-                                "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number  as '数量',price as '单价',totalprice as '小计',remark as '备注' FROM	cost_material A WHERE A.projectid=" +
-                                projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
-                                (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            tableName = "栋号材料成本表";
-                            break;
-                        case "cost_materialauxiliary":
-                            sql =
-                                "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_materialauxiliary A WHERE A.projectid=" +
-                                projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
-                                (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            tableName = "栋号辅材成本表";
-                            break;
-                        case "problem_quality":
-                            sql =
-                                "SELECT levelno as '质量问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '质量员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改班组',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',remark as '备注',summary as '总结' FROM	problem_quality A WHERE  A.projectid=" +
-                                projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
-                                (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            tableName = "质量问题表";
-                            break;
-                        case "problem_sercurity":
-                            sql =
-                                "SELECT levelno as '安全问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '安全员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改班组',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',remark as '备注',summary as '总结' FROM	problem_sercurity A WHERE   A.projectid=" +
-                                projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
-                                (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                            tableName = "安全问题表";
-                            break;
-                    }
+                            switch (table)
+                            {
+                                case "cost_labor":
+                                    sql =
+                                        "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`startdate`, '%Y-%m-%d') AS '开始日期',DATE_FORMAT(`endate`, '%Y-%m-%d') AS '结束日期',worktype as '工种',teamleader as '班组',workcontent as '施工范围',unit as '单位',price as '单价',worktime as '工作量',totalprice as '小计',remarkbywork as '备注' FROM cost_labor A WHERE A.projectid=" +
+                                        projectid + " and a.startdate>='" + month + "-01" + "'  and a.startdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "栋号用工成本表";
+                                    break;
+                                case "cost_management":
+                                    sql =
+                                        "SELECT	projectname as '项目',DATE_FORMAT(`curdate`, '%Y-%m-%d') as '日期',type as '类型',content as '内容',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_management A WHERE  A.projectid=" +
+                                        projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "管理成本表";
+                                    break;
+                                case "cost_material":
+                                    sql =
+                                        "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number  as '数量',price as '单价',totalprice as '小计',remark as '备注' FROM	cost_material A WHERE A.projectid=" +
+                                        projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "栋号材料成本表";
+                                    break;
+                                case "cost_materialauxiliary":
+                                    sql =
+                                        "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_materialauxiliary A WHERE A.projectid=" +
+                                        projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "栋号辅材成本表";
+                                    break;
+                                case "problem_quality":
+                                    sql =
+                                        "SELECT levelno as '质量问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '质量员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改班组',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',remark as '备注',summary as '总结' FROM	problem_quality A WHERE  A.projectid=" +
+                                        projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "质量问题表";
+                                    break;
+                                case "problem_sercurity":
+                                    sql =
+                                        "SELECT levelno as '安全问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '安全员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改班组',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',remark as '备注',summary as '总结' FROM	problem_sercurity A WHERE   A.projectid=" +
+                                        projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "安全问题表";
+                                    break;
+                            }
+                        }
+                    else
+                    {
+                            switch (table)
+                            {
+                                case "cost_labor":
+                                    sql =
+                                        "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`startdate`, '%Y-%m-%d') AS '开始日期',DATE_FORMAT(`endate`, '%Y-%m-%d') AS '结束日期',worktype as '工种',teamleader as '班组',workcontent as '施工范围',unit as '单位',price as '单价',worktime as '工作量',totalprice as '小计',remarkbywork as '备注' FROM cost_labor A WHERE  a.startdate>='" + month + "-01" + "'  and a.startdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "栋号用工成本表";
+                                    break;
+                                case "cost_management":
+                                    sql =
+                                        "SELECT	projectname as '项目',DATE_FORMAT(`curdate`, '%Y-%m-%d') as '日期',type as '类型',content as '内容',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_management A WHERE   a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "管理成本表";
+                                    break;
+                                case "cost_material":
+                                    sql =
+                                        "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number  as '数量',price as '单价',totalprice as '小计',remark as '备注' FROM	cost_material A WHERE  a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "栋号材料成本表";
+                                    break;
+                                case "cost_materialauxiliary":
+                                    sql =
+                                        "SELECT projectname as '项目',buildingno as '栋号',DATE_FORMAT(`curdate`, '%Y-%m-%d') AS '日期',teamleader as '班组',materialname as '材料名称 ',unit as '单位',number as '数量',price as '单价',totalprice as '小计',remark as '备注'  FROM	cost_materialauxiliary A WHERE  a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "栋号辅材成本表";
+                                    break;
+                                case "problem_quality":
+                                    sql =
+                                        "SELECT levelno as '质量问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '质量员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改班组',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',remark as '备注',summary as '总结' FROM	problem_quality A WHERE   a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "质量问题表";
+                                    break;
+                                case "problem_sercurity":
+                                    sql =
+                                        "SELECT levelno as '安全问题等级',projectname as '项目',buildingno as '栋号',location as '层号/户型',DATE_FORMAT(`checkdate`, '%Y-%m-%d')  as '检查日期',DATE_FORMAT(`finishdate`, '%Y-%m-%d') as '整改完成日期',problemdescription as '问题说明',causation as '原因分析',teamleader as '班组',worker as '施工人员',responsibleperson1 as '安全员',responsibleperson2 as '栋号长/生产经理',rebuildsolution as '整改方案',rebuilder as '整改班组',worktimecost_db as '耗费大工',worktimecost_xb as '耗费小工',materialcost as '耗费材料',remark as '备注',summary as '总结' FROM	problem_sercurity A WHERE a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
+                                        (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                                    tableName = "安全问题表";
+                                    break;
+                            }
+                        }
+                   
                     if (!string.IsNullOrEmpty(sql))
                     {
                         var result = new SxDal().GetData(sql);
@@ -106,7 +152,8 @@ namespace suxiang.Handler
                         MemoryStream memoryStream = new MemoryStream(); //创建内存流
                         workbook.Write(memoryStream); //npoi将创建好的工作簿写入到内存流
                         HttpContext.Current.Response.AppendHeader("Content-Disposition",
-                            "attachment;filename=" + HttpUtility.UrlEncode(tableName+".xls", System.Text.Encoding.UTF8));
+                            "attachment;filename=" +
+                            HttpUtility.UrlEncode(tableName + ".xls", System.Text.Encoding.UTF8));
                         HttpContext.Current.Response.BinaryWrite(memoryStream.ToArray());
                         HttpContext.Current.Response.End();
                         memoryStream.Dispose();
@@ -131,7 +178,7 @@ namespace suxiang.Handler
                     }
                     if (!string.IsNullOrEmpty(sql))
                     {
-                        
+
                     }
                     break;
                 }
@@ -147,7 +194,7 @@ namespace suxiang.Handler
                     var totalprice = WebHelper.GetActionStr(context, "totalprice");
                     var remarkbyworker = WebHelper.GetActionStr(context, "remarkbyworker");
                     var teamleaderid = WebHelper.GetActionStr(context, "teamleaderid");
-                        if (um != null)
+                    if (um != null)
                     {
                         var nextStep = SxDal.GetNextStep(projectid, -1, "cost_material", 4);
                         if (nextStep != null)
@@ -181,8 +228,8 @@ namespace suxiang.Handler
                     var number = WebHelper.GetActionStr(context, "number");
                     var totalprice = WebHelper.GetActionStr(context, "totalprice");
                     var remarkbyworker = WebHelper.GetActionStr(context, "remarkbyworker");
-                        var teamleaderid = WebHelper.GetActionStr(context, "teamleaderid");
-                        if (um != null)
+                    var teamleaderid = WebHelper.GetActionStr(context, "teamleaderid");
+                    if (um != null)
                     {
                         var nextStep = SxDal.GetNextStep(projectid, -1, "cost_materialauxiliary", 4);
                         if (nextStep != null)
@@ -218,23 +265,23 @@ namespace suxiang.Handler
                     var totalprice = WebHelper.GetActionStr(context, "totalprice");
                     var remarkbywork = WebHelper.GetActionStr(context, "remarkbywork");
                     var teamleaderid = WebHelper.GetActionStr(context, "teamleaderid");
-                    if (um != null) 
+                    if (um != null)
                     {
                         var nextStep = SxDal.GetNextStep(projectid, -1, "cost_labor", 4);
                         if (nextStep != null)
                         {
-                            var sql = "update cost_labor set startdate='"+startdate
-                                    +"',endate='"+endate
-                                    +"',workcontent='"+workcontent
-                                    +"',unit='"+unit
-                                    +"',price='"+price+ "',worktime='" + number
-                                    +"',totalprice='"+totalprice
-                                    +"',remarkbywork='"+remarkbywork
-                                    +"',currentUser="+ teamleaderid
-                                    + ",currentPage='"+nextStep.CurrentPage
-                                    +"',status='"+nextStep.Status
-                                    +"',state="+nextStep.State
-                                    +" where id="+formId;
+                            var sql = "update cost_labor set startdate='" + startdate
+                                      + "',endate='" + endate
+                                      + "',workcontent='" + workcontent
+                                      + "',unit='" + unit
+                                      + "',price='" + price + "',worktime='" + number
+                                      + "',totalprice='" + totalprice
+                                      + "',remarkbywork='" + remarkbywork
+                                      + "',currentUser=" + teamleaderid
+                                      + ",currentPage='" + nextStep.CurrentPage
+                                      + "',status='" + nextStep.Status
+                                      + "',state=" + nextStep.State
+                                      + " where id=" + formId;
                             var msg = new SxDal().AddData(sql);
                             json = WebHelper.GetObjJson(msg);
                         }
@@ -246,6 +293,7 @@ namespace suxiang.Handler
                     if (um != null)
                     {
                         #region 总经理和财务的处理
+
                         var sql =
                             string.Format(
                                 " SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth,projectname,'栋号班组用工成本表' as dtype,poster,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CASE WHEN currentUser=" +
@@ -271,8 +319,11 @@ namespace suxiang.Handler
                                 " UNION SELECT DATE_FORMAT(`posttime`, '%Y-%m') AS dmonth, projectname,'安全问题表' as dtype,postername,DATE_FORMAT(`posttime`, '%Y-%m-%d %H:%i:%s') AS posttime,CASE WHEN currentUser=" +
                                 um.Id +
                                 " THEN CONCAT(currentPage,id) ELSE CONCAT('SecurityQuestionForm_View.aspx?formId=',id) END AS url,status FROM problem_sercurity where  state>0 ");
+
                         #endregion
+
                         #region 除总经理和财务之外的处理
+
                         //if (um.Group > 10) //直接取所有表单，总经理和财务
                         //{
                         //    //第一步：取当前用户参与的项目列表
@@ -426,33 +477,33 @@ namespace suxiang.Handler
                     break;
                 }
                 case "doUpdateWM":
+                {
+                    var type = WebHelper.GetActionStr(context, "type");
+                    var formid = WebHelper.GetActionStr(context, "formid");
+                    var projectid = WebHelper.GetActionInt(context, "pid");
+                    var worktimeDb = WebHelper.GetActionStr(context, "db");
+                    var worktimeXb = WebHelper.GetActionStr(context, "xb");
+                    var materialcost = WebHelper.GetActionStr(context, "mc");
+                    if (um != null)
                     {
-                        var type = WebHelper.GetActionStr(context, "type");
-                        var formid = WebHelper.GetActionStr(context, "formid");
-                        var worktimeDb = WebHelper.GetActionStr(context, "db"); 
-                        var worktimeXb = WebHelper.GetActionStr(context, "xb");
-                        var materialcost = WebHelper.GetActionStr(context, "mc");
-                        if (um != null)
+                        var step = SxDal.GetNextStep(projectid, -1, type, 2);
+                        if (step != null)
                         {
-                            var step = SxDal.GetNextStep(-1, -1, type, 2);
-                            if (step != null)
-                            {
-                                var sql = "update " + type +
-                                          " set remarkname='" + um.RealName +
-                                          "',worktimecost_db='" + worktimeDb +
-                                          "',worktimecost_xb='" + worktimeXb +
-                                          "',materialcost='" + materialcost +
-                                          "',currentUser=" + step.CurrentUser +
-                                          ",currentPage='" + step.CurrentPage +
-                                          "',status='" + step.Status +
-                                          "',state=" + step.State +
-                                          " where id=" + formid;
-                                var msg = new SxDal().AddData(sql);
-                                json = WebHelper.GetObjJson(msg);
-                            }
+                            var sql = "update " + type +
+                                      " set worktimecost_db='" + worktimeDb +
+                                      "',worktimecost_xb='" + worktimeXb +
+                                      "',materialcost='" + materialcost +
+                                      "',currentUser=" + step.CurrentUser +
+                                      ",currentPage='" + step.CurrentPage +
+                                      "',status='" + step.Status +
+                                      "',state=" + step.State +
+                                      " where id=" + formid;
+                            var msg = new SxDal().AddData(sql);
+                            json = WebHelper.GetObjJson(msg);
                         }
-                        break;
                     }
+                    break;
+                }
                 case "doRemark":
                 {
                     var type = WebHelper.GetActionStr(context, "type");
@@ -500,7 +551,8 @@ namespace suxiang.Handler
                             if (type == "problem_sercurity" || type == "problem_quality")
                             {
                                 var levelno = WebHelper.GetActionStr(context, "levelno");
-                                sql = "update " + type + " set levelno='" + levelno + "',summaryid=" + um.Id + ",summaryname='" + um.RealName +
+                                sql = "update " + type + " set levelno='" + levelno + "',summaryid=" + um.Id +
+                                      ",summaryname='" + um.RealName +
                                       "',summary='" + summary +
                                       "',summarytime='" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") +
                                       "',currentUser=" + step.CurrentUser +
@@ -730,7 +782,8 @@ namespace suxiang.Handler
                                 (current, item) =>
                                     current +
                                     ("insert into projectinfo (projectid,projectname,buildingid,buildingleaderid,buildingleader,state)values(" +
-                                     id + ",'" + projectname + "','" + item[0] + "'," + item[1] + ",'" + item[2] + "',1);"));
+                                     id + ",'" + projectname + "','" + item[0] + "'," + item[1] + ",'" + item[2] +
+                                     "',1);"));
                             msg = new SxDal().AddData(sql);
                         }
                         else
@@ -819,7 +872,7 @@ namespace suxiang.Handler
                     }
                     if (um != null)
                     {
-                        var nextStep = SxDal.GetNextStep(projectid, -1, "problem_sercurity", 3,teamleaderid);
+                        var nextStep = SxDal.GetNextStep(projectid, -1, "problem_sercurity", 3, teamleaderid);
                         if (nextStep != null)
                         {
                             var sql =
@@ -890,7 +943,7 @@ namespace suxiang.Handler
                     {
                         var dal = new SxDal();
                         var nextStep = SxDal.GetNextStep(projectid, -1, "problem_quality", 3, teamleaderid);
-                            if (nextStep != null)
+                        if (nextStep != null)
                         {
                             var sql =
                                 "INSERT INTO problem_quality(levelno,projectid,projectname,buildingno,location,checkdate," +
@@ -1092,103 +1145,160 @@ namespace suxiang.Handler
                 {
                     var projectid = WebHelper.GetActionInt(context, "ProjectId");
                     var month = WebHelper.GetActionStr(context, "month");
+                    string sql = "";
                     if (projectid > 0)
                     {
-                        var sql = string.IsNullOrEmpty(month)
-                            ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a where   a.projectid=" +
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a where   a.projectid=" +
                               projectid
-                            : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   A.projectid=" +
+                            : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   A.projectid=" +
                               projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                               (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                        var result = new SxDal().GetData(sql);
-                        json = WebHelper.GetObjJson(result);
                     }
+                    else
+                    {
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a "
+                            : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE  a.checkdate>='" +
+                              month + "-01" + "'  and a.checkdate<'" +
+                              (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                    }
+                    var result = new SxDal().GetData(sql);
+                    json = WebHelper.GetObjJson(result);
                     break;
                 }
                 case "GetQualityProblems":
                 {
                     var projectid = WebHelper.GetActionInt(context, "ProjectId");
                     var month = WebHelper.GetActionStr(context, "month");
+                    string sql = "";
                     if (projectid > 0)
                     {
-                        var sql = string.IsNullOrEmpty(month)
-                            ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a where  a.projectid=" +
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a where  a.projectid=" +
                               projectid
-                            : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  A.projectid=" +
+                            : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  A.projectid=" +
                               projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                               (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                        var result = new SxDal().GetData(sql);
-                        json = WebHelper.GetObjJson(result);
                     }
+                    else
+                    {
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a "
+                            : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE a.checkdate>='" +
+                              month + "-01" + "'  and a.checkdate<'" +
+                              (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                    }
+                    var result = new SxDal().GetData(sql);
+                    json = WebHelper.GetObjJson(result);
                     break;
                 }
                 case "GetLaborCosts":
                 {
                     var projectid = WebHelper.GetActionInt(context, "ProjectId");
                     var month = WebHelper.GetActionStr(context, "month");
+                    string sql = "";
                     if (projectid > 0)
                     {
-                        var sql = string.IsNullOrEmpty(month)
+                        sql = string.IsNullOrEmpty(month)
                             ? "SELECT	concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`startdate`, '%Y-%m-%d') AS startdate,DATE_FORMAT(`endate`, '%Y-%m-%d') AS endate,concat(worktype,'/',teamleader) as worker,workcontent,unit,price,worktime,totalprice,remarkbywork FROM cost_labor a where  a.projectid=" +
                               projectid
                             : "SELECT	concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`startdate`, '%Y-%m-%d') AS startdate,DATE_FORMAT(`endate`, '%Y-%m-%d') AS endate,concat(worktype,'/',teamleader) as worker,workcontent,unit,price,worktime,totalprice,remarkbywork FROM cost_labor A WHERE A.projectid=" +
                               projectid + " and a.startdate>='" + month + "-01" + "'  and a.startdate<'" +
                               (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                        var result = new SxDal().GetData(sql);
-                        json = WebHelper.GetObjJson(result);
-                    }
 
+                    }
+                    else
+                    {
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT	concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`startdate`, '%Y-%m-%d') AS startdate,DATE_FORMAT(`endate`, '%Y-%m-%d') AS endate,concat(worktype,'/',teamleader) as worker,workcontent,unit,price,worktime,totalprice,remarkbywork FROM cost_labor a "
+                            : "SELECT	concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`startdate`, '%Y-%m-%d') AS startdate,DATE_FORMAT(`endate`, '%Y-%m-%d') AS endate,concat(worktype,'/',teamleader) as worker,workcontent,unit,price,worktime,totalprice,remarkbywork FROM cost_labor A WHERE  a.startdate>='" +
+                              month + "-01" + "'  and a.startdate<'" +
+                              (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                    }
+                    var result = new SxDal().GetData(sql);
+                    json = WebHelper.GetObjJson(result);
                     break;
                 }
                 case "GetMaterialCosts":
                 {
                     var projectid = WebHelper.GetActionInt(context, "ProjectId");
                     var month = WebHelper.GetActionStr(context, "month");
+                    string sql = "";
                     if (projectid > 0)
                     {
-                        var sql = string.IsNullOrEmpty(month)
+                        sql = string.IsNullOrEmpty(month)
                             ? "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_material a where a.projectid=" +
                               projectid
                             : "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_material A WHERE A.projectid=" +
                               projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
                               (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                        var result = new SxDal().GetData(sql);
-                        json = WebHelper.GetObjJson(result);
+
                     }
+                    else
+                    {
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_material a "
+                            : "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_material A WHERE  a.curdate>='" +
+                              month + "-01" + "'  and a.curdate<'" +
+                              (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                    }
+                    var result = new SxDal().GetData(sql);
+                    json = WebHelper.GetObjJson(result);
                     break;
                 }
                 case "GetMaterialAuxiliaryCost":
                 {
                     var projectid = WebHelper.GetActionInt(context, "ProjectId");
                     var month = WebHelper.GetActionStr(context, "month");
+                    string sql = "";
                     if (projectid > 0)
                     {
-                        var sql = string.IsNullOrEmpty(month)
+                        sql = string.IsNullOrEmpty(month)
                             ? "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_materialauxiliary a where a.projectid=" +
                               projectid
                             : "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_materialauxiliary A WHERE A.projectid=" +
                               projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
                               (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                        var result = new SxDal().GetData(sql);
-                        json = WebHelper.GetObjJson(result);
+
                     }
+                    else
+                    {
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_materialauxiliary a "
+                            : "SELECT concat(projectname,'|',buildingno,'栋') as addr,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,teamleader,materialname,unit,number,price,totalprice,remark,poster,comfirmname,recomfirmname,remarkbyworker FROM	cost_materialauxiliary A WHERE   a.curdate>='" +
+                              month + "-01" + "'  and a.curdate<'" +
+                              (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                    }
+                    var result = new SxDal().GetData(sql);
+                    json = WebHelper.GetObjJson(result);
                     break;
                 }
                 case "GetManageCosts":
                 {
                     var projectid = WebHelper.GetActionInt(context, "ProjectId");
                     var month = WebHelper.GetActionStr(context, "month");
+                    string sql = "";
                     if (projectid > 0)
                     {
-                        var sql = string.IsNullOrEmpty(month)
+                        sql = string.IsNullOrEmpty(month)
                             ? "SELECT	projectname,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,type,content,unit,number,price,totalprice,remark,remarkname,poster FROM	cost_management a where a.projectid=" +
                               projectid
                             : "SELECT	projectname,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,type,content,unit,number,price,totalprice,remark,remarkname,poster FROM	cost_management A WHERE  A.projectid=" +
                               projectid + " and a.curdate>='" + month + "-01" + "'  and a.curdate<'" +
                               (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
-                        var result = new SxDal().GetData(sql);
-                        json = WebHelper.GetObjJson(result);
+
                     }
+                    else
+                    {
+                        sql = string.IsNullOrEmpty(month)
+                            ? "SELECT	projectname,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,type,content,unit,number,price,totalprice,remark,remarkname,poster FROM	cost_management a "
+                            : "SELECT	projectname,DATE_FORMAT(`curdate`, '%Y-%m-%d') AS curdate,type,content,unit,number,price,totalprice,remark,remarkname,poster FROM	cost_management A WHERE   a.curdate>='" +
+                              month + "-01" + "'  and a.curdate<'" +
+                              (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
+                    }
+                    var result = new SxDal().GetData(sql);
+                    json = WebHelper.GetObjJson(result);
                     break;
                 }
             }

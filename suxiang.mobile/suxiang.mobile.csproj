@@ -324,10 +324,12 @@
     <Content Include="Form\MaterialCostForm_View.aspx" />
     <Content Include="Form\MaterialCostForm.aspx" />
     <Content Include="Form\NewForm.aspx" />
+    <Content Include="Form\QualityQuestionForm_Team.aspx" />
     <Content Include="Form\QualityQuestionForm_Remark.aspx" />
     <Content Include="Form\QualityQuestionForm_Summary.aspx" />
     <Content Include="Form\QualityQuestionForm_View.aspx" />
     <Content Include="Form\QualityQuestionForm.aspx" />
+    <Content Include="Form\SecurityQuestionForm_Team.aspx" />
     <Content Include="Form\SecurityQuestionForm_Remark.aspx" />
     <Content Include="Form\SecurityQuestionForm_View.aspx" />
     <Content Include="Form\SecurityQuestionForm_Summary.aspx" />
@@ -559,6 +561,13 @@
     <Compile Include="Form\NewForm.aspx.designer.cs">
       <DependentUpon>NewForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\QualityQuestionForm_Team.aspx.cs">
+      <DependentUpon>QualityQuestionForm_Team.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\QualityQuestionForm_Team.aspx.designer.cs">
+      <DependentUpon>QualityQuestionForm_Team.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\QualityQuestionForm_Remark.aspx.cs">
       <DependentUpon>QualityQuestionForm_Remark.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -586,6 +595,13 @@
     </Compile>
     <Compile Include="Form\QualityQuestionForm.aspx.designer.cs">
       <DependentUpon>QualityQuestionForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm_Team.aspx.cs">
+      <DependentUpon>SecurityQuestionForm_Team.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\SecurityQuestionForm_Team.aspx.designer.cs">
+      <DependentUpon>SecurityQuestionForm_Team.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\SecurityQuestionForm_Remark.aspx.cs">
       <DependentUpon>SecurityQuestionForm_Remark.aspx</DependentUpon>

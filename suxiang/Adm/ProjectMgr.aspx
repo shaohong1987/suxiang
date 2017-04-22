@@ -118,10 +118,10 @@
                             施工员
                         </th>
                         <th data-priority="1">
-                            质量员
+                            安全员
                         </th>
                         <th data-priority="1">
-                            安全员
+                            质量员
                         </th>
                         <th data-priority="1">
                             保管员

@@ -253,7 +253,7 @@ CodeBehind="QualityQuestionForm.aspx.cs" Inherits="suxiang.Form.QualityQuestionF
                 </li>
                 <li>
                     <label>
-                        耗费工时<b>*</b>
+                        耗费工时<b></b>
                     </label>
                     <input type="text" name="worktimecost_db" placeholder="整改花费工时（数字）" class="dfinput"
                            onkeyup="this.value = this.value.replace(/[^0-9.]/g, '')" style="margin-right: 3px; width: 140px;"/>大工
@@ -262,7 +262,7 @@ CodeBehind="QualityQuestionForm.aspx.cs" Inherits="suxiang.Form.QualityQuestionF
                 </li>
                 <li>
                     <label>
-                        耗费材料<b>*</b>
+                        耗费材料<b></b>
                     </label>
                     <textarea class="textinput3" name="materialcost" placeholder="整改耗费材料"></textarea>
                 </li>

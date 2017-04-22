@@ -416,6 +416,34 @@ namespace suxiang.mobile.Handler
                         json = WebHelper.GetObjJson(msg);
                         break;
                     }
+                case "doUpdateWM":
+                    {
+                        var type = WebHelper.GetActionStr(context, "type");
+                        var formid = WebHelper.GetActionStr(context, "formid");
+                        var projectid = WebHelper.GetActionInt(context, "pid");
+                        var worktimeDb = WebHelper.GetActionStr(context, "db");
+                        var worktimeXb = WebHelper.GetActionStr(context, "xb");
+                        var materialcost = WebHelper.GetActionStr(context, "mc");
+                        if (um != null)
+                        {
+                            var step = SxDal.GetNextStep(projectid, -1, type, 2);
+                            if (step != null)
+                            {
+                                var sql = "update " + type +
+                                          " set worktimecost_db='" + worktimeDb +
+                                          "',worktimecost_xb='" + worktimeXb +
+                                          "',materialcost='" + materialcost +
+                                          "',currentUser=" + step.CurrentUser +
+                                          ",currentPage='" + step.CurrentPage +
+                                          "',status='" + step.Status +
+                                          "',state=" + step.State +
+                                          " where id=" + formid;
+                                var msg = new SxDal().AddData(sql);
+                                json = WebHelper.GetObjJson(msg);
+                            }
+                        }
+                        break;
+                    }
                 case "doRemark":
                     {
                         var type = WebHelper.GetActionStr(context, "type");
@@ -793,7 +821,7 @@ namespace suxiang.mobile.Handler
                         }
                         if (um != null)
                         {
-                            var nextStep = SxDal.GetNextStep(projectid, -1, "problem_sercurity", 2);
+                            var nextStep = SxDal.GetNextStep(projectid, -1, "problem_sercurity", 3, teamleaderid);
                             if (nextStep != null)
                             {
                                 var sql =
@@ -873,7 +901,7 @@ namespace suxiang.mobile.Handler
                         if (um != null)
                         {
                             var dal = new SxDal();
-                            var nextStep = SxDal.GetNextStep(projectid, -1, "problem_quality", 2);
+                            var nextStep = SxDal.GetNextStep(projectid, -1, "problem_quality", 3, teamleaderid);
                             if (nextStep != null)
                             {
                                 var sql =
@@ -1079,9 +1107,9 @@ namespace suxiang.mobile.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a where   a.projectid=" +
+                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a where   a.projectid=" +
                                   projectid
-                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   A.projectid=" +
+                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   A.projectid=" +
                                   projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                   (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);
@@ -1090,8 +1118,8 @@ namespace suxiang.mobile.Handler
                         else
                         {
                             var sql = string.IsNullOrEmpty(month)
-                               ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a " 
-                               : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   " +
+                               ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity a "
+                               : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_sercurity A WHERE   " +
                                  " a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                  (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);
@@ -1106,9 +1134,9 @@ namespace suxiang.mobile.Handler
                         if (projectid > 0)
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a where  a.projectid=" +
+                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a where  a.projectid=" +
                                   projectid
-                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  A.projectid=" +
+                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  A.projectid=" +
                                   projectid + " and a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                   (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);
@@ -1117,8 +1145,8 @@ namespace suxiang.mobile.Handler
                         else
                         {
                             var sql = string.IsNullOrEmpty(month)
-                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a "
-                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,concat(teamleader,'/',worker) as worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  " +
+                                ? "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader,worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality a "
+                                : "SELECT CONCAT(levelno,'级') as levelno,CONCAT(projectname,'|',buildingno,'栋|',location) as addr,DATE_FORMAT(`checkdate`, '%Y-%m-%d') AS checkdate,DATE_FORMAT(`finishdate`, '%Y-%m-%d') AS finishdate,problemdescription,causation,teamleader, worker,concat(responsibleperson1,'/',responsibleperson1) as manager,rebuildsolution,rebuilder,CONCAT(worktimecost_db,'大班;',worktimecost_xb,'小班') as worktimecost,materialcost FROM	problem_quality A WHERE  " +
                                   "a.checkdate>='" + month + "-01" + "'  and a.checkdate<'" +
                                   (Convert.ToDateTime(month + "-01").AddMonths(1).ToString("yyyy-MM-dd")) + "'";
                             var result = new SxDal().GetData(sql);

@@ -42,6 +42,7 @@
             $.post("../Handler/Process.ashx", { action: "GetProjects" }, function (data) {
                 var json = eval(data);
                 if (json.State === true) {
+                    $("#project").append("<option value='-1'>全部</option>");
                     $.each(json.Data, function (i, item) {
                         $("#project").append("<option value='" + item['Id'] + "'>" + item['Projectname'] + "</option>");
                     });
@@ -129,7 +130,8 @@ function () {
                     { label: '完成日期', name: 'finishdate', width: '80' },
 			        { label: '问题说明', name: 'problemdescription', width: '150' },
 			        { label: '原因分析', name: 'causation', width: '150' },
-			        { label: '班组/施工人', name: 'worker', width: '100' },
+                    { label: '班组', name: 'teamleader', width: '50' },
+                    { label: '施工人', name: 'worker', width: '50' },
 			        { label: '管理责任人', name: 'manager', width: '100' },
                     { label: '整改方案', name: 'rebuildsolution', width: '150' },
 			        { label: '整改人', name: 'rebuilder', width: '60' },

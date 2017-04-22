@@ -16,6 +16,7 @@
                 success: function (data) {
                     var d = JSON.parse(data);
                     $("#formId").val(d[0].id);
+                    $("#projectid").val(d[0].projectid);
                     $("#addr").val(d[0].projectname + d[0].buildingno + '栋' + d[0].location);
                     $("#checkdate").val(jsonDateFormat(d[0].checkdate));
                     $("#finishdate").val(jsonDateFormat(d[0].finishdate));
@@ -69,11 +70,12 @@
             var mc = $("#materialcost").val();
             var t = $("#formtype").val();
             var fid = $("#formId").val();
+            var pid = $("#projectid").val();
             if (db.length > 0 || xb.length > 0||mc.length>0) {
                 $.ajax({
                     type: "POST",
                     url: "../Handler/Process.ashx",
-                    data: { action: 'doUpdateWM', type: t, formid: fid, db: db, xb: xb, mc: mc },
+                    data: { action: 'doUpdateWM', type: t, formid: fid, db: db, xb: xb, mc: mc,pid:pid },
                     cache: false,
                     success: function (data) {
                         var json = JSON.parse(data);
@@ -95,6 +97,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <form class="formbody" id="sqform">
     <input type="hidden" id="formId" value="-1"/>
+    <input type="hidden" id="projectid" value="-1"/>
     <input type="hidden" id="formtype" value="problem_sercurity"/>
     <input type="hidden" value="doRemark" name="action" />
     <div id="usual1" class="usual">
