@@ -158,9 +158,9 @@
                     <label for="location">整改完成时间：</label> 
                     <input type="text" name='finishdate' id="finishdate" data-role="date" placeholder="整改完成时间" />
                     <label for="problemdescription">问题说明：</label>
-                    <textarea cols="40" rows="8" name="problemdescription" id="problemdescription" placeholder="问题说明"></textarea>
+                    <textarea cols="40" rows="18" name="problemdescription" id="problemdescription" placeholder="问题说明"></textarea>
                     <label for="causation">原因分析：</label>
-                    <textarea cols="40" rows="8" name="causation" id="causation" placeholder="原因分析"></textarea>
+                    <textarea cols="40" rows="18" name="causation" id="causation" placeholder="原因分析"></textarea>
                     <label for="teamleader">班组：</label>
                     <select name="teamleader" id="teamleader"> 
                         <option value='-1'>请选择班组</option> 
@@ -172,7 +172,7 @@
                     <label for="responsibleperson2">责任人员：</label>
                    <input type="text" name='responsibleperson2' id="responsibleperson2" placeholder="栋号长/生产经理" />  
                     <label for="rebuildsolution">整改方案：</label>
-                    <textarea cols="40" rows="8" id="rebuildsolution" name="rebuildsolution" placeholder="整改方案"></textarea>
+                    <textarea cols="40" rows="18" id="rebuildsolution" name="rebuildsolution" placeholder="整改方案"></textarea>
                     <label for="rebuilder">整改班组：</label>
                     <input type="text" name='rebuilder' id="rebuilder" placeholder="整改班组" />
                     <label for="levelno">质量等级：</label>

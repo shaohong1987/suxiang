@@ -172,7 +172,9 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id="totalprice" placeholder="小计" readonly="readonly" />
                     <label for="remarkbywork">备注：</label>
-                    <textarea cols="40" id="remarkbywork" rows="8" name="remarkbywork" placeholder="备注"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbywork" name="remarkbywork" placeholder="备注"></textarea>
+                     <label id="piclabel">附件</label>
+                    <input type="file" name="pic" id="pic"  />
                     <h3 id="notification"></h3>
                     <button data-theme="b" type="submit">提交</button>
                 </div>

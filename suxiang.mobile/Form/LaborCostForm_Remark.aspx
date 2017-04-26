@@ -37,6 +37,11 @@
                         $("#remarkbywork").val(d[0].remarkbywork);
                         $("#comfirmremark").val(d[0].comfirmremark);
                         $("#recomfirmremark").val(d[0].recomfirmremark);
+                        if (d[0].attachment.length > 0) {
+                            $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                        } else {
+                            $("#pic").remove();
+                        }
                     },
                     error: function(data) {
                         var json = JSON.parse(data);
@@ -120,13 +125,14 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id="totalprice" placeholder="小计" readonly="readonly"/>
                     <label for="remarkbywork">说明：</label>
-                    <textarea cols="40" id="remarkbywork" rows="8" name="remarkbywork" placeholder="说明" readonly="readonly"></textarea>
+                    <textarea cols="40" id="remarkbywork" rows="18" name="remarkbywork" placeholder="说明" readonly="readonly"></textarea>
                     <label for="comfirmremark">班组备注：</label>
-                    <textarea cols="40" id="comfirmremark" rows="8" name="comfirmremark" placeholder="班组备注" readonly="readonly"></textarea>
+                    <textarea cols="40"  id="comfirmremark" rows="18" name="comfirmremark" placeholder="班组备注" readonly="readonly"></textarea>
                     <label for="recomfirmremark">栋号长备注：</label>
-                    <textarea cols="40" id="recomfirmremark" rows="8" name="recomfirmremark" placeholder="栋号长备注" readonly="readonly"></textarea>
+                    <textarea cols="40" id="recomfirmremark" rows="18" name="recomfirmremark" placeholder="栋号长备注" readonly="readonly"></textarea>
                     <label for="remark">备注：</label>
-                    <textarea cols="40" id="remark" rows="8" name="remark" placeholder="备注"></textarea>
+                    <textarea cols="40" id="remark" rows="18" name="remark" placeholder="备注"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button type="button" class="btn" onclick="doRemark();">
                         确认保存

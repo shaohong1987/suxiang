@@ -30,6 +30,11 @@
                     $("#totalprice").val(d[0].totalprice);
                     $("#remarkbyaccount").val(d[0].remarkbyaccount);
                     $("#remark").val(d[0].remark);
+                    if (d[0].attachment.length > 0) {
+                        $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                    } else {
+                        $("#pic").remove();
+                    }
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -109,11 +114,12 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id='totalprice' placeholder="小计" readonly="readonly" />
                     <label for="remarkbyaccount">说明：</label>
-                    <textarea cols="40" rows="8" id="remarkbyaccount" name="remarkbyaccount" placeholder="说明" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbyaccount" name="remarkbyaccount" placeholder="说明" readonly="readonly"></textarea>
                     <label for="remark">备注：</label>
-                    <textarea cols="40" rows="8" id="remark" name="remark" placeholder="备注" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remark" name="remark" placeholder="备注" readonly="readonly"></textarea>
                     <label for="summary">总结：</label>
-                    <textarea cols="40" rows="8" id="summary" name="summary" placeholder="总结"></textarea>
+                    <textarea cols="40" rows="18" id="summary" name="summary" placeholder="总结"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button data-theme="b" type="button" onclick="doSummary()">提交报告</button>
                 </div>

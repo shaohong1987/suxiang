@@ -104,7 +104,8 @@
                     <label for="totalprice">总价：</label>
                     <input type="text" name='totalprice' id='totalprice' placeholder="总价" readonly="readonly" />
                     <label for="remark">备注：</label>
-                    <textarea cols="40" rows="8" id="remark" name="remark" placeholder="备注"></textarea>
+                    <textarea cols="40" rows="18" id="remark" name="remark" placeholder="备注"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button data-theme="b" id="submit" type="button" onclick="doPost()">提交报告</button>
                 </div>

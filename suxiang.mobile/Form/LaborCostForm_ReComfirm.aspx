@@ -35,6 +35,11 @@
                         $("#totalprice").val(d[0].totalprice);
                         $("#remarkbywork").val(d[0].remarkbywork);
                         $("#comfirmremark").val(d[0].comfirmremark);
+                        if (d[0].attachment.length > 0) {
+                            $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                        } else {
+                            $("#pic").remove();
+                        }
                     },
                     error: function(data) {
                         var json = JSON.parse(data);
@@ -119,11 +124,12 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id="totalprice" placeholder="小计" readonly="readonly"/>
                     <label for="remarkbywork">说明：</label>
-                    <textarea cols="40" id="remarkbywork" rows="8" name="remarkbywork" placeholder="说明" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbywork"  name="remarkbywork" placeholder="说明" readonly="readonly"></textarea>
                     <label for="comfirmremark">班组确认：</label>
-                    <textarea cols="40" id="comfirmremark" rows="8" name="comfirmremark" placeholder="班组确认" readonly="readonly"></textarea>
+                    <textarea cols="40"  rows="18" id="comfirmremark"  name="comfirmremark" placeholder="班组确认" readonly="readonly"></textarea>
                     <label for="recomfirmremark">栋号长确认：</label>
-                    <textarea cols="40" id="recomfirmremark" rows="8" name="recomfirmremark" placeholder="栋号长确认"></textarea>
+                    <textarea cols="40" rows="18" id="recomfirmremark"  name="recomfirmremark" placeholder="栋号长确认"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button  class="btn btn-primary btn-sm" type="button" onclick="doComfirm(1);">确认</button>
                     <button  class="btn btn-primary btn-sm" type="button" onclick="doComfirm(0);">退回</button>

@@ -33,6 +33,11 @@
                     $("#number").val(d[0].number);
                     $("#totalprice").val(d[0].totalprice);
                     $("#remarkbyworker").val(d[0].remarkbyworker);
+                    if (d[0].attachment.length > 0) {
+                        $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                    } else {
+                        $("#pic").remove();
+                    }
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -113,9 +118,10 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id='totalprice' placeholder="小计" readonly="readonly"/>
                     <label for="remarkbyworker">说明：</label>
-                    <textarea cols="40" rows="8" id="remarkbyworker" name="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbyworker" name="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
                     <label for="comfirmremark">班组确认：</label>
-                    <textarea cols="40" rows="8" id="comfirmremark" name="comfirmremark" placeholder="班组确认"></textarea>
+                    <textarea cols="40" rows="18" id="comfirmremark" name="comfirmremark" placeholder="班组确认"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button data-theme="b" type="button" onclick="doComfirm(1);">确认</button>
                     <button data-theme="b" type="button" onclick="doComfirm(0);">退回</button>

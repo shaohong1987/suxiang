@@ -36,6 +36,11 @@
                     $("#comfirmremark").val(d[0].comfirmremark);
                     $("#recomfirmremark").val(d[0].recomfirmremark);
                     $("#summary").val(d[0].summary);
+                    if (d[0].attachment.length > 0) {
+                        $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                    } else {
+                        $("#pic").remove();
+                    }
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -86,15 +91,16 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id='totalprice' placeholder="小计" readonly="readonly" />
                     <label for="remarkbyworker">说明：</label>
-                    <textarea cols="40" rows="8" id="remarkbyworker" name="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbyworker" name="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
                     <label for="comfirmremark">班组长备注：</label>
-                    <textarea cols="40" rows="8" id="comfirmremark" name="comfirmremark" placeholder="班组长备注" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="comfirmremark" name="comfirmremark" placeholder="班组长备注" readonly="readonly"></textarea>
                     <label for="recomfirmremark">栋号长备注：</label>
-                    <textarea cols="40" rows="8" id="recomfirmremark" name="recomfirmremark" placeholder="栋号长备注" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="recomfirmremark" name="recomfirmremark" placeholder="栋号长备注" readonly="readonly"></textarea>
                     <label for="remark">备注：</label>
-                    <textarea cols="40" rows="8" id="remark" name="remark" placeholder="备注" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remark" name="remark" placeholder="备注" readonly="readonly"></textarea>
                     <label for="summary">总结：</label>
-                    <textarea cols="40" rows="8" id="summary" name="summary" placeholder="总结" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="summary" name="summary" placeholder="总结" readonly="readonly"></textarea>
+                    <img  id="pic" width="98%"/>
                 </div>
             </form>
         </div>

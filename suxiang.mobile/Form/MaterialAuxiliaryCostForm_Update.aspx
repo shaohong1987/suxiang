@@ -37,6 +37,11 @@
                     $("#remark").val(d[0].remark);
                     $("#comfirmremark").val(d[0].comfirmremark);
                     $("#recomfirmremark").val(d[0].recomfirmremark);
+if (d[0].attachment.length > 0) {
+                        $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                    } else {
+                        $("#pic").remove();
+                    }
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -152,11 +157,12 @@
                     <label for="totalprice">小计：</label>
                     <input type="text" name='totalprice' id='totalprice' placeholder="小计" readonly="readonly" />
                     <label for="remarkbyworker">说明：</label>
-                    <textarea cols="40" rows="8" id="remarkbyworker" name="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbyworker" name="remarkbyworker" placeholder="说明" readonly="readonly"></textarea>
                     <label for="comfirmremark">班组备注：</label>
-                    <textarea cols="40" rows="8" id="comfirmremark" name="comfirmremark" placeholder="班组备注" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="comfirmremark" name="comfirmremark" placeholder="班组备注" readonly="readonly"></textarea>
                     <label for="recomfirmremark">栋号长备注：</label>
-                    <textarea cols="40" rows="8" id="recomfirmremark" name="recomfirmremark" placeholder="栋号长备注" readonly="readonly"></textarea>
+                    <textarea cols="40" rows="18" id="recomfirmremark" name="recomfirmremark" placeholder="栋号长备注" readonly="readonly"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button data-theme="b" type="submit">提交</button>
                 </div>

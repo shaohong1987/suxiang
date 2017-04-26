@@ -794,25 +794,9 @@ namespace suxiang.mobile.Handler
                         var worktimecostDb = WebHelper.GetActionStr(context, "worktimecost_db");
                         var worktimecostXb = WebHelper.GetActionStr(context, "worktimecost_xb");
                         var materialcost = WebHelper.GetActionStr(context, "materialcost");
-                        var attachment = "";
                         HttpPostedFile file = context.Request.Files["pic"];
-                        if (file != null&&!string.IsNullOrEmpty(file.FileName))
-                        {
-                            try
-                            {
-                                var index = file.FileName.LastIndexOf(".", StringComparison.Ordinal);
-                                string filename = DateTime.Now.Ticks+ file.FileName.Substring(index,file.FileName.Length-index);
-                                string path = context.Server.MapPath("~/uploads/" + filename) ;
-                                attachment = filename;
-                                file.SaveAs(path);
-                            }
-                            catch (Exception e)
-                            {
-                                throw e;
-                            }
-                           
-                        }
-                        
+                        var attachment = UploadFile(context,file);
+                     
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
                         {
                             var arr = teamleader.Split('-');
@@ -882,16 +866,8 @@ namespace suxiang.mobile.Handler
                         var worktimecostDb = WebHelper.GetActionStr(context, "worktimecost_db");
                         var worktimecostXb = WebHelper.GetActionStr(context, "worktimecost_xb");
                         var materialcost = WebHelper.GetActionStr(context, "materialcost");
-                        var attachment = "";
                         HttpPostedFile file = context.Request.Files["pic"];
-                        if (file != null && !string.IsNullOrEmpty(file.FileName))
-                        {
-                            var index = file.FileName.LastIndexOf(".", StringComparison.Ordinal);
-                            string filename = DateTime.Now.Ticks + file.FileName.Substring(index, file.FileName.Length - index);
-                            string path = context.Server.MapPath("~/uploads/" + filename);
-                            attachment = filename;
-                            file.SaveAs(path);
-                        }
+                        var attachment = UploadFile(context, file);
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
                         {
                             var arr = teamleader.Split('-');
@@ -957,6 +933,8 @@ namespace suxiang.mobile.Handler
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
                         var remarkbywork = WebHelper.GetActionStr(context, "remarkbywork");
+                        HttpPostedFile file = context.Request.Files["pic"];
+                        var attachment = UploadFile(context, file);
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
                         {
                             var arr = teamleader.Split('-');
@@ -969,7 +947,7 @@ namespace suxiang.mobile.Handler
                             if (nextStep != null)
                             {
                                 var sql =
-                                    "INSERT INTO cost_labor(projectid,projectname,buildingno,startdate,endate,worktype,teamleaderid,teamleader,workcontent,unit,price,worktime,totalprice,remarkbywork,postid,poster,posttime,currentUser,currentPage,status,state) VALUES(" +
+                                    "INSERT INTO cost_labor(projectid,projectname,buildingno,startdate,endate,worktype,teamleaderid,teamleader,workcontent,unit,price,worktime,totalprice,remarkbywork,postid,poster,posttime,currentUser,currentPage,status,state,attachment) VALUES(" +
                                     projectid + ",'" + projectname + "','" + buildingno + "','" + startdate + "','" +
                                     endate + "','" + worktype + "'," + teamleaderid + ",'" + teamleader + "','" +
                                     workcontent + "','" + unit + "'," + price + "," + number +
@@ -977,7 +955,7 @@ namespace suxiang.mobile.Handler
                                     DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'," + teamleaderid + ",'"
                                     + nextStep.CurrentPage + "','"
                                     + nextStep.Status + "',"
-                                    + nextStep.State + "); ";
+                                    + nextStep.State + ",'" + attachment + "'); ";
                                 var msg = new SxDal().AddData(sql);
                                 json = WebHelper.GetObjJson(msg);
                             }
@@ -996,13 +974,15 @@ namespace suxiang.mobile.Handler
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
                         var remarkbyaccount = WebHelper.GetActionStr(context, "remarkbyaccount");
+                        HttpPostedFile file = context.Request.Files["pic"];
+                        var attachment = UploadFile(context, file);
                         if (um != null)
                         {
                             var nextStep = SxDal.GetNextStep(projectid, -1, "cost_management", 2);
                             if (nextStep != null)
                             {
                                 var sql =
-                                    "INSERT INTO cost_management(projectid,projectname,curdate,type,content,unit,price,number,totalprice,remarkbyaccount,postid,poster,posttime,currentUser,currentPage,status,state) VALUES(" +
+                                    "INSERT INTO cost_management(projectid,projectname,curdate,type,content,unit,price,number,totalprice,remarkbyaccount,postid,poster,posttime,currentUser,currentPage,status,state,attachment) VALUES(" +
                                     projectid + ",'" + projectname + "','" + curdate + "','" + type + "','" + content +
                                     "','" + unit + "'," + price + "," + number +
                                     "," + totalprice + ",'" + remarkbyaccount + "'," + um.Id + ",'" + um.RealName +
@@ -1010,7 +990,7 @@ namespace suxiang.mobile.Handler
                                     + nextStep.CurrentUser + ",'"
                                     + nextStep.CurrentPage + "','"
                                     + nextStep.Status + "',"
-                                    + nextStep.State + "); ";
+                                    + nextStep.State + ",'" + attachment + "'); ";
                                 var msg = new SxDal().AddData(sql);
                                 json = WebHelper.GetObjJson(msg);
                             }
@@ -1031,6 +1011,8 @@ namespace suxiang.mobile.Handler
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
                         var remarkbyworker = WebHelper.GetActionStr(context, "remarkbyworker");
+                        HttpPostedFile file = context.Request.Files["pic"];
+                        var attachment = UploadFile(context, file);
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
                         {
                             var arr = teamleader.Split('-');
@@ -1043,7 +1025,7 @@ namespace suxiang.mobile.Handler
                             if (nextStep != null)
                             {
                                 var sql =
-                                    "INSERT INTO cost_material(projectid,projectname,buildingno,curdate,teamleaderid,teamleader,materialname,unit,price,number,totalprice,remarkbyworker,postid,poster,posttime,currentUser,currentPage,status,state) VALUES(" +
+                                    "INSERT INTO cost_material(projectid,projectname,buildingno,curdate,teamleaderid,teamleader,materialname,unit,price,number,totalprice,remarkbyworker,postid,poster,posttime,currentUser,currentPage,status,state,attachment) VALUES(" +
                                     projectid + ",'" + projectname + "','" + buildingno + "','" + curdate + "'," +
                                     teamleaderid + ",'" + teamleader + "','" + materialname + "','" + unit + "'," +
                                     price + "," + number + "," + totalprice +
@@ -1051,7 +1033,7 @@ namespace suxiang.mobile.Handler
                                     DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'," + teamleaderid + ",'"
                                     + nextStep.CurrentPage + "','"
                                     + nextStep.Status + "',"
-                                    + nextStep.State + "); ";
+                                    + nextStep.State + ",'" + attachment + "'); ";
                                 var msg = new SxDal().AddData(sql);
                                 json = WebHelper.GetObjJson(msg);
                             }
@@ -1073,6 +1055,8 @@ namespace suxiang.mobile.Handler
                         var number = WebHelper.GetActionStr(context, "number");
                         var totalprice = WebHelper.GetActionStr(context, "totalprice");
                         var remarkbyworker = WebHelper.GetActionStr(context, "remarkbyworker");
+                        HttpPostedFile file = context.Request.Files["pic"];
+                        var attachment = UploadFile(context, file);
                         if (!string.IsNullOrEmpty(teamleader) && teamleader.Contains("-"))
                         {
                             var arr = teamleader.Split('-');
@@ -1085,7 +1069,7 @@ namespace suxiang.mobile.Handler
                             if (nextStep != null)
                             {
                                 var sql =
-                                    "INSERT INTO cost_materialauxiliary(projectid,projectname,buildingno,curdate,teamleaderid,teamleader,materialname,unit,price,number,totalprice,remarkbyworker,postid,poster,posttime,currentUser,currentPage,status,state) VALUES(" +
+                                    "INSERT INTO cost_materialauxiliary(projectid,projectname,buildingno,curdate,teamleaderid,teamleader,materialname,unit,price,number,totalprice,remarkbyworker,postid,poster,posttime,currentUser,currentPage,status,state,attachment) VALUES(" +
                                     projectid + ",'" + projectname + "','" + buildingno + "','" + curdate + "'," +
                                     teamleaderid + ",'" + teamleader + "','" + materialname + "','" + unit + "'," +
                                     price + "," + number + "," + totalprice +
@@ -1093,7 +1077,7 @@ namespace suxiang.mobile.Handler
                                     DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "'," + teamleaderid + ",'"
                                     + nextStep.CurrentPage + "','"
                                     + nextStep.Status + "',"
-                                    + nextStep.State + "); ";
+                                    + nextStep.State + ",'"+ attachment + "'); ";
                                 var msg = new SxDal().AddData(sql);
                                 json = WebHelper.GetObjJson(msg);
                             }
@@ -1261,6 +1245,27 @@ namespace suxiang.mobile.Handler
                     }
             }
             context.Response.Write(json);
+        }
+
+        private string UploadFile(HttpContext context,HttpPostedFile file)
+        {
+            var attachment = "";
+            if (file != null && !string.IsNullOrEmpty(file.FileName))
+            {
+                try
+                {
+                    var index = file.FileName.LastIndexOf(".", StringComparison.Ordinal);
+                    string filename = DateTime.Now.Ticks + file.FileName.Substring(index, file.FileName.Length - index);
+                    string path = context.Server.MapPath("~/uploads/" + filename);
+                    attachment = filename;
+                    file.SaveAs(path);
+                }
+                catch (Exception e)
+                {
+                    return "";
+                }
+            }
+            return attachment;
         }
 
         public bool IsReusable

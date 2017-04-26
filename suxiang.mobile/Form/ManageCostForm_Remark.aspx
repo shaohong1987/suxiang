@@ -29,6 +29,11 @@
                     $("#number").val(d[0].number);
                     $("#totalprice").val(d[0].totalprice);
                     $("#remarkbyaccount").val(d[0].remarkbyaccount);
+                    if (d[0].attachment.length > 0) {
+                        $("#pic").attr("src", "../uploads/" + d[0].attachment);
+                    } else {
+                        $("#pic").remove();
+                    }
                 },
                 error: function (data) {
                     var json = JSON.parse(data);
@@ -108,9 +113,10 @@
                     <label for="totalprice">总价：</label>
                     <input type="text" name='totalprice' id='totalprice' placeholder="总价" readonly="readonly" />
                     <label for="remarkbyaccount">说明：</label>
-                    <textarea cols="40" rows="8" id="remarkbyaccount" name="remarkbyaccount" placeholder="说明"></textarea>
+                    <textarea cols="40" rows="18" id="remarkbyaccount" name="remarkbyaccount" placeholder="说明"></textarea>
                     <label for="remark">备注：</label>
-                    <textarea cols="40" rows="8" id="remark" name="remark" placeholder="说明"></textarea>
+                    <textarea cols="40" rows="18" id="remark" name="remark" placeholder="说明"></textarea>
+                    <img  id="pic" width="98%"/>
                     <h3 id="notification"></h3>
                     <button data-theme="b"  type="button" onclick="doRemark();">确认保存</button>
                 </div>
