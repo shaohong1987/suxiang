@@ -58,11 +58,13 @@
                 onkeyup: false,
                 submitHandler: function () {
                     if ($("#projectid").val() != -1 && $("#buildingno").val() != '') {
-                        var formData = $("#mcform").serialize();
+                       // var formData = $("#mcform").serialize();
+                        var formData = new FormData(document.getElementById("mcform"));
                         $.ajax({
                             type: "POST",
                             url: "../Handler/Process.ashx",
-                            cache: false,
+                            processData: false,  // 告诉jQuery不要去处理发送的数据
+                            contentType: false,   // 
                             data: formData,
                             success: function (data) {
                                 var json = JSON.parse(data);

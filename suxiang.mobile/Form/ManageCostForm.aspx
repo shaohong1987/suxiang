@@ -35,11 +35,13 @@
             var v1 = parseFloat($("#number").val());
             var v2 = parseFloat($("#price").val());
             $("#totalprice").val(v1 * v2);
-            var formData = $("#managecostForm").serialize();
+            //var formData = $("#managecostForm").serialize();
+            var formData = new FormData(document.getElementById("managecostForm"));
             $.ajax({
                 type: "POST",
                 url: "../Handler/process.ashx?action=ManageCostForm",
-                cache: false,
+                processData: false,  // 告诉jQuery不要去处理发送的数据
+                contentType: false,   // 
                 data: formData,
                 success: function (data) {
                     var json = JSON.parse(data);
